@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% set survey = answers.survey %}
+
+{% block body %}
+	{{ dump() }}
+	<h1>{{ survey.title }}</h1>
+
+	{% if survey.description %}
+		<div>{{ survey.description }}</div>
+	{% endif %}
+
+	<div id="chart-wrapper">
+		<canvas id="chart"></canvas>
+	</div>
+
+	<div class="questions">
+		{% for index, question in survey.questions %}
+			{% set answer = answers.data[index]|default(false) %}
+			<div class="question">
+				{{ index + 1 }}. {{ question.title }}
+				<div class="answer">
+					{% if answer %}
+						{{ 'Answer: %answer%' | trans({'%answer%': answer}) }}
+					{% else %}
+						{{ 'Not answered' | trans }}
+					{% endif %}
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}
+
+{% block stylesheets %}
+	<style>
+	 #chart-wrapper {
+		 max-width: 500px;
+		 height: 400px;
+	 }
+	</style>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" integrity="sha256-SiHXR50l06UwJvHhFY4e5vzwq75vEHH+8fFNpkXePr0=" crossorigin="anonymous"></script>
+	<script src="/survey.js"></script>
+	<script src="{{ path('answers_show_data', {id: answers.id, callback: 'loadSurvey'}) }}"></script>
+{% endblock %}

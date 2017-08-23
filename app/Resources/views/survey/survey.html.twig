@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{{ dump() }}
+
+	<h1 id="survey-title"></h1>
+
+	<div class="row">
+		<div class="col-md-6">
+			<h2 id="question-title"></h2>
+
+			<div id="question-text"></div>
+			<div id="question-rating"></div>
+
+			<div class="row">
+				<div class="col-md-6">
+					<button type="button" class="btn btn-default" id="prev">{{ 'Previous question' | trans }}</button>
+				</div>
+				<div class="col-md-6 text-right">
+					<button type="button" class="btn btn-primary" id="next">{{ 'Next question' | trans }}</button>
+				</div>
+			</div>
+
+			<form method="post" action="{{path('answers_submit', {id: survey.id}) }}">
+				<button type="submit" class="btn btn-success btn-block" id="submit">{{ 'Submit answers' | trans }}</button>
+				<textarea id="data" name="data" readonly rows="10"></textarea>
+			</form>
+		</div>
+		<div class="col-md-6">
+			<div id="chart-wrapper">
+				<canvas id="chart"></canvas>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block stylesheets %}
+	<style>
+	 #chart-wrapper {
+		 max-width: 100%;
+		 height: 400px;
+	 }
+
+	 #question-description {
+		 height: 200px;
+	 }
+
+	 #data {
+		 display: none;
+	 }
+	</style>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" integrity="sha256-SiHXR50l06UwJvHhFY4e5vzwq75vEHH+8fFNpkXePr0=" crossorigin="anonymous"></script>
+	<script src="/survey.js"></script>
+	<script src="{{ path('survey_show_data', {id: survey.id, callback: 'loadSurvey'}) }}"></script>
+{% endblock %}

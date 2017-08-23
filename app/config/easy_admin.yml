@@ -1,0 +1,20 @@
+easy_admin:
+    entities:
+        Survey:
+            class: AppBundle\Entity\Survey
+            form:
+                fields:
+                    - property: title
+                    - property: description
+                    - property: configuration
+                      type: AppBundle\Form\ConfigurationType
+                    - property: questions
+                      type: collection
+                      type_options:
+                        entry_type: AppBundle\Form\QuestionType
+                        by_reference: false
+                        required: true
+                      embedded: true
+
+        Answers:
+            class: AppBundle\Entity\Answers
