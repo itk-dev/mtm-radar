@@ -10,8 +10,6 @@ rating:
   - 1
   - 2
   - 3
-  - 4
-  - 5
 
 questions:
   -
@@ -24,36 +22,3 @@ questions:
 
   -
     title: Bidrag til nærområde
-
-  -
-    title: Væsentlige kulturværdier
-
-  -
-    title: Opholdsarealer af høj kvalitet
-
-  -
-    title: En grønnere by
-
-  -
-    title: Dyrke fitidsinteresser
-
-  -
-    title: Sammenhæng til nærområde
-
-  -
-    title: Fortætning med kvalitet
-
-  -
-    title: Varierede boligtyper
-
-  -
-    title: Bæredygtig transport
-
-  -
-    title: Klimaeffekt
-
-  -
-    title: En blandet by
-
-  -
-    title: Samskabelse

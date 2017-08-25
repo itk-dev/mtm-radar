@@ -3,11 +3,17 @@ easy_admin:
         Survey:
             class: AppBundle\Entity\Survey
             list:
-                actions: ['show']
+                actions:
+                    - name: survey_show
+                      type: route
+                      label: Share
+                    - show
+                    - edit
+                    - delete
+
                 fields:
-                    # - property: id
-                    #   template: id.html.twig
                     - property: title
+                      # template: share.html.twig
                     - property: createdAt
                     - property: questions
                     - property: answers

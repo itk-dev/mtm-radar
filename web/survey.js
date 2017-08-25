@@ -85,19 +85,18 @@
                     $('#next')
                         .toggle(index < count - 1)
                         .prop('disabled', true);
-                    $('#prev')
-                        .toggle(index > 0);
                     if (answers[index] !== null) {
                         $('[name="rating"][value="' + answers[index] + '"]').prop('checked', true);
                         $('#next').prop('disabled', false);
                     }
-                    chart.data.datasets[0].data = answers.slice(0, index);
+								}
+                chart.data.datasets[0].data = answers.slice(0, index);
 
-                    // chart.update(0); // No animation
-                    chart.update();
-
-                    $('#data').val(JSON.stringify(answers, null, 2));
-                }
+                // chart.update(0); // No animation
+                chart.update();
+                $('#data').val(JSON.stringify(answers, null, 2));
+								$('#prev').toggle(index > 0);
+								$('#next').toggle(index < count);
                 $('#submit').toggle(index >= count);
             };
 
