@@ -2,6 +2,26 @@ easy_admin:
     entities:
         Survey:
             class: AppBundle\Entity\Survey
+            list:
+                actions: ['show']
+                fields:
+                    # - property: id
+                    #   template: id.html.twig
+                    - property: title
+                    - property: createdAt
+                    - property: questions
+                    - property: answers
+
+            show:
+                fields:
+                    - property: title
+                    - property: description
+                    - property: configuration
+                      template: configuration.html.twig
+                    - property: questions
+                    - property: answers
+                      template: answers.html.twig
+
             form:
                 fields:
                     - property: title

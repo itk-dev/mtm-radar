@@ -37,6 +37,11 @@ class Question
      */
     private $text;
 
+    public function __toString()
+    {
+        return $this->getSurvey().' - '.$this->getTitle();
+    }
+
     /**
      * Get id.
      *

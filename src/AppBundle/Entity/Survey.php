@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -55,8 +56,13 @@ class Survey
      */
     public function __construct()
     {
-        $this->questions = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->answers = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->questions = new ArrayCollection();
+        $this->answers = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle() ?? 'Survey#'.$this->getId();
     }
 
     /**

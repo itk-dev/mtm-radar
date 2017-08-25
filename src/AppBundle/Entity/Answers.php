@@ -32,6 +32,11 @@ class Answers
      */
     private $data;
 
+    public function __toString()
+    {
+        return 'Answer#'.$this->getId();
+    }
+
     /**
      * Get id.
      *

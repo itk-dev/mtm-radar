@@ -1,0 +1,10 @@
+<div class="survey-answers">
+	{% for answer in value %}
+		<a href="{{ path('answers_show', {id: answer.id}) }}">
+			{{ answer.createdAt | date }}
+			{{ answer.id }}
+		</a>
+	{% else %}
+		{{ 'No answers' | trans }}
+	{% endfor %}
+</div>
