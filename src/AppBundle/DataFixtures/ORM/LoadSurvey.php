@@ -4,12 +4,14 @@ namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Question;
 use AppBundle\Entity\Survey;
-use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Yaml\Yaml;
 
 class LoadSurvey extends LoadData
 {
+    public function getOrder()
+    {
+        return 1;
+    }
+
     protected function loadItem($data)
     {
         $survey = new Survey();
@@ -25,10 +27,5 @@ class LoadSurvey extends LoadData
 
         $survey = $this->setValues($survey, $data);
         $this->persist($survey);
-    }
-
-    public function getOrder()
-    {
-        return 1;
     }
 }

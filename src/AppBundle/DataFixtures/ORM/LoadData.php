@@ -13,7 +13,7 @@ abstract class LoadData extends ContainerAwareFixture implements OrderedFixtureI
     /** @var ObjectManager */
     protected $manager;
 
-    /** @var  \Symfony\Component\PropertyAccess\PropertyAccessorInterface */
+    /** @var \Symfony\Component\PropertyAccess\PropertyAccessorInterface */
     protected $accessor;
 
     public function load(ObjectManager $manager)
@@ -21,7 +21,7 @@ abstract class LoadData extends ContainerAwareFixture implements OrderedFixtureI
         $this->accessor = $this->container->get('property_accessor');
         $this->manager = $manager;
 
-        $finder = (new Finder())->files()->name('*.yml')->in(__DIR__ . '/../data/' . $this->getName());
+        $finder = (new Finder())->files()->name('*.yml')->in(__DIR__.'/../data/'.$this->getName());
         foreach ($finder as $file) {
             $yaml = file_get_contents($file->getRealPath());
             $data = Yaml::parse($yaml, Yaml::PARSE_OBJECT_FOR_MAP);
@@ -32,7 +32,8 @@ abstract class LoadData extends ContainerAwareFixture implements OrderedFixtureI
         $manager->flush();
     }
 
-    protected function setValues($object, $values) {
+    protected function setValues($object, $values)
+    {
         foreach ($values as $key => $value) {
             $this->setValue($object, $key, $value);
         }
@@ -40,17 +41,20 @@ abstract class LoadData extends ContainerAwareFixture implements OrderedFixtureI
         return $object;
     }
 
-    protected function setValue($object, $path, $value) {
+    protected function setValue($object, $path, $value)
+    {
         $this->accessor->setValue($object, $path, $value);
 
         return $object;
     }
 
-    protected function persist($entity) {
+    protected function persist($entity)
+    {
         $this->manager->persist($entity);
     }
 
-    protected function getName() {
+    protected function getName()
+    {
         if (preg_match('@\\\\Load(?<name>[A-Z][a-z0-9]*)$@', get_class($this), $matches)) {
             return $matches['name'];
         }

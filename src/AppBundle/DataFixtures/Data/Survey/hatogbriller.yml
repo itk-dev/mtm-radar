@@ -8,11 +8,11 @@ description: |
 configuration:
     min: 1
     rating:
-        - 1
-        - 2
-        - 3
-        - 4
-        - 5
+        - Strongly disagree
+        - Disagree
+        - Neutral
+        - Agree
+        - Strongly agree
 
 questions:
   -

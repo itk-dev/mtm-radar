@@ -19,18 +19,45 @@ description: |
 
 author: John Doe
 
-data:
-    - 1
-    - 3
-    - 5
-    - 2
-    - 3
-    - 2
-    - 4
-    - 2
-    - 5
-    - 4
-    - 3
-    - 2
-    - 1
-    - 1
+replies:
+    - value: 1
+      comment: Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus.
+
+    - value: 3
+      comment: Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus.
+
+    - value: 5
+      comment: Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus.
+
+    - value: 2
+      comment: Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus.
+
+    - value: 3
+      comment: Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus.
+
+    - value: 2
+      comment: Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus.
+
+    - value: 4
+      comment: Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus.
+
+    - value: 2
+      comment: Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus.
+
+    - value: 5
+      comment: Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus.
+
+    - value: 4
+      comment: Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus.
+
+    - value: 3
+      comment: Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus.
+
+    - value: 2
+      comment: Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus.
+
+    - value: 1
+      comment: Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus.
+
+    - value: 1
+      comment: Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus.
