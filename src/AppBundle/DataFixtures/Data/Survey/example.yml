@@ -5,11 +5,12 @@ description: |
   Non nobis, Domine, non nobis, sed nomini tuo da gloriam.
   Non nobis, Domine, non nobis, sed nomini tuo da gloriam.
 
-min: 1
-rating:
-  - 1
-  - 2
-  - 3
+configuration:
+    min: 1
+    rating:
+        - 1
+        - 2
+        - 3
 
 questions:
   -
@@ -22,3 +23,4 @@ questions:
 
   -
     title: Bidrag til nærområde
+    text: Donec pretium posuere tellus.
