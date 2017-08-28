@@ -214,4 +214,11 @@ class Survey
     {
         return $this->configuration;
     }
+
+    public function getRating()
+    {
+        $configuration = $this->getConfiguration();
+
+        return isset($configuration['rating']) ? $configuration['rating'] : [];
+    }
 }

@@ -33,11 +33,11 @@ easy_admin:
                     - property: title
                     - property: description
                     - property: configuration
-                      type: AppBundle\Form\ConfigurationType
+                      type: AppBundle\Form\Type\ConfigurationType
                     - property: questions
                       type: collection
                       type_options:
-                        entry_type: AppBundle\Form\QuestionType
+                        entry_type: AppBundle\Form\Type\QuestionType
                         by_reference: false
                         required: true
                       embedded: true

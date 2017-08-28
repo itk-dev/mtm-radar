@@ -1,21 +1,25 @@
 <?php
 
-namespace AppBundle\Form;
+namespace AppBundle\Form\Type;
 
-use AppBundle\Entity\Question;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class QuestionType extends AbstractType
+class ReplyType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class)
-            ->add('text', TextareaType::class, [
+            ->add('value', ChoiceType::class, [
+                'choices' => array_flip($options['choices']),
+                'required' => true,
+                'expanded' => true,
+                'multiple' => false,
+            ])
+            ->add('comment', TextareaType::class, [
                 'attr' => [
                     'rows' => 4,
                 ],
@@ -24,13 +28,11 @@ class QuestionType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-           'data_class' => Question::class,
-        ]);
+        $resolver->setRequired('choices');
     }
 
     public function getName()
     {
-        return 'appbundle_question';
+        return 'appbundle_reply';
     }
 }

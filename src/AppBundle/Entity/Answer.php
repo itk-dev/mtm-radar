@@ -48,6 +48,12 @@ class Answer
      * @ORM\Column(type="json_array")
      * @Groups({"answer"})
      */
+    private $replies;
+
+    /**
+     * @ORM\Column(type="json_array", nullable=true)
+     * @Groups({"answer"})
+     */
     private $data;
 
     public function __toString()
@@ -114,7 +120,7 @@ class Answer
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
      *
@@ -128,7 +134,7 @@ class Answer
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -138,7 +144,7 @@ class Answer
     }
 
     /**
-     * Set description
+     * Set description.
      *
      * @param string $description
      *
@@ -152,7 +158,7 @@ class Answer
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -162,7 +168,7 @@ class Answer
     }
 
     /**
-     * Set author
+     * Set author.
      *
      * @param string $author
      *
@@ -176,12 +182,36 @@ class Answer
     }
 
     /**
-     * Get author
+     * Get author.
      *
      * @return string
      */
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Set replies.
+     *
+     * @param array $replies
+     *
+     * @return Answer
+     */
+    public function setReplies($replies)
+    {
+        $this->replies = $replies;
+
+        return $this;
+    }
+
+    /**
+     * Get replies.
+     *
+     * @return array
+     */
+    public function getReplies()
+    {
+        return $this->replies;
     }
 }

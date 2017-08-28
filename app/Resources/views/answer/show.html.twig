@@ -14,15 +14,18 @@
 	</div>
 
 	<div class="questions">
-		{% for index, question in survey.questions %}
-			{% set answer = answer.data[index]|default(false) %}
+		{% for question in survey.questions %}
+			{% set reply = answer.replies[loop.index0]|default(false) %}
 			<div class="question">
-				{{ index + 1 }}. {{ question.title }}
-				<div class="answer">
-					{% if answer %}
-						{{ 'Answer: %answer%' | trans({'%answer%': answer}) }}
+				{{ loop.index }}. {{ question.title }}
+				<div class="reply">
+					{% if reply.value|default(false) %}
+						{{ 'Reply: %reply%' | trans({'%reply%': reply.value}) }}
+						{% if reply.comment|default(false) %}
+							<div>{{ reply.comment }}</div>
+						{% endif %}
 					{% else %}
-						{{ 'Not answered' | trans }}
+						{{ 'No reply' | trans }}
 					{% endif %}
 				</div>
 			</div>
