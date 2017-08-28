@@ -1,6 +1,6 @@
-<div class="survey-answers">
+<div class="survey-answer">
 	{% for answer in value %}
-		<a href="{{ path('answers_show', {id: answer.id}) }}">
+		<a href="{{ path('answer_show', {id: answer.id}) }}">
 			{{ answer.createdAt | date }}
 			{{ answer.id }}
 		</a>

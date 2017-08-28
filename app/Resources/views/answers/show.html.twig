@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% set survey = answers.survey %}
+{% set survey = answer.survey %}
 
 {% block body %}
 	<h1>{{ survey.title }}</h1>
@@ -15,7 +15,7 @@
 
 	<div class="questions">
 		{% for index, question in survey.questions %}
-			{% set answer = answers.data[index]|default(false) %}
+			{% set answer = answer.data[index]|default(false) %}
 			<div class="question">
 				{{ index + 1 }}. {{ question.title }}
 				<div class="answer">
@@ -43,5 +43,5 @@
 	{{ parent() }}
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" integrity="sha256-SiHXR50l06UwJvHhFY4e5vzwq75vEHH+8fFNpkXePr0=" crossorigin="anonymous"></script>
 	<script src="/survey.js"></script>
-	<script src="{{ path('answers_show_data', {id: answers.id, callback: 'loadSurvey'}) }}"></script>
+	<script src="{{ path('answer_show_data', {id: answer.id, callback: 'loadSurvey'}) }}"></script>
 {% endblock %}

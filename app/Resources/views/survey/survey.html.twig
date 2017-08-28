@@ -19,8 +19,8 @@
 				</div>
 			</div>
 
-			<form method="post" action="{{path('answers_submit', {id: survey.id}) }}">
-				<button type="submit" class="btn btn-success btn-block" id="submit">{{ 'Submit answers' | trans }}</button>
+			<form method="post" action="{{path('answer_submit', {id: survey.id}) }}">
+				<button type="submit" class="btn btn-success btn-block" id="submit">{{ 'Submit answer' | trans }}</button>
 				<textarea id="data" name="data" readonly rows="10"></textarea>
 			</form>
 		</div>

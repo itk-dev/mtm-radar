@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Answers;
+use AppBundle\Entity\Answer;
 use AppBundle\Entity\Survey;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -13,9 +13,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
- * @Route("/answers")
+ * @Route("/answer")
  */
-class AnswersController extends Controller
+class AnswerController extends Controller
 {
     /** @var \Doctrine\ORM\EntityManagerInterface */
     private $entityManager;
@@ -26,43 +26,43 @@ class AnswersController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="answers_submit")
+     * @Route("/{id}", name="answer_submit")
      * @Method("POST")
      */
-    public function answersSubmitAction(Request $request, Survey $survey)
+    public function answerSubmitAction(Request $request, Survey $survey)
     {
         $data = json_decode($request->request->get('data'));
-        $answers = new Answers();
-        $answers
+        $answer = new Answer();
+        $answer
             ->setSurvey($survey)
             ->setData($data);
-        $this->entityManager->persist($answers);
+        $this->entityManager->persist($answer);
         $this->entityManager->flush();
 
-        $this->addFlash('info', 'Answers saved succesfully');
+        $this->addFlash('info', 'Answer saved succesfully');
 
-        return $this->redirectToRoute('answers_show', ['id' => $answers->getId()]);
+        return $this->redirectToRoute('answer_show', ['id' => $answer->getId()]);
     }
 
     /**
-     * @Route("/{id}", name="answers_show")
+     * @Route("/{id}", name="answer_show")
      * @Method("GET")
      */
-    public function getAction(Request $request, Answers $answers)
+    public function getAction(Request $request, Answer $answer)
     {
-        return $this->render('answers/show.html.twig', [
-            'answers' => $answers,
+        return $this->render('answer/show.html.twig', [
+            'answer' => $answer,
         ]);
     }
 
     /**
-     * @Route("/{id}/data", name="answers_show_data")
+     * @Route("/{id}/data", name="answer_show_data")
      * @Method("GET")
      */
-    public function getDataAction(Request $request, Answers $answers, SerializerInterface $serializer)
+    public function getDataAction(Request $request, Answer $answer, SerializerInterface $serializer)
     {
         $callback = $request->get('callback');
-        $data = $serializer->serialize(['survey' => $answers->getSurvey(), 'answers' => $answers->getData()], 'json', ['groups' => ['answers'], 'enable_max_depth' => true]);
+        $data = $serializer->serialize(['survey' => $answer->getSurvey(), 'answer' => $answer->getData()], 'json', ['groups' => ['answer'], 'enable_max_depth' => true]);
         $response = new JsonResponse($data, 200, [], true);
         if ($callback) {
             $response->setCallback($callback);

@@ -18,36 +18,36 @@ class Survey
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="UUID")
-     * @Groups({"survey", "answers"})
+     * @Groups({"survey", "answer"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"survey", "answers"})
+     * @Groups({"survey", "answer"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"survey", "answers"})
+     * @Groups({"survey", "answer"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="json_array")
-     * @Groups({"survey", "answers"})
+     * @Groups({"survey", "answer"})
      */
     private $configuration;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Question", mappedBy="survey")
-     * @Groups({"survey", "answers"})
+     * @Groups({"survey", "answer"})
      */
     private $questions;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Answers", mappedBy="survey")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Answer", mappedBy="survey")
      */
     private $answers;
 
@@ -136,11 +136,11 @@ class Survey
     /**
      * Add answer.
      *
-     * @param \AppBundle\Entity\Answers $answer
+     * @param \AppBundle\Entity\Answer $answer
      *
      * @return Survey
      */
-    public function addAnswer(\AppBundle\Entity\Answers $answer)
+    public function addAnswer(\AppBundle\Entity\Answer $answer)
     {
         $this->answers[] = $answer;
 
@@ -150,9 +150,9 @@ class Survey
     /**
      * Remove answer.
      *
-     * @param \AppBundle\Entity\Answers $answer
+     * @param \AppBundle\Entity\Answer $answer
      */
-    public function removeAnswer(\AppBundle\Entity\Answers $answer)
+    public function removeAnswer(\AppBundle\Entity\Answer $answer)
     {
         $this->answers->removeElement($answer);
     }

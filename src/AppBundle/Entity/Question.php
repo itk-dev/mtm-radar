@@ -27,13 +27,13 @@ class Question
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"survey", "answers"})
+     * @Groups({"survey", "answer"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"survey", "answers"})
+     * @Groups({"survey", "answer"})
      */
     private $text;
 

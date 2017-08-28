@@ -42,5 +42,5 @@ easy_admin:
                         required: true
                       embedded: true
 
-        Answers:
-            class: AppBundle\Entity\Answers
+        Answer:
+            class: AppBundle\Entity\Answer
