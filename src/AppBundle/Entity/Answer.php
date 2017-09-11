@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -65,7 +66,7 @@ class Answer
     /**
      * Get id.
      *
-     * @return guid
+     * @return string
      */
     public function getId()
     {
@@ -103,7 +104,7 @@ class Answer
      *
      * @return Answer
      */
-    public function setSurvey(\AppBundle\Entity\Survey $survey = null)
+    public function setSurvey(Survey $survey = null)
     {
         $this->survey = $survey;
 
@@ -195,7 +196,7 @@ class Answer
     /**
      * Set replies.
      *
-     * @param array $replies
+     * @param ArrayCollection $replies
      *
      * @return Answer
      */

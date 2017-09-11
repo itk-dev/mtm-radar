@@ -55,7 +55,7 @@ class Question
     /**
      * Get id.
      *
-     * @return guid
+     * @return string
      */
     public function getId()
     {
@@ -93,7 +93,7 @@ class Question
      *
      * @return Question
      */
-    public function setSurvey(\AppBundle\Entity\Survey $survey = null)
+    public function setSurvey(Survey $survey = null)
     {
         $this->survey = $survey;
 

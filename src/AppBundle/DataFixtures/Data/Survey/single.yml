@@ -1,6 +1,6 @@
 title: A single question
 
-description: |
+description: A survey with just a single question.
 
 configuration:
     min: 1
@@ -10,6 +10,6 @@ configuration:
         - 3
 
 questions:
-  -
-    title: The first question
-    text: Pellentesque condimentum, magna ut suscipit hendrerit, ipsum augue ornare nulla, non luctus diam neque sit amet urna.
+    -
+        title: The first question
+        text: Pellentesque condimentum, magna ut suscipit hendrerit, ipsum augue ornare nulla, non luctus diam neque sit amet urna.

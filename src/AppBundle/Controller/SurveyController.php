@@ -33,6 +33,10 @@ class SurveyController extends Controller
     /**
      * @Route("/{id}/answer", name="survey_answer")
      * @Method("GET")
+     *
+     * @param Survey $survey
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function getAction(Survey $survey)
     {
@@ -48,6 +52,11 @@ class SurveyController extends Controller
     /**
      * @Route("/{id}/answer")
      * @Method("POST")
+     *
+     * @param Request $request
+     * @param Survey  $survey
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function postAnswer(Request $request, Survey $survey)
     {
@@ -77,6 +86,12 @@ class SurveyController extends Controller
 
     /**
      * @Route("/{id}/data", name="survey_show_data")
+     *
+     * @param Request             $request
+     * @param Survey              $survey
+     * @param SerializerInterface $serializer
+     *
+     * @return JsonResponse
      */
     public function getDataAction(Request $request, Survey $survey, SerializerInterface $serializer)
     {
@@ -92,7 +107,9 @@ class SurveyController extends Controller
 
     private function buildAnswerForm(Answer $answer, Survey $survey)
     {
-        $answer->setReplies($survey->getQuestions()->map(function () { return null; }));
+        $answer->setReplies($survey->getQuestions()->map(function () {
+            return null;
+        }));
 
         $form = $this->createFormBuilder($answer)
             ->add('replies', CollectionType::class, [

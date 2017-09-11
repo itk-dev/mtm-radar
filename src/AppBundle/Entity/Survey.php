@@ -16,6 +16,8 @@ class Survey
     use TimestampableEntity;
 
     /**
+     * @var string
+     *
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="UUID")
@@ -71,7 +73,7 @@ class Survey
     /**
      * Get id.
      *
-     * @return guid
+     * @return string
      */
     public function getId()
     {
