@@ -1,12 +1,15 @@
 easy_admin:
+    design:
+        assets:
+            css:
+                - 'assets/easyadmin.css'
+
     entities:
         Survey:
             class: AppBundle\Entity\Survey
             list:
                 actions:
-                    - name: survey_answer
-                      type: route
-                      label: Share
+                    - shareSurvey
                     - show
                     - edit
                     - delete
