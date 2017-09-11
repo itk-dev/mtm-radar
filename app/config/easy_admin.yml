@@ -4,7 +4,7 @@ easy_admin:
             class: AppBundle\Entity\Survey
             list:
                 actions:
-                    - name: survey_show
+                    - name: survey_answer
                       type: route
                       label: Share
                     - show
@@ -14,9 +14,10 @@ easy_admin:
                 fields:
                     - property: title
                       # template: share.html.twig
-                    - property: createdAt
+                    - property: description
                     - property: questions
                     - property: answers
+                    - property: createdAt
 
             show:
                 fields:
@@ -44,3 +45,14 @@ easy_admin:
 
         Answer:
             class: AppBundle\Entity\Answer
+            disabled_actions: [edit, delete]
+            list:
+                actions:
+                    - name: answer_show
+                      type: route
+                      label: Show
+                fields:
+                    - property: title
+                    - property: author
+                    - property: description
+                    - property: createdAt
