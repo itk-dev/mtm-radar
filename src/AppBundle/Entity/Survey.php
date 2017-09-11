@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -23,13 +24,15 @@ class Survey
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Assert\NotBlank()
      * @Groups({"survey", "answer"})
      */
     private $title;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=false)
+     * @Assert\NotBlank()
      * @Groups({"survey", "answer"})
      */
     private $description;
@@ -41,7 +44,7 @@ class Survey
     private $configuration;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Question", mappedBy="survey")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Question", mappedBy="survey", cascade={"persist", "remove"}, orphanRemoval=true)
      * @Groups({"survey", "answer"})
      */
     private $questions;
@@ -106,9 +109,10 @@ class Survey
      *
      * @return Survey
      */
-    public function addQuestion(\AppBundle\Entity\Question $question)
+    public function addQuestion(Question $question)
     {
         $this->questions[] = $question;
+        $question->setSurvey($this);
 
         return $this;
     }
@@ -118,9 +122,10 @@ class Survey
      *
      * @param \AppBundle\Entity\Question $question
      */
-    public function removeQuestion(\AppBundle\Entity\Question $question)
+    public function removeQuestion(Question $question)
     {
         $this->questions->removeElement($question);
+        $question->setSurvey(null);
     }
 
     /**
@@ -140,9 +145,10 @@ class Survey
      *
      * @return Survey
      */
-    public function addAnswer(\AppBundle\Entity\Answer $answer)
+    public function addAnswer(Answer $answer)
     {
         $this->answers[] = $answer;
+        $answer->setSurvey($this);
 
         return $this;
     }
@@ -152,9 +158,10 @@ class Survey
      *
      * @param \AppBundle\Entity\Answer $answer
      */
-    public function removeAnswer(\AppBundle\Entity\Answer $answer)
+    public function removeAnswer(Answer $answer)
     {
         $this->answers->removeElement($answer);
+        $answer->setSurvey(null);
     }
 
     /**

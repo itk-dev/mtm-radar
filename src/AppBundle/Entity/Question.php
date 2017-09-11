@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -22,20 +23,29 @@ class Question
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Survey", inversedBy="questions")
+     * @ORM\JoinColumn(name="survey_id", referencedColumnName="id", nullable=false)
      */
     private $survey;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Assert\NotBlank()
      * @Groups({"survey", "answer"})
      */
     private $title;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=false)
+     * @Assert\NotBlank()
      * @Groups({"survey", "answer"})
      */
     private $text;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey", "answer"})
+     */
+    private $description;
 
     public function __toString()
     {
@@ -122,5 +132,29 @@ class Question
     public function getText()
     {
         return $this->text;
+    }
+
+    /**
+     * Set description.
+     *
+     * @param string $description
+     *
+     * @return Question
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description.
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

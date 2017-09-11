@@ -22,6 +22,7 @@ class Answer
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Survey", inversedBy="answers")
+     * @ORM\JoinColumn(name="survey_id", referencedColumnName="id", nullable=false)
      * @Groups({"answer"})
      */
     private $survey;
