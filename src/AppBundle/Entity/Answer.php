@@ -32,19 +32,19 @@ class Answer
      * @ORM\Column(type="string", length=255)
      * @Groups({"survey", "answer"})
      */
-    private $title;
-
-    /**
-     * @ORM\Column(type="text")
-     * @Groups({"survey", "answer"})
-     */
-    private $description;
+    private $author;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"survey", "answer"})
      */
-    private $author;
+    private $title;
+
+    /**
+     * @ORM\Column(type="text")
+     * @Groups({"survey", "answer"}, nullable=true)
+     */
+    private $description;
 
     /**
      * @ORM\Column(type="json_array")
@@ -122,6 +122,30 @@ class Answer
     }
 
     /**
+     * Set author.
+     *
+     * @param string $author
+     *
+     * @return Answer
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author.
+     *
+     * @return string
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
      * Set title.
      *
      * @param string $title
@@ -167,30 +191,6 @@ class Answer
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Set author.
-     *
-     * @param string $author
-     *
-     * @return Answer
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author.
-     *
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->author;
     }
 
     /**

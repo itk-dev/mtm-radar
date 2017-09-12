@@ -16,8 +16,6 @@ class Survey
     use TimestampableEntity;
 
     /**
-     * @var string
-     *
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="UUID")
@@ -27,7 +25,6 @@ class Survey
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Assert\NotBlank()
      * @Groups({"survey", "answer"})
      */
     private $title;
@@ -73,7 +70,7 @@ class Survey
     /**
      * Get id.
      *
-     * @return string
+     * @return guid
      */
     public function getId()
     {
