@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
-scss src/easyadmin.scss dist/easyadmin.css
-scss src/survey.scss dist/survey.css
+mkdir -p dist
+scss --sourcemap=none src/easyadmin.scss dist/easyadmin.css
+scss --sourcemap=none src/survey.scss dist/survey.css
 
