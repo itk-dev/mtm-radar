@@ -21,6 +21,7 @@ class QuestionType extends AbstractType
                 ],
             ])
             ->add('description', TextareaType::class, [
+                'required' => false,
                 'attr' => [
                     'rows' => 4,
                 ],

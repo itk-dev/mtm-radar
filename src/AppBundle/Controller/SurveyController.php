@@ -107,24 +107,27 @@ class SurveyController extends Controller
 
     private function buildAnswerForm(Answer $answer, Survey $survey)
     {
+        // Create an initial empty reply for all questions.
         $answer->setReplies($survey->getQuestions()->map(function () {
             return null;
         }));
 
         $form = $this->createFormBuilder($answer)
+            ->add('title', TextType::class, [
+                'label' => 'Title',
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'Description',
+                'required' => false,
+            ])
+            ->add('author', TextType::class, [
+                'label' => 'Author',
+            ])
             ->add('replies', CollectionType::class, [
+                'label' => 'Replies',
                 'entry_type' => ReplyType::class,
                 'entry_options' => [
                     'choices' => $survey->getRating(),
-                ],
-            ])
-            ->add('title', TextType::class)
-            ->add('description', TextareaType::class)
-            ->add('author', TextType::class)
-            ->add('save', SubmitType::class, [
-                'label' => 'Submit answer',
-                'attr' => [
-                    'class' => 'btn btn-primary btn-block',
                 ],
             ])
             ->getForm();
