@@ -28,6 +28,12 @@ class Question
     private $survey;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"survey", "answer"})
+     */
+    private $category;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank()
      * @Groups({"survey", "answer"})
@@ -156,5 +162,29 @@ class Question
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set category.
+     *
+     * @param string $category
+     *
+     * @return Question
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category.
+     *
+     * @return string
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }

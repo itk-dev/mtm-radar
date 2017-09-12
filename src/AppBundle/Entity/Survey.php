@@ -37,6 +37,12 @@ class Survey
     private $description;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey", "answer"})
+     */
+    private $instructions;
+
+    /**
      * @ORM\Column(type="json_array")
      * @Groups({"survey", "answer"})
      */
@@ -224,6 +230,31 @@ class Survey
     public function getRating()
     {
         $configuration = $this->getConfiguration();
+
         return isset($configuration['rating']) ? $configuration['rating'] : [];
+    }
+
+    /**
+     * Set instructions.
+     *
+     * @param string $instructions
+     *
+     * @return Survey
+     */
+    public function setInstructions($instructions)
+    {
+        $this->instructions = $instructions;
+
+        return $this;
+    }
+
+    /**
+     * Get instructions.
+     *
+     * @return string
+     */
+    public function getInstructions()
+    {
+        return $this->instructions;
     }
 }
