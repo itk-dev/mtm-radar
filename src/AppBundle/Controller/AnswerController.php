@@ -28,6 +28,11 @@ class AnswerController extends Controller
     /**
      * @Route("/{id}", name="answer_submit")
      * @Method("POST")
+     *
+     * @param Request $request
+     * @param Survey  $survey
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function answerSubmitAction(Request $request, Survey $survey)
     {
@@ -47,6 +52,11 @@ class AnswerController extends Controller
     /**
      * @Route("/{id}", name="answer_show")
      * @Method("GET")
+     *
+     * @param Request $request
+     * @param Answer  $answer
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function getAction(Request $request, Answer $answer)
     {
@@ -58,6 +68,12 @@ class AnswerController extends Controller
     /**
      * @Route("/{id}/data", name="answer_show_data")
      * @Method("GET")
+     *
+     * @param Request             $request
+     * @param Answer              $answer
+     * @param SerializerInterface $serializer
+     *
+     * @return JsonResponse
      */
     public function getDataAction(Request $request, Answer $answer, SerializerInterface $serializer)
     {

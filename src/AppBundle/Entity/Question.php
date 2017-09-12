@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -22,20 +23,35 @@ class Question
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Survey", inversedBy="questions")
+     * @ORM\JoinColumn(name="survey_id", referencedColumnName="id", nullable=false)
      */
     private $survey;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"survey", "answer"})
+     */
+    private $category;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Assert\NotBlank()
      * @Groups({"survey", "answer"})
      */
     private $title;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=false)
+     * @Assert\NotBlank()
      * @Groups({"survey", "answer"})
      */
     private $text;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey", "answer"})
+     */
+    private $description;
 
     public function __toString()
     {
@@ -45,7 +61,7 @@ class Question
     /**
      * Get id.
      *
-     * @return guid
+     * @return string
      */
     public function getId()
     {
@@ -83,7 +99,7 @@ class Question
      *
      * @return Question
      */
-    public function setSurvey(\AppBundle\Entity\Survey $survey = null)
+    public function setSurvey(Survey $survey = null)
     {
         $this->survey = $survey;
 
@@ -122,5 +138,53 @@ class Question
     public function getText()
     {
         return $this->text;
+    }
+
+    /**
+     * Set description.
+     *
+     * @param string $description
+     *
+     * @return Question
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description.
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set category.
+     *
+     * @param string $category
+     *
+     * @return Question
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category.
+     *
+     * @return string
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }

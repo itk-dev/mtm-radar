@@ -10,7 +10,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -33,6 +32,10 @@ class SurveyController extends Controller
     /**
      * @Route("/{id}/answer", name="survey_answer")
      * @Method("GET")
+     *
+     * @param Survey $survey
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function getAction(Survey $survey)
     {
@@ -48,6 +51,11 @@ class SurveyController extends Controller
     /**
      * @Route("/{id}/answer")
      * @Method("POST")
+     *
+     * @param Request $request
+     * @param Survey  $survey
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function postAnswer(Request $request, Survey $survey)
     {
@@ -77,6 +85,12 @@ class SurveyController extends Controller
 
     /**
      * @Route("/{id}/data", name="survey_show_data")
+     *
+     * @param Request             $request
+     * @param Survey              $survey
+     * @param SerializerInterface $serializer
+     *
+     * @return JsonResponse
      */
     public function getDataAction(Request $request, Survey $survey, SerializerInterface $serializer)
     {
@@ -92,22 +106,27 @@ class SurveyController extends Controller
 
     private function buildAnswerForm(Answer $answer, Survey $survey)
     {
-        $answer->setReplies($survey->getQuestions()->map(function () { return null; }));
+        // Create an initial empty reply for all questions.
+        $answer->setReplies($survey->getQuestions()->map(function () {
+            return null;
+        }));
 
         $form = $this->createFormBuilder($answer)
+            ->add('title', TextType::class, [
+                'label' => 'Title',
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'Description',
+                'required' => false,
+            ])
+            ->add('author', TextType::class, [
+                'label' => 'Author',
+            ])
             ->add('replies', CollectionType::class, [
+                'label' => 'Replies',
                 'entry_type' => ReplyType::class,
                 'entry_options' => [
                     'choices' => $survey->getRating(),
-                ],
-            ])
-            ->add('title', TextType::class)
-            ->add('description', TextareaType::class)
-            ->add('author', TextType::class)
-            ->add('save', SubmitType::class, [
-                'label' => 'Submit answer',
-                'attr' => [
-                    'class' => 'btn btn-primary btn-block',
                 ],
             ])
             ->getForm();

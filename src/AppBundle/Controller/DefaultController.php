@@ -10,6 +10,10 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/", name="homepage")
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function indexAction(Request $request)
     {

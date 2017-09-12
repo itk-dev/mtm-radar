@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -22,6 +23,7 @@ class Answer
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Survey", inversedBy="answers")
+     * @ORM\JoinColumn(name="survey_id", referencedColumnName="id", nullable=false)
      * @Groups({"answer"})
      */
     private $survey;
@@ -30,19 +32,19 @@ class Answer
      * @ORM\Column(type="string", length=255)
      * @Groups({"survey", "answer"})
      */
-    private $title;
-
-    /**
-     * @ORM\Column(type="text")
-     * @Groups({"survey", "answer"})
-     */
-    private $description;
+    private $author;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"survey", "answer"})
      */
-    private $author;
+    private $title;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey", "answer"})
+     */
+    private $description;
 
     /**
      * @ORM\Column(type="json_array")
@@ -64,7 +66,7 @@ class Answer
     /**
      * Get id.
      *
-     * @return guid
+     * @return string
      */
     public function getId()
     {
@@ -102,7 +104,7 @@ class Answer
      *
      * @return Answer
      */
-    public function setSurvey(\AppBundle\Entity\Survey $survey = null)
+    public function setSurvey(Survey $survey = null)
     {
         $this->survey = $survey;
 
@@ -117,6 +119,30 @@ class Answer
     public function getSurvey()
     {
         return $this->survey;
+    }
+
+    /**
+     * Set author.
+     *
+     * @param string $author
+     *
+     * @return Answer
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author.
+     *
+     * @return string
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 
     /**
@@ -168,33 +194,9 @@ class Answer
     }
 
     /**
-     * Set author.
-     *
-     * @param string $author
-     *
-     * @return Answer
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author.
-     *
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    /**
      * Set replies.
      *
-     * @param array $replies
+     * @param ArrayCollection $replies
      *
      * @return Answer
      */

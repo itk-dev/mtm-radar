@@ -104,7 +104,7 @@
         $('#next').on('click', next);
             showQuestion();
         }
-    }
+    };
 
     window.loadSurvey = loadSurvey;
 }(jQuery));

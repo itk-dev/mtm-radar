@@ -1,26 +1,25 @@
 title: Example
 
 description: |
-  Non nobis, Domine, non nobis, sed nomini tuo da gloriam.
-  Non nobis, Domine, non nobis, sed nomini tuo da gloriam.
-  Non nobis, Domine, non nobis, sed nomini tuo da gloriam.
+    Non nobis, Domine, non nobis, sed nomini tuo da gloriam.
+    Non nobis, Domine, non nobis, sed nomini tuo da gloriam.
+    Non nobis, Domine, non nobis, sed nomini tuo da gloriam.
 
 configuration:
-    min: 1
     rating:
-        - 1
-        - 2
-        - 3
+        1: Anaconda
+        2: Bear
+        4: Cougar
 
 questions:
-  -
-    title: Klog vækst
-    text: Non nobis, Domine, non nobis, sed nomini tuo da gloriam.
+    -
+        title: Klog vækst
+        text: Non nobis, Domine, non nobis, sed nomini tuo da gloriam.
 
-  -
-    title: Forbundethed
-    text: Yada, yada, yada, …
+    -
+        title: Forbundethed
+        text: Yada, yada, yada, …
 
-  -
-    title: Bidrag til nærområde
-    text: Donec pretium posuere tellus.
+    -
+        title: Bidrag til nærområde
+        text: Donec pretium posuere tellus.

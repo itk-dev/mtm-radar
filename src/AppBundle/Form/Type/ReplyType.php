@@ -20,6 +20,7 @@ class ReplyType extends AbstractType
                 'multiple' => false,
             ])
             ->add('comment', TextareaType::class, [
+                'required' => false,
                 'attr' => [
                     'rows' => 4,
                 ],

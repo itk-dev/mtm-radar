@@ -1,12 +1,25 @@
+ivory_ck_editor:
+    input_sync: true
+    default_config: base_config
+    configs:
+        base_config:
+            toolbar:
+                -
+                    name: "styles"
+                    items: ['Format', 'Bold', 'Italic', 'BulletedList', 'Link']
+
 easy_admin:
+    design:
+        assets:
+            css:
+                - 'assets/dist/easyadmin.css'
+
     entities:
         Survey:
             class: AppBundle\Entity\Survey
             list:
                 actions:
-                    - name: survey_show
-                      type: route
-                      label: Share
+                    - shareSurvey
                     - show
                     - edit
                     - delete
@@ -14,9 +27,10 @@ easy_admin:
                 fields:
                     - property: title
                       # template: share.html.twig
-                    - property: createdAt
+                    - property: description
                     - property: questions
                     - property: answers
+                    - property: createdAt
 
             show:
                 fields:
@@ -32,6 +46,9 @@ easy_admin:
                 fields:
                     - property: title
                     - property: description
+                      type: ckeditor
+                    - property: instructions
+                      type: ckeditor
                     - property: configuration
                       type: AppBundle\Form\Type\ConfigurationType
                     - property: questions
@@ -44,3 +61,14 @@ easy_admin:
 
         Answer:
             class: AppBundle\Entity\Answer
+            disabled_actions: [edit, delete]
+            list:
+                actions:
+                    - name: answer_show
+                      type: route
+                      label: Show
+                fields:
+                    - property: title
+                    - property: author
+                    - property: description
+                    - property: createdAt

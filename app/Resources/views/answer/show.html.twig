@@ -3,48 +3,114 @@
 {% set survey = answer.survey %}
 
 {% block body %}
-	<h1>{{ survey.title }}</h1>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="survey" data-configuration="{{ survey.configuration|json_encode }}" data-replies="{{ answer.replies | json_encode }}">
+        <section class="header">
+          <h1 class="title" >{{ survey.title }}</h1>
 
-	{% if survey.description %}
-		<div>{{ survey.description }}</div>
-	{% endif %}
+          {% if survey.description %}
+            <div class="description">{{ survey.description }}</div>
+          {% endif %}
+        </section>
 
-	<div id="chart-wrapper">
-		<canvas id="chart"></canvas>
-	</div>
+				<section class="metadata">
+					<div class="form-group">
+						<label class="control-label">{{ 'Author' | trans }}</label>
+						<span class="form-control">{{ answer.author }}</span>
+					</div>
 
-	<div class="questions">
-		{% for question in survey.questions %}
-			{% set reply = answer.replies[loop.index0]|default(false) %}
-			<div class="question">
-				{{ loop.index }}. {{ question.title }}
-				<div class="reply">
-					{% if reply.value|default(false) %}
-						{{ 'Reply: %reply%' | trans({'%reply%': reply.value}) }}
-						{% if reply.comment|default(false) %}
-							<div>{{ reply.comment }}</div>
-						{% endif %}
-					{% else %}
-						{{ 'No reply' | trans }}
+					<div class="form-group">
+						<label class="control-label">{{ 'Title' | trans }}</label>
+						<span class="form-control">{{ answer.title }}</span>
+					</div>
+
+					{% if answer.description|default(false) %}
+						<div class="form-group">
+							<label class="control-label">{{ 'Description' | trans }}</label>
+							<span class="form-control">{{ answer.description }}</span>
+						</div>
 					{% endif %}
-				</div>
-			</div>
-		{% endfor %}
-	</div>
+				</section>
+
+				{% for question in survey.questions %}
+					{% set reply = answer.replies[loop.index0]|default(false) %}
+          <section class="question" data-index="{{ loop.index0 }}" id="{{ loop.index0 }}">
+						{{ loop.index }}. {{ question.title }}
+						<div class="reply">
+							{% if reply.value|default(false) %}
+								{{ 'Reply: %reply%' | trans({'%reply%': reply.value}) }}
+								{% if reply.comment|default(false) %}
+									<div class="comment form-control">{{ reply.comment }}</div>
+								{% endif %}
+							{% else %}
+								{{ 'No reply' | trans }}
+							{% endif %}
+						</div>
+					</section>
+				{% endfor %}
+
+				{#
+        {% form_theme form 'bootstrap_3_layout.html.twig' %}
+        {{ form_start(form) }}
+          <section class="metadata" style="display: none">
+            {{ form_row(form.author) }}
+            {{ form_row(form.title) }}
+            {{ form_row(form.description) }}
+
+						<div class="text-right">
+							<button type="button" class="btn btn-primary survey-next">{{ 'Start survey' | trans }}</button>
+						</div>
+          </section>
+
+          {% for question in survey.questions %}
+            <section class="question" data-index="{{ loop.index0 }}" id="{{ loop.index0 }}" style="display: none">
+              <h2>{{ loop.index }}. <span  class="title">{{ question.title }}</span></h2>
+
+              <div class="text">{{ question.text }}</div>
+
+              {% set form_field = form.replies[loop.index0] %}
+              {% form_theme form_field.value _self %}
+              {{ form_widget(form_field) }}
+
+              <div class="row">
+                <div class="col-md-6">
+                  {% if not loop.first %}
+                    <button type="button" class="btn btn-default survey-prev">{{ 'Previous question' | trans }}</button>
+                  {% endif %}
+                </div>
+                <div class="col-md-6 text-right">
+                  {% if true or not loop.last %}
+                    <button type="button" class="btn btn-primary survey-next">{{ 'Next question' | trans }}</button>
+                  {% endif %}
+                </div>
+              </div>
+            </section>
+          {% endfor %}
+
+          <section class="submit" style="display: none">
+            <button type="button" class="btn btn-default survey-prev">{{ 'Back' | trans }}</button>
+
+            <button type="submit" class="btn btn-primary btn-block">{{ 'Save answer' | trans }}</button>
+          </section>
+        {{ form_end(form) }}
+				#}
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div id="chart-wrapper">
+        <canvas id="chart"></canvas>
+      </div>
+    </div>
+  </div>
 {% endblock %}
 
 {% block stylesheets %}
-	<style>
-	 #chart-wrapper {
-		 max-width: 500px;
-		 height: 400px;
-	 }
-	</style>
+	<link rel="stylesheet" href="/assets/dist/survey.css"/>
 {% endblock %}
 
 {% block javascripts %}
 	{{ parent() }}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" integrity="sha256-SiHXR50l06UwJvHhFY4e5vzwq75vEHH+8fFNpkXePr0=" crossorigin="anonymous"></script>
-	<script src="/survey.js"></script>
-	<script src="{{ path('answer_show_data', {id: answer.id, callback: 'loadSurvey'}) }}"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" integrity="sha256-SiHXR50l06UwJvHhFY4e5vzwq75vEHH+8fFNpkXePr0=" crossorigin="anonymous"></script>
+	<script src="/assets/src/survey.js"></script>
 {% endblock %}
