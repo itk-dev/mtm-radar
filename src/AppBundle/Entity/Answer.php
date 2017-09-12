@@ -41,8 +41,8 @@ class Answer
     private $title;
 
     /**
-     * @ORM\Column(type="text")
-     * @Groups({"survey", "answer"}, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey", "answer"})
      */
     private $description;
 
