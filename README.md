@@ -4,8 +4,8 @@
 
 ```
 composer install
-bin/console ckeditor:install
-bin/console assets:install web
+bin/console ckeditor:install --clear=drop
+bin/console assets:install --symlink
 bin/console doctrine:database:create
 bin/console doctrine:migrations:migrate --no-interaction
 ```
