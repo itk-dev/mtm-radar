@@ -21,7 +21,7 @@ abstract class LoadData extends ContainerAwareFixture implements OrderedFixtureI
         $this->accessor = $this->container->get('property_accessor');
         $this->manager = $manager;
 
-        $finder = (new Finder())->files()->name('*.yml')->in(__DIR__.'/../data/'.$this->getName());
+        $finder = (new Finder())->files()->name('*.yml')->in(__DIR__.'/../Data/'.$this->getName());
         foreach ($finder as $file) {
             $yaml = file_get_contents($file->getRealPath());
             $data = Yaml::parse($yaml, Yaml::PARSE_OBJECT_FOR_MAP);
