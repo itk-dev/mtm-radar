@@ -2,7 +2,7 @@ easy_admin:
     design:
         assets:
             css:
-                - 'assets/easyadmin.css'
+                - 'assets/dist/easyadmin.css'
 
     entities:
         Survey:
