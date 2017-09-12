@@ -3,6 +3,7 @@
 namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Question;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -15,7 +16,10 @@ class QuestionType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('text', TextareaType::class, [
+            ->add('category', TextType::class, [
+                'required' => false,
+            ])
+            ->add('text', CKEditorType::class, [
                 'attr' => [
                     'rows' => 4,
                 ],

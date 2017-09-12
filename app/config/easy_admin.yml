@@ -1,3 +1,13 @@
+ivory_ck_editor:
+    input_sync: true
+    default_config: base_config
+    configs:
+        base_config:
+            toolbar:
+                -
+                    name: "styles"
+                    items: ['Format', 'Bold', 'Italic', 'BulletedList', 'Link']
+
 easy_admin:
     design:
         assets:
@@ -36,6 +46,9 @@ easy_admin:
                 fields:
                     - property: title
                     - property: description
+                      type: ckeditor
+                    - property: instructions
+                      type: ckeditor
                     - property: configuration
                       type: AppBundle\Form\Type\ConfigurationType
                     - property: questions

@@ -6,7 +6,7 @@
   <div class="replies">
     <div class="btn-group" data-toggle="buttons">
       {% for choice in choices %}
-        <label class="btn btn-success reply-index-{{ loop.index0 }} reply-value-{{ choice.value }}">
+        <label class="btn btn-light reply-index-{{ loop.index0 }} reply-value-{{ choice.value }}">
           <input type="radio" name="{{ loop.parent.full_name }}" value="{{ choice.value }}" autocomplete="off" required/> {{ choice.label }}
         </label>
       {% endfor %}
@@ -17,19 +17,23 @@
 {% block body %}
   <div class="row">
     <div class="col-md-8">
-			<div id="validation-errors" class="alert alert-danger" style="display: none">{{ 'Please fill in all required fields' | trans }}</div>
+      <div id="validation-errors" class="alert alert-danger" style="display: none">{{ 'Please fill in all required fields' | trans }}</div>
 
       <div class="survey" data-configuration="{{ survey.configuration|json_encode }}" data-survey-min="{{ survey.configuration.min|default(0) }}" data-survey-max="{{ survey.configuration.rating|length }}">
         <section class="header">
           <h1 class="title" >{{ survey.title }}</h1>
 
           {% if survey.description %}
-            <div class="description">{{ survey.description }}</div>
+            <div class="description">{{ survey.description | raw }}</div>
           {% endif %}
 
-					<div class="text-right">
-						<button type="button" class="btn btn-primary survey-next">{{ 'Next' | trans }}</button>
-					</div>
+          {% if survey.instructions %}
+            <div class="instructions">{{ survey.instructions | raw }}</div>
+          {% endif %}
+
+          <div class="text-right">
+            <button type="button" class="btn btn-primary survey-next">{{ 'Next' | trans }}</button>
+          </div>
         </section>
 
         {% form_theme form 'bootstrap_3_layout.html.twig' %}
@@ -39,16 +43,16 @@
             {{ form_row(form.title) }}
             {{ form_row(form.description) }}
 
-						<div class="text-right">
-							<button type="button" class="btn btn-primary survey-next">{{ 'Start survey' | trans }}</button>
-						</div>
+            <div class="text-right">
+              <button type="button" class="btn btn-primary survey-next">{{ 'Start survey' | trans }}</button>
+            </div>
           </section>
 
           {% for question in survey.questions %}
             <section class="question" data-index="{{ loop.index0 }}" id="{{ loop.index0 }}" style="display: none">
               <h2>{{ loop.index }}. <span  class="title">{{ question.title }}</span></h2>
 
-              <div class="text">{{ question.text }}</div>
+              <div class="text">{{ question.text | raw }}</div>
 
               {% set form_field = form.replies[loop.index0] %}
               {% form_theme form_field.value _self %}
@@ -86,12 +90,12 @@
 {% endblock %}
 
 {% block stylesheets %}
-	<link rel="stylesheet" href="/assets/dist/survey.css"/>
+  <link rel="stylesheet" href="/assets/dist/survey.css"/>
 {% endblock %}
 
 {% block javascripts %}
   {{ parent() }}
   <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" integrity="sha256-SiHXR50l06UwJvHhFY4e5vzwq75vEHH+8fFNpkXePr0=" crossorigin="anonymous"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
   <script src="/assets/src/survey.js"></script>
 {% endblock %}
