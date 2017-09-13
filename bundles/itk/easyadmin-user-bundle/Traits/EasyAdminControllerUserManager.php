@@ -1,6 +1,6 @@
 <?php
 
-namespace EasyAdminUserBundle\Traits;
+namespace Itk\Bundle\EasyAdminUserBundle\Traits;
 
 trait EasyAdminControllerUserManager
 {

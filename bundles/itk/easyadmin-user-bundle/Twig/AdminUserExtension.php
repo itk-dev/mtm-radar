@@ -1,6 +1,6 @@
 <?php
 
-namespace EasyAdminUserBundle\Twig;
+namespace Itk\Bundle\EasyAdminUserBundle\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

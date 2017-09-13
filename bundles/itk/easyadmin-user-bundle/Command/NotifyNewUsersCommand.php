@@ -1,6 +1,6 @@
 <?php
 
-namespace EasyAdminUserBundle\Command;
+namespace Itk\Bundle\EasyAdminUserBundle\Command;
 
 use EasyAdminUserBundle\Entity\User;
 use EasyAdminUserBundle\Service\UserManager;

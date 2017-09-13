@@ -1,10 +1,10 @@
 fos_user:
-    user_class: EasyAdminUserBundle\Entity\User
+    user_class: Itk\Bundle\EasyAdminUserBundle\Entity\User
     from_email:
         address: "%mailer_email%"
         sender_name: "%mailer_name%"
     service:
-        user_manager: EasyAdminUserBundle\Service\UserManager
+        user_manager: Itk\Bundle\EasyAdminUserBundle\Service\UserManager
         mailer: fos_user.mailer.twig_swift
     resetting:
         email:

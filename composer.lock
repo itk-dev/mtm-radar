@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "695e097407b8c2b17e92c74b5815d6bb",
+    "content-hash": "ec11d401a3b6ab600ca4916840a64e69",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1394,6 +1394,37 @@
                 "parameters management"
             ],
             "time": "2015-11-10T17:04:01+00:00"
+        },
+        {
+            "name": "itk/easyadmin-user-bundle",
+            "version": "dev-feature/RADAR-17-admin-security",
+            "dist": {
+                "type": "path",
+                "url": "bundles/itk/easyadmin-user-bundle",
+                "reference": "335c344d18e66b85c97d3d992fc30627d812a324",
+                "shasum": null
+            },
+            "require": {
+                "friendsofsymfony/user-bundle": "^2.0",
+                "javiereguiluz/easyadmin-bundle": "^1.16",
+                "symfony/symfony": "^3.3"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Itk\\Bundle\\EasyAdminUserBundle\\": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mikkel Ricky",
+                    "email": "rimi@aarhus.dk"
+                }
+            ],
+            "description": "Itk easy admin user bundle"
         },
         {
             "name": "javiereguiluz/easyadmin-bundle",
@@ -3440,9 +3471,11 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": [],
-    "prefer-stable": false,
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "itk/easyadmin-user-bundle": 20
+    },
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.0.0"

@@ -1,6 +1,6 @@
 <?php
 
-namespace EasyAdminUserBundle\Service;
+namespace Itk\Bundle\EasyAdminUserBundle\Service;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use EasyAdminUserBundle\Entity\User;

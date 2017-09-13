@@ -1,6 +1,6 @@
 <?php
 
-namespace EasyAdminUserBundle\Entity;
+namespace Itk\Bundle\EasyAdminUserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;

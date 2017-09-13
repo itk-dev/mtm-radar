@@ -75,7 +75,7 @@ easy_admin:
                     - property: createdAt
 
         User:
-            class: EasyAdminUserBundle\Entity\User
+            class: Itk\Bundle\EasyAdminUserBundle\Entity\User
             list:
                 fields:
                     - property: email
