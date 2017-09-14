@@ -4,6 +4,7 @@
 parameters:
     site_url: http://mtm-radar.vm
     site_name: MTM Radar
+    site_logo_url: /assets/images/logo.png
     router.request_context.host: mtm-radar.vm
     database_host: 127.0.0.1
     database_port: ~
