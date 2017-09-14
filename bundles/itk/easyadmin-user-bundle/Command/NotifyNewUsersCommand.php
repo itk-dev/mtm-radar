@@ -2,8 +2,8 @@
 
 namespace Itk\Bundle\EasyAdminUserBundle\Command;
 
-use EasyAdminUserBundle\Entity\User;
-use EasyAdminUserBundle\Service\UserManager;
+use Itk\Bundle\EasyAdminUserBundle\Entity\User;
+use Itk\Bundle\EasyAdminUserBundle\Service\UserManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
