@@ -1,15 +1,41 @@
 title: Example
 
 description: |
+    <h1>Description</h1>
+
+    <p>
     Non nobis, Domine, non nobis, sed nomini tuo da gloriam.
     Non nobis, Domine, non nobis, sed nomini tuo da gloriam.
     Non nobis, Domine, non nobis, sed nomini tuo da gloriam.
+    </p>
+
+instructions: |
+    <h1>Instructions</h1>
+
+    <p>
+    Non nobis, Domine, non nobis, sed nomini tuo da gloriam.
+    Non nobis, Domine, non nobis, sed nomini tuo da gloriam.
+    Non nobis, Domine, non nobis, sed nomini tuo da gloriam.
+    </p>
 
 configuration:
     rating:
         1: Anaconda
         2: Bear
         4: Cougar
+        0: (Not relevant)
+
+    answer:
+        labels:
+            title: Overskrift
+            author: Udfyldt af
+    labels:
+        title: Hat og briller
+        description: Formål
+        instructions: Vejledning
+
+    chart:
+        type: radar
 
 questions:
     -

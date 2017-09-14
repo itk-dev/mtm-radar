@@ -9,21 +9,21 @@ class LoadSurvey extends LoadData
 {
     public function getOrder()
     {
-        return 1;
+        return 2;
     }
 
     protected function loadItem($data)
     {
         $survey = new Survey();
-        foreach ($data->questions as $item) {
+        foreach ($data['questions'] as $item) {
             $question = $this->setValues(new Question(), $item)
                 ->setSurvey($survey);
             $this->persist($question);
         }
-        unset($data->questions);
+        unset($data['questions']);
 
-        $this->setValue($survey, 'configuration', $data->configuration);
-        unset($data->configuration);
+        $this->setValue($survey, 'configuration', $data['configuration']);
+        unset($data['configuration']);
 
         $survey = $this->setValues($survey, $data);
         $this->persist($survey);

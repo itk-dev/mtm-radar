@@ -23,11 +23,14 @@ abstract class LoadData extends ContainerAwareFixture implements OrderedFixtureI
 
         $finder = (new Finder())->files()->name('*.yml')->in(__DIR__.'/../Data/'.$this->getName());
         foreach ($finder as $file) {
-            $yaml = file_get_contents($file->getRealPath());
-            $data = Yaml::parse($yaml, Yaml::PARSE_OBJECT_FOR_MAP);
             echo $file->getFilename(), PHP_EOL;
 
-            $this->loadItem($data);
+            $yaml = file_get_contents($file->getRealPath());
+            $data = Yaml::parse($yaml);
+            $items = $this->isAssoc($data) ? [$data] : $data;
+            foreach ($items as $item) {
+                $this->loadItem($item);
+            }
         }
         $manager->flush();
     }
@@ -63,4 +66,13 @@ abstract class LoadData extends ContainerAwareFixture implements OrderedFixtureI
     }
 
     abstract protected function loadItem($data);
+
+    // @see https://stackoverflow.com/a/173479
+    private function isAssoc(array $arr)
+    {
+        if ([] === $arr) {
+            return false;
+        }
+        return array_keys($arr) !== range(0, count($arr) - 1);
+    }
 }

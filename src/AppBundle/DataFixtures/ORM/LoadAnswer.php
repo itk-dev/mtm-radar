@@ -7,10 +7,15 @@ use AppBundle\Entity\Survey;
 
 class LoadAnswer extends LoadData
 {
+    public function getOrder()
+    {
+        return 3;
+    }
+
     public function loadItem($data)
     {
         $criteria = [];
-        foreach ($data->survey as $name => $value) {
+        foreach ($data['survey'] as $name => $value) {
             $criteria[$name] = $value;
         }
         $survey = $this->manager->getRepository(Survey::class)->findOneBy($criteria);
@@ -18,14 +23,9 @@ class LoadAnswer extends LoadData
             throw new \RuntimeException('No such survey: '.json_encode($criteria));
         }
 
-        $data->survey = $survey;
+        $data['survey'] = $survey;
 
         $answer = $this->setValues(new Answer(), $data);
         $this->persist($answer);
-    }
-
-    public function getOrder()
-    {
-        return 2;
     }
 }
