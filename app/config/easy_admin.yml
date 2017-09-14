@@ -9,6 +9,7 @@ ivory_ck_editor:
                     items: ['Format', 'Bold', 'Italic', 'BulletedList', 'Link']
 
 easy_admin:
+    site_name: '%site_name%'
     design:
         assets:
             css:
@@ -72,3 +73,25 @@ easy_admin:
                     - property: author
                     - property: description
                     - property: createdAt
+
+        User:
+            class: Itk\Bundle\EasyAdminUserBundle\Entity\User
+            list:
+                fields:
+                    - property: email
+                    - property: roles
+                    - property: last_login
+                      type: datetime
+
+            form:
+                fields:
+                    - property: email
+                      type: email
+                    - property: roles
+                      type: choice
+                      type_options:
+                          multiple: true
+                          expanded: true
+                          choices: &role_list
+                              ROLE_USER: ROLE_USER
+                              ROLE_ADMIN: ROLE_ADMIN

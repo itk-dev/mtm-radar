@@ -2,7 +2,9 @@
 # Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
 # https://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
+    site_url: http://mtm-radar.vm
     site_name: MTM Radar
+    router.request_context.host: mtm-radar.vm
     database_host: 127.0.0.1
     database_port: ~
     database_name: mtm_radar
@@ -13,8 +15,32 @@ parameters:
 
     mailer_transport: smtp
     mailer_host: 127.0.0.1
+    mailer_port: ~
     mailer_user: ~
     mailer_password: ~
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
+
+    mailer_email: admin@mtm-radar.vm
+    mailer_name: MTM Radar
+
+    user_created:
+        subject: '{{ site_name }} – brugeroprettelse'
+        header: 'Bruger oprettet på {{ site_name }}'
+        body: |
+          <p style='margin: 0;'>Du er blevet oprettet som bruger på {{ site_name }} med e-mailadressen {{ user.email }}.</p>
+          <p style='margin: 0;'>For at komme i gang skal du angive en adgangskode.
+          <p style='margin: 0;'>Du kan efterfølgende logge ind med din e-mailadresse ({{ user.email }}) og den valgte adgangskode.</p>
+        button:
+            text: 'Angiv adgangskode'
+        footer: '<p style="margin: 0;">Venlig hilsen<br/> {{ site_name }}</p>'
+
+    password_resetting:
+        subject: '{{ site_name }} – nulstilling af adgangskode'
+        header: 'Nulstilling af adgangskode på {{ site_name }}'
+        body: |
+          <p style='margin: 0;'>Du kan skifte adgangskoden for {{ user.email }} ved at gå til <a href="{{ confirmationUrl }}">{{ confirmationUrl }}</a> og vælge en ny adgangskode.</p>
+        button:
+            text: 'Skift adgangskode'
+        footer: '<p style="margin: 0;">Venlig hilsen<br/> {{ site_name }}</p>'
