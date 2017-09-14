@@ -3,12 +3,12 @@
 namespace Itk\Bundle\EasyAdminUserBundle\Service;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use EasyAdminUserBundle\Entity\User;
 use FOS\UserBundle\Doctrine\UserManager as BaseUserManager;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Util\CanonicalFieldsUpdater;
 use FOS\UserBundle\Util\PasswordUpdaterInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
+use Itk\Bundle\EasyAdminUserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
