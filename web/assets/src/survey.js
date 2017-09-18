@@ -59,6 +59,9 @@
                         min: 0,
                         max: max,
                         stepSize: 1
+                    },
+                    gridLines: {
+                        color: ['#ffffff', '#ff0000', '#00ff00', '#ffff00', '#0000ff']
                     }
                 }
             }
@@ -71,7 +74,14 @@
 
         var showQuestion = function () {
             if (index < count - 1) {
-                sections.hide().eq(index).show();
+                var current = sections.hide().eq(index).show();
+				if (current.is('.question')) {
+					$('#chart-wrapper').show();
+					$('#survey-info').hide();
+				} else {
+					$('#chart-wrapper').hide();
+					$('#survey-info').show();
+				}
             } else {
                 sections.show();
             }
