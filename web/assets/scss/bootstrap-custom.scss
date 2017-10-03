@@ -1,0 +1,47 @@
+// Open sans font
+$FontPathOpenSans: "../fonts/open-sans/";
+@import "../node_modules/npm-font-open-sans/open-sans.scss";
+$font-open-sans: 'Open Sans', sans-serif;
+
+// Font-awesome icons
+$fa-font-path: "../fonts/font-awesome/";
+@import "../node_modules/font-awesome/scss/font-awesome";
+
+
+
+
+// Override bootstrap variables
+// Color system
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #868e96;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+
+$blue:    #009BDD;
+$indigo:  #82338E;
+$purple:  #A36FAF;
+$pink:    #e83e8c;
+$red:     #D56056;
+$orange:  #fd7e14;
+$yellow:  #FECE60;
+$green:   #7DBA6D;
+$teal:    #20c997;
+$cyan:    #17a2b8;
+
+// Text
+$headings-font-weight:   700;
+$paragraph-margin-bottom: 1.5rem;
+$font-family-sans-serif: $font-open-sans;
+
+// Round corners
+$border-radius:          .15rem;
+$border-radius-lg:       .15rem;
+$border-radius-sm:       .15rem;
+
+// Import full bootstrap from node_modules
+@import "../node_modules/bootstrap/scss/bootstrap";

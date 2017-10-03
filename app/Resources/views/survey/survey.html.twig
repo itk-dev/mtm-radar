@@ -33,7 +33,7 @@
                         {{ form_row(form.description, {label: survey.configuration.answer.labels.description|default(null)}) }}
 
                         <div class="text-right">
-                            <button type="button" class="btn btn-primary survey-next">{{ survey.configuration.labels.start|default('Start survey' | trans) }}</button>
+                            <button type="button" class="btn btn-primary btn-lg btn-block survey-next">{{ survey.configuration.labels.start|default('Start survey' | trans) }}</button>
                         </div>
                     </section>
 
@@ -73,12 +73,33 @@
         </div>
         <div class="col-md-4">
             <section class="header">
+                <div id="accordion" data-children=".item">
                 {% if survey.description %}
-                    <div class="description">{{ survey.description | raw }}</div>
+                    <div class="item description">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#description" aria-expanded="true" aria-controls="description">
+                               Description
+                        </a>
+                        <div id="description" class="collapse show" role="tabpanel">
+                        <p class="mb-3">
+                            {{ survey.description | raw }}
+                        </p>
+                        </div>
+                    </div>
+                    <!-- <div class="description">{{ survey.description | raw }}</div> -->
                 {% endif %}
 
                 {% if survey.instructions %}
-                    <div class="instructions">{{ survey.instructions | raw }}</div>
+                    <div class="item instructions">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#instructions" aria-expanded="false" aria-controls="instructions">
+                                Instructions
+                        </a>
+                        <div id="instructions" class="collapse" role="tabpanel">
+                        <p class="mb-3">
+                            {{ survey.instructions | raw }}
+                        </p>
+                        </div>
+                    </div>
+                    <!-- <div class="instructions">{{ survey.instructions | raw }}</div> -->
                 {% endif %}
             </section>
 
@@ -90,12 +111,12 @@
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="/assets/dist/survey.css"/>
+    <link rel="stylesheet" href="/assets/dist/css/survey.css"/>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" integrity="sha256-SiHXR50l06UwJvHhFY4e5vzwq75vEHH+8fFNpkXePr0=" crossorigin="anonymous"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
-    <script src="/assets/src/survey.js"></script>
+    <script src="/assets/dist/js/Chart.min.js"></script>
+    <script src="/assets/dist/js/jquery.validate.min.js"></script>
+    <script src="/assets/dist/js/survey.js"></script>
 {% endblock %}
