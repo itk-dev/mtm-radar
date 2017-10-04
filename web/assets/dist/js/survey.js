@@ -73,17 +73,13 @@
         };
 
         var showQuestion = function () {
-            if (index < count - 1) {
-                var current = sections.hide().eq(index).show();
-				if (current.is('.question')) {
-					$('#chart-wrapper').show();
-					$('#survey-info').hide();
-				} else {
-					$('#chart-wrapper').hide();
-					$('#survey-info').show();
-				}
+            var current = sections.hide().eq(index).show();
+            if (current.is('.question')) {
+                $('#chart-wrapper').show();
+                $('#survey-info').hide();
             } else {
-                sections.show();
+                $('#chart-wrapper').hide();
+                $('#survey-info').show();
             }
         };
 

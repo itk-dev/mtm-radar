@@ -46,10 +46,10 @@
                         <section class="question" data-index="{{ loop.index0 }}" id="{{ loop.index0 }}" style="display: none">
                             <div class="row mt-3">
                                 <div class="col">
-                                    <p class="lead">Spørgsmål 1/14</p> <!-- TODO: Automatisk vis hvilket spørgsmål  -->
+                                    <p class="lead">Spørgsmål {{ loop.index }}/{{ loop.length }}</p> <!-- TODO: Automatisk vis hvilket spørgsmål  -->
                                 </div>
                                 <div class="col">
-                                    <p class="lead text-md-right">Aarhus - en by og byregion i vækst</p> <!-- TODO: Vis hvilket kapitel spørgsmålet hører til  -->
+                                    <p class="lead text-md-right">{{ question.category }}</p> <!-- TODO: Vis hvilket kapitel spørgsmålet hører til  -->
                                 </div>
                             </div>
 
@@ -69,19 +69,15 @@
                                     {% endif %}
                                 </div>
                                 <div class="col-md-6">
-                                    {% if true or not loop.last %}
+                                    {% if loop.last %}
+                                        <button type="submit" class="btn btn-primary btn-lg btn-block survey-next text-right">{{ survey.configuration.labels.save|default('Save answer' | trans) }}</button>
+                                    {% else %}
                                         <button type="button" class="btn btn-primary btn-lg btn-block survey-next text-right">{{ survey.configuration.labels.next|default('Next question' | trans) }}</button>
                                     {% endif %}
                                 </div> 
                             </div>
                         </section>
                     {% endfor %}
-
-                    <section class="submit prev-next-btns" style="display: none">
-                        <button type="button" class="btn btn-default btn-lg btn-block survey-prev text-left">{{ survey.configuration.labels.back|default('Back' | trans) }}</button>
-
-                        <button type="submit" class="btn btn-primary btn-lg btn-block survey-next text-right">{{ survey.configuration.labels.save|default('Save answer' | trans) }}</button>
-                    </section>
                 {{ form_end(form) }}
             </div>
         </div>
