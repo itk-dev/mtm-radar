@@ -1,17 +1,3 @@
 label.required:after {
   content: ' *';
   color: red; }
-
-#accordion a[data-toggle="collapse"][aria-expanded="true"]:before {
-  content: "\f107";
-  font-family: FontAwesome;
-  width: 10px;
-  height: 10px;
-  display: inline-block; }
-
-#accordion a[data-toggle="collapse"][aria-expanded="false"]:before {
-  content: "\f105";
-  font-family: FontAwesome;
-  width: 10px;
-  height: 10px;
-  display: inline; }

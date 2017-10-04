@@ -4,9 +4,9 @@
 {# @see: https://getbootstrap.com/docs/4.0/components/buttons/#checkbox-and-radio-buttons #}
 {% block choice_widget_expanded -%}
     <div class="replies">
-        <div class="btn-group" data-toggle="buttons">
+        <div class="btn-group choices" data-toggle="buttons"> <!-- TODO: Lav et lille script der skifter klassen 'btn-group' med 'btn-group-vertical' på mobil -->
             {% for choice in choices %}
-                <label class="btn btn-light reply-index-{{ loop.index0 }} reply-value-{{ choice.value }}">
+                <label class="btn btn-default reply-index-{{ loop.index0 }} reply-value-{{ choice.value }}">
                     <input type="radio" name="{{ loop.parent.full_name }}" value="{{ choice.value }}" autocomplete="off" required/> {{ choice.label }}
                 </label>
             {% endfor %}
@@ -15,31 +15,45 @@
 {% endblock %}
 
 {% block body %}
-    <div class="row">
+    <div class="row full-height">
         <div class="col-md-8">
             <div id="validation-errors" class="alert alert-danger" style="display: none">{{ 'Please fill in all required fields' | trans }}</div>
 
             <div class="survey" data-configuration="{{ survey.configuration|json_encode }}" data-survey-min="{{ survey.configuration.min|default(0) }}" data-survey-max="{{ survey.configuration.rating|length }}">
-				<header>
-					<h1 class="title" >{{ survey.title }}</h1>
-				</header>
-
+				
                 {% form_theme form 'bootstrap_3_layout.html.twig' %}
                 {{ form_start(form) }}
-					<section class="metadata" style="display: none">
-
-                        {{ form_row(form.author, {label: survey.configuration.answer.labels.author|default(null)}) }}
-                        {{ form_row(form.title, {label: survey.configuration.answer.labels.title|default(null)}) }}
-                        {{ form_row(form.description, {label: survey.configuration.answer.labels.description|default(null)}) }}
-
-                        <div class="text-right">
-                            <button type="button" class="btn btn-primary btn-lg btn-block survey-next">{{ survey.configuration.labels.start|default('Start survey' | trans) }}</button>
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <section class="metadata mt-3 mb-3" style="display: none">
+                                
+                                <header>
+                                    <h1 class="title" >{{ survey.title }}</h1>
+                                </header>
+        
+                                {{ form_row(form.author, {label: survey.configuration.answer.labels.author|default(null)}) }}
+                                {{ form_row(form.title, {label: survey.configuration.answer.labels.title|default(null)}) }}
+                                {{ form_row(form.description, {label: survey.configuration.answer.labels.description|default(null)}) }}
+                                
+                                <button type="button" class="btn btn-primary btn-lg btn-block survey-next">{{ survey.configuration.labels.start|default('Start survey' | trans) }}</button>
+                                
+                            </section>
                         </div>
-                    </section>
+                    </div>
+					
 
                     {% for question in survey.questions %}
                         <section class="question" data-index="{{ loop.index0 }}" id="{{ loop.index0 }}" style="display: none">
-                            <h2>{{ loop.index }}. <span  class="title">{{ question.title }}</span></h2>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <p class="lead">Spørgsmål 1/14</p> <!-- TODO: Automatisk vis hvilket spørgsmål  -->
+                                </div>
+                                <div class="col">
+                                    <p class="lead text-md-right">Aarhus - en by og byregion i vækst</p> <!-- TODO: Vis hvilket kapitel spørgsmålet hører til  -->
+                                </div>
+                            </div>
+
+                            <h1>{{ loop.index }}. <span  class="title">{{ question.title }}</span></h1>
 
                             <div class="text">{{ question.text | raw }}</div>
 
@@ -48,36 +62,38 @@
                             {{ form_row(form_field.value, {label: survey.configuration.question.labels.value|default(null)}) }}
                             {{ form_row(form_field.comment, {label: survey.configuration.question.labels.comment|default(null)}) }}
 
-                            <div class="row">
+                            <div class="row prev-next-btns">
                                 <div class="col-md-6">
                                     {% if not loop.first %}
-                                        <button type="button" class="btn btn-default survey-prev">{{ survey.configuration.labels.prev|default('Previous question' | trans) }}</button>
+                                        <button type="button" class="btn btn-default btn-lg btn-block survey-prev text-left">{{ survey.configuration.labels.prev|default('Previous question' | trans) }}</button>
                                     {% endif %}
                                 </div>
-                                <div class="col-md-6 text-right">
+                                <div class="col-md-6">
                                     {% if true or not loop.last %}
-                                        <button type="button" class="btn btn-primary survey-next">{{ survey.configuration.labels.next|default('Next question' | trans) }}</button>
+                                        <button type="button" class="btn btn-primary btn-lg btn-block survey-next text-right">{{ survey.configuration.labels.next|default('Next question' | trans) }}</button>
                                     {% endif %}
-                                </div>
+                                </div> 
                             </div>
                         </section>
                     {% endfor %}
 
-                    <section class="submit" style="display: none">
-                        <button type="button" class="btn btn-default survey-prev">{{ survey.configuration.labels.back|default('Back' | trans) }}</button>
+                    <section class="submit prev-next-btns" style="display: none">
+                        <button type="button" class="btn btn-default btn-lg btn-block survey-prev text-left">{{ survey.configuration.labels.back|default('Back' | trans) }}</button>
 
-                        <button type="submit" class="btn btn-primary btn-block">{{ survey.configuration.labels.save|default('Save answer' | trans) }}</button>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block survey-next text-right">{{ survey.configuration.labels.save|default('Save answer' | trans) }}</button>
                     </section>
                 {{ form_end(form) }}
             </div>
         </div>
-        <div class="col-md-4">
-            <section class="header">
+        <div class="col-md-4 grey-bg aside">
+            
+            <section id="survey-info" class="mt-3 mb-3">
                 <div id="accordion" data-children=".item">
+
                 {% if survey.description %}
                     <div class="item description">
                         <a data-toggle="collapse" data-parent="#accordion" href="#description" aria-expanded="true" aria-controls="description">
-                               Description
+                               Baggrund og formål <!-- TODO: Dynamisk tekst fra admin/conf. -->
                         </a>
                         <div id="description" class="collapse show" role="tabpanel">
                         <p class="mb-3">
@@ -85,13 +101,12 @@
                         </p>
                         </div>
                     </div>
-                    <!-- <div class="description">{{ survey.description | raw }}</div> -->
                 {% endif %}
 
                 {% if survey.instructions %}
                     <div class="item instructions">
                         <a data-toggle="collapse" data-parent="#accordion" href="#instructions" aria-expanded="false" aria-controls="instructions">
-                                Instructions
+                                Vejledning <!-- TODO: Dynamisk tekst fra admin/conf.  -->
                         </a>
                         <div id="instructions" class="collapse" role="tabpanel">
                         <p class="mb-3">
@@ -99,12 +114,24 @@
                         </p>
                         </div>
                     </div>
-                    <!-- <div class="instructions">{{ survey.instructions | raw }}</div> -->
+
                 {% endif %}
             </section>
 
             <div id="chart-wrapper">
+                <p class="lead mt-3">Skema</p>
+                <h4>{{ survey.title }}</h4>
+                <p>Foreløbig model af besvarelse</p>
                 <canvas id="chart"></canvas>
+                <p class="chapters">
+                    <strong>Kapitler</strong><br>
+                    1 - 2 Aarhus - en by og byregion i vækst<br>
+                    3 - 8 Bykvalitet og liveability for alle<br>
+                    9 - 1 Gearet til storby
+                </p>
+            </div>
+            <div class="logo">
+                <img src="/assets/dist/img/AAK_TM_venstre_70.png" alt="Teknink og Miljø - Aarhus Kommune"> <!-- TODO: vælg logo og skriv alt tekst fra admin -->
             </div>
         </div>
     </div>

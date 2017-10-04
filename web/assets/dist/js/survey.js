@@ -39,7 +39,7 @@
             type: 'radar',
             data: {
                 labels: questions.map(function (question, index) {
-                    return (index + 1) + '. ' + question.title;
+                    return (index + 1) + '. ';
                 }),
                 datasets: [{
                     label: 'Answer',
