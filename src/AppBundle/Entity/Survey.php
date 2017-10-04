@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Survey
 {
@@ -256,5 +257,20 @@ class Survey
     public function getInstructions()
     {
         return $this->instructions;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function setQuestionCategories() {
+        $category = null;
+        foreach ($this->getQuestions() as $question) {
+            if ($question->getCategory() !== null) {
+                $category = $question->getCategory();
+            } else {
+                $question->setCategory($category);
+            }
+        }
     }
 }
