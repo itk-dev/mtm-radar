@@ -13,7 +13,7 @@ easy_admin:
     design:
         assets:
             css:
-                - 'assets/dist/easyadmin.css'
+                - 'assets/dist/css/easyadmin.css'
 
     entities:
         Survey:
@@ -67,7 +67,7 @@ easy_admin:
                 actions:
                     - name: answer_show
                       type: route
-                      label: Show
+                      label: action.show
                 fields:
                     - property: title
                     - property: survey

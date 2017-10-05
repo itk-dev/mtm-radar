@@ -29,6 +29,11 @@ parameters:
     # Require comments on replies?
     survey.reply.comment_required: true
 
+    survey.logo.url: /assets/images/AAK_TM_venstre_70.png
+    survey.logo.alt: Teknik og Miljø – Aarhus Kommune
+
+    locale: da
+
     user_created:
         subject: '{{ site_name }} – brugeroprettelse'
         header: 'Bruger oprettet på {{ site_name }}'

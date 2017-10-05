@@ -8,7 +8,6 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
 
 framework:
     #esi: ~
@@ -45,6 +44,8 @@ twig:
         site_url: '%site_url%'
         site_name: '%site_name%'
         site_logo_url: '%site_logo_url%'
+        survey_logo_url: '%survey.logo.url%'
+        survey_logo_alt: '%survey.logo.alt%'
 
 # Doctrine Configuration
 doctrine:

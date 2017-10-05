@@ -1,0 +1,54 @@
+# Frontend
+
+Comment: Kommentarer #Uddyb/begrund dit svar
+Next question: Næste
+Previous question: Forrige
+Save answer: Gem besvarelse
+Value: Svar
+Please fill in all required fields: Udfyld venligst alle felter
+Start survey: Start spørgeskema
+Survey description: Beskrivelse
+Survey instructions: Vejledning
+Question %number% of %max_number%: Spørgsmål %number%/%max_number%
+Sections: Afsnit
+Chart: Skema
+Current chart progress: Foreløbig model af besvarelse
+Summary of your replies: Opsummering af dine svar
+Print answer: Udskriv besvarelsen
+Reply: Svar
+Your answer has been saved: Din besvarelse er nu gemt
+
+# Admin
+
+Answer: Besvarelse
+Answers: Besvarelser
+Author: Besvaret af
+Change password: Skift adgangskode
+Created at: Oprettet
+Description: Beskrivelse
+Email: E-mailadresse
+Last login: Seneste login
+Questions: Spørgsmål
+Roles: Roler
+Share survey: Del spørgeskema
+Survey: Spørgeskema
+Title: Titel
+User: Bruger
+
+action.cancel: Annuller
+action.delete: Slet
+action.edit: Rediger
+action.list: Tilbage til listen
+action.new: Ny
+action.save: Gem
+action.search: Søg
+action.show: Vis
+
+
+ROLE_USER: Bruger
+ROLE_ADMIN: Administrator
+
+Instructions: Vejledning
+Configuration: Indstillinger
+Category: Kategori
+Text: Tekst
