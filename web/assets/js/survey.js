@@ -48,7 +48,7 @@
             type: 'radar',
             data: {
                 labels: questions.map(function (question, index) {
-                    return (index + 1) + '. ' + question.title;
+                    return (index + 1) + '. ';
                 }),
                 datasets: [{
                     label: 'Answer',
@@ -70,7 +70,7 @@
                         stepSize: 1
                     },
                     gridLines: {
-                        color: ['#ffffff', '#ff0000', '#00ff00', '#ffff00', '#0000ff']
+                        color: ['#C00122', '#FECE60', '#7DBA6D', '#22A136', '#FFFFFF']
                     }
                 }
             }
@@ -82,18 +82,13 @@
         };
 
         var showQuestion = function () {
-            // history.replaceState({}, 'step ' + index, '#' + index);
-            if (index < count - 1) {
-                var current = sections.hide().eq(index).show();
-				if (current.is('.question')) {
-					$('#chart-wrapper').show();
-					$('#survey-info').hide();
-				} else {
-					$('#chart-wrapper').hide();
-					$('#survey-info').show();
-				}
+            var current = sections.hide().eq(index).show();
+            if (current.is('.question')) {
+                $('#chart-wrapper').show();
+                $('#survey-info').hide();
             } else {
-                sections.show();
+                $('#chart-wrapper').hide();
+                $('#survey-info').show();
             }
         };
 
