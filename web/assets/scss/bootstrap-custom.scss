@@ -94,6 +94,11 @@ html, body {
 // Survey
 .survey {
     padding-bottom: 10rem;
+    .question {
+        animation: flyin .4s ease-out forwards;
+        opacity: 0;
+        filter: blur(2px);
+    }
 }
 
 // Toggle icon on accordion

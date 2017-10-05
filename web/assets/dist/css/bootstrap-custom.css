@@ -9,6 +9,11 @@
   40%, 60% {
     transform: translate3d(4px, 0, 0); } }
 
+@keyframes flyin {
+  to {
+    filter: blur(0);
+    opacity: 1; } }
+
 @font-face {
   font-family: 'Open Sans';
   font-weight: 300;
@@ -7986,6 +7991,10 @@ a.text-dark:focus, a.text-dark:hover {
 
 .survey {
   padding-bottom: 10rem; }
+  .survey .question {
+    animation: flyin .4s ease-out forwards;
+    opacity: 0;
+    filter: blur(2px); }
 
 #accordion div:first-child {
   border-bottom: 1px solid #181715;
