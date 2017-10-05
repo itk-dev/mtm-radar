@@ -118,12 +118,19 @@
                 <h4>{{ survey.title }}</h4>
                 <p>Foreløbig model af besvarelse</p>
                 <canvas id="chart"></canvas>
-                <p class="chapters">
-                    <strong>Kapitler</strong><br>
-                    1 - 2 Aarhus - en by og byregion i vækst<br>
-                    3 - 8 Bykvalitet og liveability for alle<br>
-                    9 - 1 Gearet til storby
-                </p>
+
+                {% set category_ranges = survey.categoryRanges|default(null) %}
+                {% if category_ranges %}
+                    <p class="chapters">
+                        <strong>Kapitler</strong>
+
+                        {% for range, category in category_ranges %}
+                            {% set range = range|split('-') %}
+                            <br/>
+                            {{ range[0] }}{% if range|length > 1 %}–{{ range[1] }}{% endif %} {{ category }}
+                        {% endfor %}
+                    </p>
+                {% endif %}
             </div>
             <div class="logo">
                 <img src="/assets/dist/img/AAK_TM_venstre_70.png" alt="Teknink og Miljø - Aarhus Kommune"> <!-- TODO: vælg logo og skriv alt tekst fra admin -->

@@ -44,7 +44,6 @@ class SurveyController extends Controller
 
         return $this->render('survey/survey.html.twig', [
             'survey' => $survey,
-            'category_ranges' => $this->getCategoryRanges($survey),
             'form' => $form->createView(),
         ]);
     }
@@ -80,7 +79,6 @@ class SurveyController extends Controller
 
         return $this->render('survey/survey.html.twig', [
             'survey' => $survey,
-            'category_ranges' => $this->getCategoryRanges($survey),
             'form' => $form->createView(),
         ]);
     }
@@ -135,23 +133,5 @@ class SurveyController extends Controller
             ->getForm();
 
         return $form;
-    }
-
-    private function getCategoryRanges(Survey $survey) {
-        $ranges = [];
-        $questions = $survey->getQuestions();
-        $start = 0;
-        while ($start < count($questions)) {
-            $category = $questions[$start]->getCategory();
-            $end = $start;
-            while ($end < count($questions) && $questions[$end]->getCategory() === $category) {
-                $end++;
-            }
-            $key = $start . ($start === $end - 1 ? '' : '-' . ($end - 1));
-            $ranges[$key] = $category;
-            $start = $end;
-        }
-
-        return $ranges;
     }
 }
