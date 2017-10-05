@@ -52,9 +52,9 @@
                 }),
                 datasets: [{
                     label: 'Answer',
-                    fill: false,
-                    backgroundColor: 'red',
-                    borderColor: 'blue',
+                    fill: true,
+                    backgroundColor: 'rgba(0,155,221,0.2)',
+                    borderColor: '#009BDD',
                     pointRadius: 8,
                     data: []
                 }]

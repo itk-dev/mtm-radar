@@ -20,7 +20,7 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#description" aria-expanded="false" aria-controls="description">
                             Baggrund og formål <!-- TODO: Dynamisk tekst fra admin/conf. -->
                     </a>
-                    <div id="description" class="collapse" role="tabpanel">
+                    <div id="description" class="collapse d-print-block" role="tabpanel">
                     <p class="mb-3">
                         {{ survey.description | raw }}
                     </p>
@@ -33,7 +33,7 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#instructions" aria-expanded="false" aria-controls="instructions">
                             Vejledning <!-- TODO: Dynamisk tekst fra admin/conf.  -->
                     </a>
-                    <div id="instructions" class="collapse" role="tabpanel">
+                    <div id="instructions" class="collapse d-print-block" role="tabpanel">
                     <p class="mb-3">
                         {{ survey.instructions | raw }}
                     </p>
@@ -55,12 +55,12 @@
                         <div class="reply">
                             {% if reply.value|default(null) != null %}
                                 {% set reply_value = survey.rating[reply.value]|default(reply.value) %}
-                                {{ 'Reply: %reply%' | trans({'%reply%': reply_value}) }}
+                                <p>{{ 'Reply: %reply%' | trans({'%reply%': reply_value}) }}</p>
                                 {% if reply.comment|default(false) %}
-                                    <div class="comment form-control" style="white-space: pre-line">{{ reply.comment }}</div>
+                                    <p><i>{{ reply.comment }}</i></p>
                                 {% endif %}
                             {% else %}
-                                {{ 'No reply' | trans }}
+                                <p>{{ 'No reply' | trans }}</p>
                             {% endif %}
                         </div>
                     </div>
