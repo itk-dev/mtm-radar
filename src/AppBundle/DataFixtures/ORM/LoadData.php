@@ -37,6 +37,17 @@ abstract class LoadData extends ContainerAwareFixture implements OrderedFixtureI
 
     protected function setValues($object, $values)
     {
+        if (isset($values['id'])) {
+            $id = $values['id'];
+            unset($values['id']);
+            try {
+                $property = new \ReflectionProperty(get_class($object), 'id');
+                $property->setAccessible(true);
+                $property->setValue($object, $id);
+            } catch (\ReflectionException $exception) {
+            }
+        }
+
         foreach ($values as $key => $value) {
             $this->setValue($object, $key, $value);
         }
@@ -53,7 +64,25 @@ abstract class LoadData extends ContainerAwareFixture implements OrderedFixtureI
 
     protected function persist($entity)
     {
+        $metadata = null;
+        $idGenerator = null;
+        $idGeneratorType = null;
+        if ($entity->getId() !== null) {
+            // Remove id generator and set id manually.
+            $metadata = $this->manager->getClassMetadata(get_class($entity));
+            $idGenerator = $metadata->idGenerator;
+            $idGeneratorType = $metadata->generatorType;
+            $metadata->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
+            $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+        }
+
         $this->manager->persist($entity);
+
+        // Restore id generator.
+        if ($metadata !== null) {
+            $metadata->setIdGenerator($idGenerator);
+            $metadata->setIdGeneratorType($idGeneratorType);
+        }
     }
 
     protected function getName()

@@ -18,7 +18,7 @@ class LoadSurvey extends LoadData
         foreach ($data['questions'] as $item) {
             $question = $this->setValues(new Question(), $item)
                 ->setSurvey($survey);
-            $this->persist($question);
+            $survey->addQuestion($question);
         }
         unset($data['questions']);
 

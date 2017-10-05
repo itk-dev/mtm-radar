@@ -20,7 +20,7 @@ class ReplyType extends AbstractType
                 'multiple' => false,
             ])
             ->add('comment', TextareaType::class, [
-                'required' => false,
+                'required' => $options['comment_required'],
                 'attr' => [
                     'rows' => 4,
                 ],
@@ -29,7 +29,10 @@ class ReplyType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setRequired('choices');
+        $resolver->setRequired(['choices'])
+            ->setDefaults([
+                'comment_required' => false,
+            ]);
     }
 
     public function getName()

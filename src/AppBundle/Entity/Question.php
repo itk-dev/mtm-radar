@@ -47,12 +47,6 @@ class Question
      */
     private $text;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     * @Groups({"survey", "answer"})
-     */
-    private $description;
-
     public function __toString()
     {
         return $this->getSurvey().' - '.$this->getTitle();
@@ -138,30 +132,6 @@ class Question
     public function getText()
     {
         return $this->text;
-    }
-
-    /**
-     * Set description.
-     *
-     * @param string $description
-     *
-     * @return Question
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description.
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
     }
 
     /**

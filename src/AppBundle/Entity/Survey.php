@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Survey
 {
@@ -55,7 +56,7 @@ class Survey
     private $questions;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Answer", mappedBy="survey")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Answer", mappedBy="survey", cascade={"remove"}, orphanRemoval=true)
      */
     private $answers;
 
@@ -256,5 +257,38 @@ class Survey
     public function getInstructions()
     {
         return $this->instructions;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function setQuestionCategories() {
+        $category = null;
+        foreach ($this->getQuestions() as $question) {
+            if ($question->getCategory() !== null) {
+                $category = $question->getCategory();
+            } else {
+                $question->setCategory($category);
+            }
+        }
+    }
+
+    public function getCategoryRanges() {
+        $ranges = [];
+        $questions = $this->getQuestions();
+        $start = 0;
+        while ($start < count($questions)) {
+            $category = $questions[$start]->getCategory();
+            $end = $start;
+            while ($end < count($questions) && $questions[$end]->getCategory() === $category) {
+                $end++;
+            }
+            $key = $start . ($start === $end - 1 ? '' : '-' . ($end - 1));
+            $ranges[$key] = $category;
+            $start = $end;
+        }
+
+        return $ranges;
     }
 }

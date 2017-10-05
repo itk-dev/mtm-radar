@@ -20,27 +20,26 @@
             <div id="validation-errors" class="alert alert-danger" style="display: none">{{ 'Please fill in all required fields' | trans }}</div>
 
             <div class="survey" data-configuration="{{ survey.configuration|json_encode }}" data-survey-min="{{ survey.configuration.min|default(0) }}" data-survey-max="{{ survey.configuration.rating|length }}">
-				
                 {% form_theme form 'bootstrap_3_layout.html.twig' %}
                 {{ form_start(form) }}
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <section class="metadata mt-3 mb-3" style="display: none">
-                                
+
                                 <header>
                                     <h1 class="title" >{{ survey.title }}</h1>
                                 </header>
-        
+
                                 {{ form_row(form.author, {label: survey.configuration.answer.labels.author|default(null)}) }}
                                 {{ form_row(form.title, {label: survey.configuration.answer.labels.title|default(null)}) }}
                                 {{ form_row(form.description, {label: survey.configuration.answer.labels.description|default(null)}) }}
-                                
+
                                 <button type="button" class="btn btn-primary btn-lg btn-block survey-next">{{ survey.configuration.labels.start|default('Start survey' | trans) }}</button>
-                                
+
                             </section>
                         </div>
                     </div>
-					
+
 
                     {% for question in survey.questions %}
                         <section class="question" data-index="{{ loop.index0 }}" id="{{ loop.index0 }}" style="display: none">
@@ -74,7 +73,7 @@
                                     {% else %}
                                         <button type="button" class="btn btn-primary btn-lg btn-block survey-next text-right">{{ survey.configuration.labels.next|default('Next question' | trans) }}</button>
                                     {% endif %}
-                                </div> 
+                                </div>
                             </div>
                         </section>
                     {% endfor %}
@@ -82,7 +81,7 @@
             </div>
         </div>
         <div class="col-md-4 grey-bg aside">
-            
+
             <section id="survey-info" class="mt-3 mb-3">
                 <div id="accordion" data-children=".item">
 
@@ -119,12 +118,19 @@
                 <h4>{{ survey.title }}</h4>
                 <p>Foreløbig model af besvarelse</p>
                 <canvas id="chart"></canvas>
-                <p class="chapters">
-                    <strong>Kapitler</strong><br>
-                    1 - 2 Aarhus - en by og byregion i vækst<br>
-                    3 - 8 Bykvalitet og liveability for alle<br>
-                    9 - 1 Gearet til storby
-                </p>
+
+                {% set category_ranges = survey.categoryRanges|default(null) %}
+                {% if category_ranges %}
+                    <p class="chapters">
+                        <strong>Kapitler</strong>
+
+                        {% for range, category in category_ranges %}
+                            {% set range = range|split('-') %}
+                            <br/>
+                            {{ range[0] }}{% if range|length > 1 %}–{{ range[1] }}{% endif %} {{ category }}
+                        {% endfor %}
+                    </p>
+                {% endif %}
             </div>
             <div class="logo">
                 <img src="/assets/dist/img/AAK_TM_venstre_70.png" alt="Teknink og Miljø - Aarhus Kommune"> <!-- TODO: vælg logo og skriv alt tekst fra admin -->

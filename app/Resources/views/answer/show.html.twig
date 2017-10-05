@@ -21,7 +21,7 @@
                             Baggrund og formål <!-- TODO: Dynamisk tekst fra admin/conf. -->
                     </a>
                     <div id="description" class="collapse" role="tabpanel">
-                    <p class="mb-3">    
+                    <p class="mb-3">
                         {{ survey.description | raw }}
                     </p>
                     </div>
@@ -53,10 +53,11 @@
                     <div class="col-11">
                         <h4>{{ question.title }}</h4>
                         <div class="reply">
-                            {% if reply.value == null %}
-                                {{ 'Reply: %reply%' | trans({'%reply%': reply.value}) }}
+                            {% if reply.value|default(null) != null %}
+                                {% set reply_value = survey.rating[reply.value]|default(reply.value) %}
+                                {{ 'Reply: %reply%' | trans({'%reply%': reply_value}) }}
                                 {% if reply.comment|default(false) %}
-                                    <div class="comment form-control">{{ reply.comment }}</div>
+                                    <div class="comment form-control" style="white-space: pre-line">{{ reply.comment }}</div>
                                 {% endif %}
                             {% else %}
                                 {{ 'No reply' | trans }}
@@ -76,27 +77,31 @@
                 <canvas id="chart"></canvas>
                 <div class="row">
                     <div class="col">
-                        <p class="chapters">
-                            <strong>Kapitler</strong><br>
-                            1 - 2 Aarhus - en by og byregion i vækst<br>
-                            3 - 8 Bykvalitet og liveability for alle<br>
-                            9 - 1 Gearet til storby
-                        </p>
+                        {% set category_ranges = survey.categoryRanges|default(null) %}
+                        {% if category_ranges %}
+                            <p class="chapters">
+                                <strong>Kapitler</strong>
+
+                                {% for range, category in category_ranges %}
+                                    {% set range = range|split('-') %}
+                                    <br/>
+                                    {{ range[0] }}{% if range|length > 1 %}–{{ range[1] }}{% endif %} {{ category }}
+                                {% endfor %}
+                            </p>
+                        {% endif %}
                     </div>
                     <div class="col">
                         <p class="legend">
                             <strong>Legend</strong>
                             <dl>
-                                <dd><span class="legend-color legend-color-0"></span>i ringe grad</li>
-                                <dd><span class="legend-color legend-color-1"></span>i nogen grad</dd>
-                                <dd><span class="legend-color legend-color-2"></span>i høj grad</dd>
-                                <dd><span class="legend-color legend-color-3"></span>i meget høj grad</dd>
-                                <dd><span class="legend-color legend-color-4"></span>ikke relevant</dd>
+                                {% for value, label in survey.rating %}
+                                    <dd><span class="legend-color legend-color-{{ loop.index0 }}"></span>{{ label }}</dd>
+                                {% endfor %}
                             </dl>
                         </p>
                     </div>
                 </div>
-                
+
             </div>
             <div class="logo">
                 <img src="/assets/dist/img/AAK_TM_venstre_70.png" alt="Teknink og Miljø - Aarhus Kommune"> <!-- TODO: vælg logo og skriv alt tekst fra admin -->

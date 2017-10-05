@@ -34,3 +34,5 @@ bin/console fos:user:promote admin@example.com ROLE_ADMIN
 ```
 bin/console doctrine:fixtures:load --no-interaction
 ```
+
+After loading fixtures, you can sign in with username `admin@example.com` and password `password`.

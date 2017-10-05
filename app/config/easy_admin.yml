@@ -70,6 +70,7 @@ easy_admin:
                       label: Show
                 fields:
                     - property: title
+                    - property: survey
                     - property: author
                     - property: description
                     - property: createdAt

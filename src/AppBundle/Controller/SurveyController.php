@@ -127,6 +127,7 @@ class SurveyController extends Controller
                 'entry_type' => ReplyType::class,
                 'entry_options' => [
                     'choices' => $survey->getRating(),
+                    'comment_required' => $this->getParameter('survey.reply.comment_required'),
                 ],
             ])
             ->getForm();
