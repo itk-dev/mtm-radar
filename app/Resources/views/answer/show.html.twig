@@ -1,123 +1,82 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    {{ site_name }} – {{ survey.title }}
+{% endblock %}
+
 {% set survey = answer.survey %}
 
 {% block body %}
-  <div class="row full-height">
-    <div class="col-md-6">
-      <div class="survey" data-configuration="{{ survey.configuration|json_encode }}" data-replies="{{ answer.replies | json_encode }}">
-        <section class="header mt-3">
-            <div class="row">
-                <div class="col"><h4>Din besvarelse er nu gemt.</h4></div> <!-- TODO: Oversættelse -->
-                <div class="col text-right"><a href="javascript:window.print()" class="btn btn-secondary"><i class="fa fa-print"></i> Udskriv besvarelsen</a></div> <!-- TODO: Oversættelse -->  <!-- TODO: Print stylesheet -->
-            </div>
-        </section>
-        <section id="survey-info" class="mt-3 mb-3">
-            <div id="accordion" data-children=".item">
-
-            {% if survey.description %}
-                <div class="item description">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#description" aria-expanded="false" aria-controls="description">
-                            Baggrund og formål <!-- TODO: Dynamisk tekst fra admin/conf. -->
-                    </a>
-                    <div id="description" class="collapse d-print-block" role="tabpanel">
-                    <p class="mb-3">
-                        {{ survey.description | raw }}
-                    </p>
+    <div class="row full-height">
+        <div class="col-md-6">
+            <div class="survey" data-configuration="{{ survey.configuration|json_encode }}" data-replies="{{ answer.replies | json_encode }}">
+                <section class="header mt-3">
+                    <div class="row">
+                        <div class="col"><h4>{{ 'Your answer has been saved' | trans }}</h4></div>
+                        <div class="col text-right"><a href="javascript:window.print()" class="btn btn-secondary"><i class="fa fa-print"></i> {{ 'Print answer' | trans }}</a></div><!-- TODO: Print stylesheet -->
                     </div>
-                </div>
-            {% endif %}
+                </section>
+                <section id="survey-info" class="mt-3 mb-3">
+                    {% include '_partials/survey_metadata.html.twig' %}
+                </section>
 
-            {% if survey.instructions %}
-                <div class="item instructions">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#instructions" aria-expanded="false" aria-controls="instructions">
-                            Vejledning <!-- TODO: Dynamisk tekst fra admin/conf.  -->
-                    </a>
-                    <div id="instructions" class="collapse d-print-block" role="tabpanel">
-                    <p class="mb-3">
-                        {{ survey.instructions | raw }}
-                    </p>
-                    </div>
-                </div>
-
-            {% endif %}
-        </section>
-        <p class="lead">Opsummering af dine svar</p> <!-- TODO: Oversættelse -->
-        {% for question in survey.questions %}
-            {% set reply = answer.replies[loop.index0]|default(false) %}
-            <section class="question mb-3" data-index="{{ loop.index0 }}" id="{{ loop.index0 }}">
-                <div class="row">
-                    <div class="col-1">
-                        <p class="lead">{{ loop.index }}. </p>
-                    </div>
-                    <div class="col-11">
-                        <h4>{{ question.title }}</h4>
-                        <div class="reply">
-                            {% if reply.value|default(null) != null %}
-                                {% set reply_value = survey.rating[reply.value]|default(reply.value) %}
-                                <p>{{ 'Reply: %reply%' | trans({'%reply%': reply_value}) }}</p>
-                                {% if reply.comment|default(false) %}
-                                    <p><i>{{ reply.comment }}</i></p>
-                                {% endif %}
-                            {% else %}
-                                <p>{{ 'No reply' | trans }}</p>
-                            {% endif %}
+                <p class="lead">{{ 'Summary of your replies' | trans }}</p>
+                {% for question in survey.questions %}
+                    {% set reply = answer.replies[loop.index0]|default(false) %}
+                    <section class="question mb-3" data-index="{{ loop.index0 }}" id="{{ loop.index0 }}">
+                        <div class="row">
+                            <div class="col-1">
+                                <p class="lead">{{ loop.index }}. </p>
+                            </div>
+                            <div class="col-11">
+                                <h4>{{ question.title }}</h4>
+                                <div class="reply">
+                                    {% if reply.value|default(null) != null %}
+                                        <p>{{ 'Reply' | trans }}: {{ survey.rating[reply.value]|default(reply.value) }}</p>
+                                        {% if reply.comment|default(false) %}
+                                            <p><i>{{ reply.comment }}</i></p>
+                                        {% endif %}
+                                    {% else %}
+                                        <p>{{ 'No reply' | trans }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </section>
-        {% endfor %}
-      </div>
-    </div>
-    <div class="col-md-6 grey-bg aside">
-            <div id="chart-wrapper">
-                <p class="lead mt-3">Skema</p>
-                <h4>{{ survey.title }}</h4>
-                <p>Foreløbig model af besvarelse</p>
-                <canvas id="chart"></canvas>
-                <div class="row">
-                    <div class="col">
-                        {% set category_ranges = survey.categoryRanges|default(null) %}
-                        {% if category_ranges %}
-                            <p class="chapters">
-                                <strong>Kapitler</strong>
-
-                                {% for range, category in category_ranges %}
-                                    {% set range = range|split('-') %}
-                                    <br/>
-                                    {{ range[0]+1 }}{% if range|length > 1 %}–{{ range[1]+1 }}{% endif %} {{ category }}
-                                {% endfor %}
-                            </p>
-                        {% endif %}
-                    </div>
-                    <div class="col">
-                        <p class="legend">
-                            <strong>Legend</strong>
-                            <dl>
-                                {% for value, label in survey.rating %}
-                                    <dd><span class="legend-color legend-color-{{ loop.index0 }}"></span>{{ label }}</dd>
-                                {% endfor %}
-                            </dl>
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-            <div class="logo">
-                <img src="/assets/dist/img/AAK_TM_venstre_70.png" alt="Teknink og Miljø - Aarhus Kommune"> <!-- TODO: vælg logo og skriv alt tekst fra admin -->
+                    </section>
+                {% endfor %}
             </div>
         </div>
-  </div>
+
+        <div class="col-md-6 grey-bg aside">
+            <div id="chart-wrapper">
+                <p class="lead mt-3">{{ labels.chart.title|default('Chart'|trans) }}</p>
+                <h4>{{ survey.title }}</h4>
+
+                <canvas id="chart"></canvas>
+
+                <div class="row">
+                    <div class="col">
+                        {% include '_partials/category_ranges.html.twig' %}
+                    </div>
+                    <div class="col">
+                        {% include '_partials/chart_legend.html.twig' %}
+                    </div>
+                </div>
+            </div>
+
+            {% include '_partials/logo.html.twig' %}
+        </div>
+    </div>
 {% endblock %}
 
 {% block stylesheets %}
-{{ parent() }}
-<link rel="stylesheet" href="{{ asset('assets/dist/css/survey.css')}}"/>
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/dist/css/survey.css')}}"/>
 {% endblock %}
 
 {% block javascripts %}
-{{ parent() }}
-<script src="{{ asset('assets/dist/js/Chart.min.js')}}"></script>
-<script src="{{ asset('assets/dist/js/jquery.validate.min.js')}}"></script>
-<script src="{{ asset('assets/dist/js/survey.min.js')}}"></script>
+    {{ parent() }}
+    <script src="{{ asset('assets/dist/js/Chart.min.js')}}"></script>
+    <script src="{{ asset('assets/dist/js/jquery.validate.min.js')}}"></script>
+    <script src="{{ asset('assets/dist/js/survey.min.js')}}"></script>
 {% endblock %}

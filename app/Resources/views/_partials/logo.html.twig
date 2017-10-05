@@ -1,0 +1,7 @@
+<div class="logo">
+    {% set logo_url = survey.configuration.logo.url|default(survey_logo_url)|default(null) %}
+    {% set logo_alt = survey.configuration.logo.alt|default(survey_logo_alt)|default(null) %}
+    {% if logo_url %}
+        <img src="{{ logo_url }}" alt="{{ logo_alt }}"/>
+    {% endif %}
+</div>

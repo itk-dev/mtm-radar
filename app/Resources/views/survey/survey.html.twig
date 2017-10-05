@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    {{ site_name }} – {{ survey.title }}
+{% endblock %}
+
 {# @FIXME: There must be a better way to do this! #}
 {# @see: https://getbootstrap.com/docs/4.0/components/buttons/#checkbox-and-radio-buttons #}
 {% block choice_widget_expanded -%}
@@ -15,6 +19,8 @@
 {% endblock %}
 
 {% block body %}
+    {% set labels = survey.configuration.labels|default(null) %}
+
     <div class="row full-height">
         <div class="col-md-8">
             <div id="validation-errors" class="alert alert-danger" style="display: none">{{ 'Please fill in all required fields' | trans }}</div>
@@ -30,22 +36,21 @@
                                     <h1 class="title" >{{ survey.title }}</h1>
                                 </header>
 
-                                {{ form_row(form.author, {label: survey.configuration.answer.labels.author|default(null)}) }}
-                                {{ form_row(form.title, {label: survey.configuration.answer.labels.title|default(null)}) }}
-                                {{ form_row(form.description, {label: survey.configuration.answer.labels.description|default(null)}) }}
+                                {{ form_row(form.author, {label: labels.answer.author|default(null)}) }}
+                                {{ form_row(form.title, {label: labels.answer.title|default(null)}) }}
+                                {{ form_row(form.description, {label: labels.answer.description|default(null)}) }}
 
-                                <button type="button" class="btn btn-primary btn-lg btn-block survey-next">{{ survey.configuration.labels.start|default('Start survey' | trans) }}</button>
+                                <button type="button" class="btn btn-primary btn-lg btn-block survey-next">{{ labels.start|default('Start survey' | trans) }}</button>
 
                             </section>
                         </div>
                     </div>
 
-
                     {% for question in survey.questions %}
                         <section class="question" data-index="{{ loop.index0 }}" id="{{ loop.index0 }}" style="display: none">
                             <div class="row mt-3">
                                 <div class="col-md-6 col-sm-12">
-                                    <p class="lead">Spørgsmål {{ loop.index }}/{{ loop.length }}</p>
+                                    <p class="lead">{{ 'Question %number% of %max_number%' | trans({'%number%': loop.index, '%max_number%': loop.length}) }}</p>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <p class="lead text-md-right">{{ question.category }}</p>
@@ -57,21 +62,22 @@
                             <div class="text">{{ question.text | raw }}</div>
 
                             {% set form_field = form.replies[loop.index0] %}
+                            {# use custom "block choice_widget_expanded" (see above) to render radio buttons #}
                             {% form_theme form_field.value _self %}
-                            {{ form_row(form_field.value, {label: survey.configuration.question.labels.value|default(null)}) }}
-                            {{ form_row(form_field.comment, {label: survey.configuration.question.labels.comment|default(null)}) }}
+                            {{ form_row(form_field.value, {label: labels.answer.reply.value|default(null)}) }}
+                            {{ form_row(form_field.comment, {label: labels.answer.reply.comment|default(null)}) }}
 
                             <div class="row prev-next-btns">
                                 <div class="col col-md-6">
                                     {% if not loop.first %}
-                                        <button type="button" class="btn btn-default btn-lg btn-block survey-prev text-left">{{ survey.configuration.labels.prev|default('Previous question' | trans) }}</button>
+                                        <button type="button" class="btn btn-default btn-lg btn-block survey-prev text-left">{{ labels.prev|default('Previous question' | trans) }}</button>
                                     {% endif %}
                                 </div>
                                 <div class="col col-md-6">
                                     {% if loop.last %}
-                                        <button type="submit" class="btn btn-primary btn-lg btn-block survey-next text-right">{{ survey.configuration.labels.save|default('Save answer' | trans) }}</button>
+                                        <button type="submit" class="btn btn-primary btn-lg btn-block survey-next text-right">{{ labels.save|default('Save answer' | trans) }}</button>
                                     {% else %}
-                                        <button type="button" class="btn btn-primary btn-lg btn-block survey-next text-right">{{ survey.configuration.labels.next|default('Next question' | trans) }}</button>
+                                        <button type="button" class="btn btn-primary btn-lg btn-block survey-next text-right">{{ labels.next|default('Next question' | trans) }}</button>
                                     {% endif %}
                                 </div>
                             </div>
@@ -80,73 +86,34 @@
                 {{ form_end(form) }}
             </div>
         </div>
+
         <div class="col-md-4 grey-bg aside">
-
             <section id="survey-info" class="mt-3 mb-3">
-                <div id="accordion" data-children=".item">
-
-                {% if survey.description %}
-                    <div class="item description">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#description" aria-expanded="true" aria-controls="description">
-                               Baggrund og formål <!-- TODO: Dynamisk tekst fra admin/conf. -->
-                        </a>
-                        <div id="description" class="collapse show" role="tabpanel">
-                        <p class="mb-3">
-                            {{ survey.description | raw }}
-                        </p>
-                        </div>
-                    </div>
-                {% endif %}
-
-                {% if survey.instructions %}
-                    <div class="item instructions">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#instructions" aria-expanded="false" aria-controls="instructions">
-                                Vejledning <!-- TODO: Dynamisk tekst fra admin/conf.  -->
-                        </a>
-                        <div id="instructions" class="collapse" role="tabpanel">
-                        <p class="mb-3">
-                            {{ survey.instructions | raw }}
-                        </p>
-                        </div>
-                    </div>
-
-                {% endif %}
+                {% include '_partials/survey_metadata.html.twig' %}
             </section>
 
             <div id="chart-wrapper">
-                <p class="lead mt-3">Skema</p>
+                <p class="lead mt-3">{{ labels.chart.title|default('Chart'|trans) }}</p>
                 <h4>{{ survey.title }}</h4>
-                <p>Foreløbig model af besvarelse</p>
+                <p>{{ labels.chart.progress|default('Current chart progress'|trans) }}</p>
+
                 <canvas id="chart"></canvas>
 
-                {% set category_ranges = survey.categoryRanges|default(null) %}
-                {% if category_ranges %}
-                    <p class="chapters">
-                        <strong>Kapitler</strong>
-
-                        {% for range, category in category_ranges %}
-                            {% set range = range|split('-') %}
-                            <br/>
-                            {{ range[0]+1 }}{% if range|length > 1 %}–{{ range[1]+1 }}{% endif %} {{ category }}
-                        {% endfor %}
-                    </p>
-                {% endif %}
+                {% include '_partials/category_ranges.html.twig' %}
             </div>
-            <div class="logo">
-                <img src="/assets/dist/img/AAK_TM_venstre_70.png" alt="Teknink og Miljø - Aarhus Kommune"> <!-- TODO: vælg logo og skriv alt tekst fra admin -->
-            </div>
+            {% include '_partials/logo.html.twig' %}
         </div>
     </div>
 {% endblock %}
 
 {% block stylesheets %}
-{{ parent() }}
-<link rel="stylesheet" href="{{ asset('assets/dist/css/survey.css')}}"/>
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/dist/css/survey.css')}}"/>
 {% endblock %}
 
 {% block javascripts %}
-{{ parent() }}
-<script src="{{ asset('assets/dist/js/Chart.min.js')}}"></script>
-<script src="{{ asset('assets/dist/js/jquery.validate.min.js')}}"></script>
-<script src="{{ asset('assets/dist/js/survey.min.js')}}"></script>
+    {{ parent() }}
+    <script src="{{ asset('assets/dist/js/Chart.min.js')}}"></script>
+    <script src="{{ asset('assets/dist/js/jquery.validate.min.js')}}"></script>
+    <script src="{{ asset('assets/dist/js/survey.min.js')}}"></script>
 {% endblock %}

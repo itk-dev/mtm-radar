@@ -1,0 +1,30 @@
+{% set labels = survey.configuration.labels|default(null) %}
+
+<div id="accordion" data-children=".item">
+    {% if survey.description %}
+        <div class="item description">
+            <a data-toggle="collapse" data-parent="#accordion" href="#description" aria-expanded="true" aria-controls="description">
+                {{ labels.description|default('Survey description'|trans) }}
+            </a>
+            <div id="description" class="collapse d-print-block" role="tabpanel">
+                <p class="mb-3">
+                    {{ survey.description | raw }}
+                </p>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if survey.instructions %}
+        <div class="item instructions">
+            <a data-toggle="collapse" data-parent="#accordion" href="#instructions" aria-expanded="false" aria-controls="instructions">
+                {{ labels.instructions|default('Survey instructions'|trans) }}
+            </a>
+            <div id="instructions" class="collapse d-print-block" role="tabpanel">
+                <p class="mb-3">
+                    {{ survey.instructions | raw }}
+                </p>
+            </div>
+        </div>
+
+    {% endif %}
+</div>
