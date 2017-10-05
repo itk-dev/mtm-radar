@@ -19,7 +19,7 @@
         <div class="col-md-8">
             <div id="validation-errors" class="alert alert-danger" style="display: none">{{ 'Please fill in all required fields' | trans }}</div>
 
-            <div class="survey" data-configuration="{{ survey.configuration|json_encode }}" data-survey-min="{{ survey.configuration.min|default(0) }}" data-survey-max="{{ survey.configuration.rating|length }}">
+            <div class="survey" data-configuration="{{ survey.configuration|json_encode }}">
 				<header>
 					<h1 class="title" >{{ survey.title }}</h1>
 				</header>
