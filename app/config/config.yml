@@ -44,6 +44,8 @@ twig:
         site_url: '%site_url%'
         site_name: '%site_name%'
         site_logo_url: '%site_logo_url%'
+        survey_logo_url: '%survey.logo.url%'
+        survey_logo_alt: '%survey.logo.alt%'
 
 # Doctrine Configuration
 doctrine:
