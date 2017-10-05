@@ -263,7 +263,8 @@ class Survey
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
-    public function setQuestionCategories() {
+    public function setQuestionCategories()
+    {
         $category = null;
         foreach ($this->getQuestions() as $question) {
             if ($question->getCategory() !== null) {
@@ -274,7 +275,8 @@ class Survey
         }
     }
 
-    public function getCategoryRanges() {
+    public function getCategoryRanges()
+    {
         $ranges = [];
         $questions = $this->getQuestions();
         $start = 0;
@@ -282,9 +284,9 @@ class Survey
             $category = $questions[$start]->getCategory();
             $end = $start;
             while ($end < count($questions) && $questions[$end]->getCategory() === $category) {
-                $end++;
+                ++$end;
             }
-            $key = $start . ($start === $end - 1 ? '' : '-' . ($end - 1));
+            $key = $start.($start === $end - 1 ? '' : '-'.($end - 1));
             $ranges[$key] = $category;
             $start = $end;
         }

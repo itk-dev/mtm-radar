@@ -40,6 +40,7 @@ abstract class LoadData extends ContainerAwareFixture implements OrderedFixtureI
         if (isset($values['id'])) {
             $id = $values['id'];
             unset($values['id']);
+
             try {
                 $property = new \ReflectionProperty(get_class($object), 'id');
                 $property->setAccessible(true);
@@ -102,6 +103,7 @@ abstract class LoadData extends ContainerAwareFixture implements OrderedFixtureI
         if ([] === $arr) {
             return false;
         }
+
         return array_keys($arr) !== range(0, count($arr) - 1);
     }
 }
