@@ -33,7 +33,16 @@
 
             return max;
         }());
-        var index = -1;
+        var index = (function() {
+            var index = 0;
+            // Get index from url.
+            var match = /^#([0-9]+)/.exec(location.hash);
+            if (match && match[1]) {
+                index = match[1];
+            }
+
+            return index - 1;
+        }());
         var count = sections.length;
         var chart = new Chart(document.getElementById('chart'), {
             type: 'radar',
@@ -73,6 +82,7 @@
         };
 
         var showQuestion = function () {
+            // history.replaceState({}, 'step ' + index, '#' + index);
             if (index < count - 1) {
                 var current = sections.hide().eq(index).show();
 				if (current.is('.question')) {
