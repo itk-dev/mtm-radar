@@ -29,6 +29,8 @@ parameters:
     # Require comments on replies?
     survey.reply.comment_required: true
 
+    locale: da
+
     user_created:
         subject: '{{ site_name }} – brugeroprettelse'
         header: 'Bruger oprettet på {{ site_name }}'
