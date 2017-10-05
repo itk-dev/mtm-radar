@@ -127,7 +127,7 @@
                         {% for range, category in category_ranges %}
                             {% set range = range|split('-') %}
                             <br/>
-                            {{ range[0] }}{% if range|length > 1 %}–{{ range[1] }}{% endif %} {{ category }}
+                            {{ range[0]+1 }}{% if range|length > 1 %}–{{ range[1]+1 }}{% endif %} {{ category }}
                         {% endfor %}
                     </p>
                 {% endif %}
