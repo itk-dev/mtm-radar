@@ -26,6 +26,9 @@ parameters:
     mailer_email: admin@mtm-radar.vm
     mailer_name: MTM Radar
 
+    # Require comments on replies?
+    survey.reply.comment_required: true
+
     user_created:
         subject: '{{ site_name }} – brugeroprettelse'
         header: 'Bruger oprettet på {{ site_name }}'
