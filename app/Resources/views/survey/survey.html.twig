@@ -46,10 +46,10 @@
                         <section class="question" data-index="{{ loop.index0 }}" id="{{ loop.index0 }}" style="display: none">
                             <div class="row mt-3">
                                 <div class="col">
-                                    <p class="lead">Spørgsmål {{ loop.index }}/{{ loop.length }}</p> <!-- TODO: Automatisk vis hvilket spørgsmål  -->
+                                    <p class="lead">Spørgsmål {{ loop.index }}/{{ loop.length }}</p>
                                 </div>
                                 <div class="col">
-                                    <p class="lead text-md-right">{{ question.category }}</p> <!-- TODO: Vis hvilket kapitel spørgsmålet hører til  -->
+                                    <p class="lead text-md-right">{{ question.category }}</p>
                                 </div>
                             </div>
 
@@ -134,12 +134,13 @@
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="/assets/dist/css/survey.css"/>
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('assets/dist/css/survey.css')}}"/>
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
-    <script src="/assets/dist/js/Chart.min.js"></script>
-    <script src="/assets/dist/js/jquery.validate.min.js"></script>
-    <script src="/assets/dist/js/survey.js"></script>
+{{ parent() }}
+<script src="{{ asset('assets/dist/js/Chart.min.js')}}"></script>
+<script src="{{ asset('assets/dist/js/jquery.validate.min.js')}}"></script>
+<script src="{{ asset('assets/dist/js/survey.min.js')}}"></script>
 {% endblock %}

@@ -61,7 +61,7 @@
                         stepSize: 1
                     },
                     gridLines: {
-                        color: ['#ffffff', '#ff0000', '#00ff00', '#ffff00', '#0000ff']
+                        color: ['#C00122', '#FECE60', '#7DBA6D', '#22A136', '#FFFFFF']
                     }
                 }
             }

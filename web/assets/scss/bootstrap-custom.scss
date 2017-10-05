@@ -23,16 +23,29 @@ $gray-800: #343a40;
 $gray-900: #212529;
 $black:    #181715;
 
-$blue:    #009BDD;
-$indigo:  #82338E;
-$purple:  #A36FAF;
-$pink:    #e83e8c;
-$red:     #D56056;
-$orange:  #fd7e14;
-$yellow:  #FECE60;
-$green:   #7DBA6D;
-$teal:    #20c997;
-$cyan:    #17a2b8;
+$blue:      #009BDD;
+$indigo:    #82338E;
+$purple:    #A36FAF;
+$pink:      #e83e8c;
+$red:       #D56056;
+$red-dark:  #C00122;
+$orange:    #fd7e14;
+$yellow:    #FECE60;
+$green:     #7DBA6D;
+$green-dark:#22A136;
+$teal:      #20c997;
+$cyan:      #17a2b8;
+
+$theme-colors: (
+    primary: $blue,
+    secondary: $gray-200,
+    success: $green,
+    info: $cyan,
+    warning: $yellow,
+    danger: $red,
+    light: $gray-100,
+    dark: $gray-800
+);
 
 // Text
 $headings-font-weight:   700;
@@ -143,7 +156,7 @@ html, body {
             &.active {
                 color: $white;
                 &.reply-index-0 {
-                    background-color: #C00122;
+                    background-color: $red-dark;
                 }
                 &.reply-index-1 {
                     background-color: $yellow;
@@ -152,7 +165,7 @@ html, body {
                     background-color: $green;
                 }
                 &.reply-index-3 {
-                    background-color: #22A136;
+                    background-color: $green-dark;
                 }
                 &.reply-index-4 {
                     background-color: $black;
@@ -211,6 +224,33 @@ html, body {
     }
 }
 
+// Chart legend
+#chart-wrapper {
+    .legend {
+        &-color {
+            display: inline-block;
+            width: 15px;
+            height: 3px;
+            margin-right: 10px;
+            vertical-align: middle;
+            &-0 {
+                background-color: $red-dark;
+            }
+            &-1 {
+                background-color: $yellow;
+            }
+            &-2 {
+                background-color: $green;
+            }
+            &-3 {
+                background-color: $green-dark;
+            }
+            &-4 {
+                background-color: $black;
+            }
+        }
+    }
+}
 // Logo
 .logo {
     @include media-breakpoint-up(md) {
