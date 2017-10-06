@@ -83,7 +83,7 @@
 
         var showQuestion = function () {
             var current = sections.hide().eq(index).show();
-            if (current.find('.question')) {
+            if (current.find('.question').length>0) {
                 $('#chart-wrapper').show();
                 $('#survey-info').hide();
             } else {
