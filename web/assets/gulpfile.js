@@ -4,12 +4,13 @@ var gulp = require('gulp'),
     browsersync = require('browser-sync').create(),
     gulpif = require('gulp-if'),
     cssnano = require('gulp-cssnano'),
-    del = require('del');
+    del = require('del'),
     runsequence = require('run-sequence'),
     plumber = require('gulp-plumber'),
-    gutil = require('gulp-util');
-    uglify = require('gulp-uglify');
-    rename = require('gulp-rename');
+    gutil = require('gulp-util'),
+    uglify = require('gulp-uglify'),
+    rename = require('gulp-rename'),
+    autoprefixer = require('gulp-autoprefixer');
 
 // Set paths
 var scriptFiles = 'js/**/*.js',
@@ -84,11 +85,14 @@ gulp.task('images', function() {
 
 // Compile scss to minifyed css
 gulp.task('scss', function(){
-  gulp.src('scss/*.scss')
+  gulp.src(styleFiles)
     .pipe(plumber({ // More graceful error handling, prevents watch from breaking.
       errorHandler: onError
     }))
     .pipe(sass()) // Converts Sass to CSS with gulp-sass
+    .pipe(autoprefixer({
+        browsers: ['last 2 versions']
+    }))
     .pipe(gulp.dest(styleDest)) // Destination for css
     .pipe(gulpif('*.css', cssnano())) // minifi the css file
     .pipe(browsersync.reload({ // Reload browser with changes
