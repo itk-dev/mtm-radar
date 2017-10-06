@@ -88,13 +88,12 @@ h1{
     box-shadow: 0 4px 16px rgba(0,0,0,.16); 
 }
 .aside {
-    position: relative;
     height: 100%;
+    z-index: 3;
     @include media-breakpoint-up(md){
         position: fixed;
         right: 0;
         top: 0;
-        z-index: 3;
     }
 }
 
@@ -104,7 +103,7 @@ h1{
         padding-bottom: 10rem;
     }
     .question {
-        animation: flyin .4s ease-out forwards;
+        animation: blurfade .4s ease-out forwards;
         opacity: 0;
         filter: blur(2px);
         .reply {
@@ -149,7 +148,6 @@ h1{
 .alert-danger {
     position: fixed;
     top: 1%;
-    left: 10px;
     z-index: 10000;
     width: calc(100% - 2rem);
     box-shadow: 0 4px 16px rgba(0,0,0,.16);
@@ -199,20 +197,22 @@ h1{
             }
         }
     }
-    > .btn:not(:last-child) {
-        border-bottom: 0;
+    @include media-breakpoint-down(md) {
+        > .btn:not(:last-child) {
+            border-bottom: 0;
+        }
     }
 }
 
 // Survey navigation buttons
 .prev-next-btns {
-    
-    z-index: 2;
+    z-index: 10;
     background-color: $gray-200;
+    position: fixed;
+    bottom: 0;
     @include media-breakpoint-up(md) {
         width: 66.66667%;
-        position: fixed;
-        bottom: 0;
+        
     }
     [class^="col"]{
         padding-left: 0;
@@ -255,6 +255,10 @@ h1{
                 margin-left: .5rem;
             }
         }
+    }
+    @include media-breakpoint-down(md) {
+        border-bottom: 1px solid $gray-300;
+        width: 100%;
     }
 }
 
@@ -308,6 +312,15 @@ h1{
     .survey,
     .survey-info
     {
+        break-after: always;
         page-break-after: always;
+    }
+    .grey-bg
+    {
+        break-before: always;
+        page-break-before: always;
+    }
+    .collapse {
+        display: block;
     }
 }
