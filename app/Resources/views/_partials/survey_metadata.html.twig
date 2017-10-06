@@ -1,12 +1,13 @@
 {% set labels = survey.configuration.labels|default(null) %}
+{% set expandfirst = expandfirst|default(false) %}
 
 <div id="accordion" data-children=".item">
     {% if survey.description %}
         <div class="item description mb-3">
-            <a data-toggle="collapse" data-parent="#accordion" href="#description" aria-expanded="false" aria-controls="description">
+            <a data-toggle="collapse" data-parent="#accordion" href="#description" aria-expanded="{{expandfirst ? 'true' : 'false' }}" aria-controls="description">
                 {{ labels.description|default('Survey description'|trans) }}
             </a>
-            <div id="description" class="collapse" role="tabpanel">
+            <div id="description" class="collapse {{expandfirst ? 'show' }} " role="tabpanel">
                 {{ survey.description | raw }}
             </div>
         </div>

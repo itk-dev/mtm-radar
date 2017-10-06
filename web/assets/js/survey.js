@@ -83,13 +83,14 @@
 
         var showQuestion = function () {
             var current = sections.hide().eq(index).show();
-            if (current.is('.question')) {
+            if (current.find('.question')) {
                 $('#chart-wrapper').show();
                 $('#survey-info').hide();
             } else {
                 $('#chart-wrapper').hide();
                 $('#survey-info').show();
             }
+            $(window).scrollTop(0);
         };
 
         var prev = function () {
