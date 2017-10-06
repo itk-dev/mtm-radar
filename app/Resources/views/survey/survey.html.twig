@@ -47,26 +47,27 @@
                     </div>
 
                     {% for question in survey.questions %}
-                        <section class="question" data-index="{{ loop.index0 }}" id="{{ loop.index0 }}" style="display: none">
-                            <div class="row mt-3">
-                                <div class="col-md-6 col-sm-12">
-                                    <p class="lead">{{ 'Question %number% of %max_number%' | trans({'%number%': loop.index, '%max_number%': loop.length}) }}</p>
+                        <section data-index="{{ loop.index0 }}" id="{{ loop.index0 }}" style="display: none">
+                            <div class="question" >
+                                <div class="row mt-3">
+                                    <div class="col-md-6 col-sm-12">
+                                        <p class="lead">{{ 'Question %number% of %max_number%' | trans({'%number%': loop.index, '%max_number%': loop.length}) }}</p>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <p class="lead text-md-right">{{ question.category }}</p>
+                                    </div>
                                 </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <p class="lead text-md-right">{{ question.category }}</p>
-                                </div>
+
+                                <h1>{{ loop.index }}. <span  class="title">{{ question.title }}</span></h1>
+
+                                <div class="text">{{ question.text | raw }}</div>
+
+                                {% set form_field = form.replies[loop.index0] %}
+                                {# use custom "block choice_widget_expanded" (see above) to render radio buttons #}
+                                {% form_theme form_field.value _self %}
+                                {{ form_row(form_field.value, {label: labels.answer.reply.value|default(null)}) }}
+                                {{ form_row(form_field.comment, {label: labels.answer.reply.comment|default(null)}) }}
                             </div>
-
-                            <h1>{{ loop.index }}. <span  class="title">{{ question.title }}</span></h1>
-
-                            <div class="text">{{ question.text | raw }}</div>
-
-                            {% set form_field = form.replies[loop.index0] %}
-                            {# use custom "block choice_widget_expanded" (see above) to render radio buttons #}
-                            {% form_theme form_field.value _self %}
-                            {{ form_row(form_field.value, {label: labels.answer.reply.value|default(null)}) }}
-                            {{ form_row(form_field.comment, {label: labels.answer.reply.comment|default(null)}) }}
-
                             <div class="row prev-next-btns">
                                 <div class="col col-md-6">
                                     {% if not loop.first %}
