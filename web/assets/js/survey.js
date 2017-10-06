@@ -122,7 +122,7 @@
             survey.find('.survey-prev').on('click', prev);
             survey.find('.survey-next').on('click', next);
             survey.find('input[type="radio"]').on('change', function () {
-                var index = $(this).closest('.question').data('index');
+                var index = $(this).closest('[data-index]').data('index');
                 updateReply(index, $(this).val());
             });
             next();
