@@ -11,12 +11,13 @@ Survey description: Beskrivelse
 Survey instructions: Vejledning
 Question %number% of %max_number%: Spørgsmål %number%/%max_number%
 Sections: Afsnit
-Chart: Skema
+Chart: Model af besvarelse
 Current chart progress: Foreløbig model af besvarelse
 Summary of your replies: Opsummering af dine svar
 Print answer: Udskriv besvarelsen
 Reply: Svar
 Your answer has been saved: Din besvarelse er nu gemt
+Legend: Singaturforklaring
 
 # Admin
 
