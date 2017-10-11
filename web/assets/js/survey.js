@@ -55,7 +55,10 @@
                     fill: true,
                     backgroundColor: 'rgba(0,155,221,0.2)',
                     borderColor: '#009BDD',
-                    pointRadius: 8,
+                    pointRadius: 2,
+                    pointBorderWidth: 0,
+                    pointBackgroundColor: '#009BDD',
+                    pointStyle: 'circle',
                     data: []
                 }]
             },
