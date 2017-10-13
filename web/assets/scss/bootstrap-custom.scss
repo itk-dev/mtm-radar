@@ -279,32 +279,31 @@ h3{
 }
 
 // Chart legend
-#chart-wrapper {
-    .legend {
-        &-color {
-            display: inline-block;
-            width: 15px;
-            height: 3px;
-            margin-right: 10px;
-            vertical-align: middle;
-            &-0 {
-                background-color: $red-dark;
-            }
-            &-1 {
-                background-color: $yellow;
-            }
-            &-2 {
-                background-color: $green;
-            }
-            &-3 {
-                background-color: $green-dark;
-            }
-            &-4 {
-                background-color: $black;
-            }
+.legend {
+    &-color {
+        display: inline-block;
+        width: 15px;
+        height: 3px;
+        margin-right: 10px;
+        vertical-align: middle;
+        &-0 {
+            background-color: $red-dark;
+        }
+        &-1 {
+            background-color: $yellow;
+        }
+        &-2 {
+            background-color: $green;
+        }
+        &-3 {
+            background-color: $green-dark;
+        }
+        &-4 {
+            background-color: $black;
         }
     }
 }
+
 // Logo
 .logo {
     @include media-breakpoint-up(md) {
@@ -332,19 +331,27 @@ h3{
     }
     .question {
         h4 {
-            font-size: 20pt;
+            font-size: 13pt !important;
         }
         p {
-            font-size: 13pt;
+            font-size: 9pt !important;
         }
         display: block !important;
         page-break-inside: avoid;
     }
-    .grey-bg {
+     .grey-bg {
         display: block !important;
         page-break-inside: avoid;
         position: static;
         background: none;
+        flex: none;
+        height: auto !important;
+        top: initial;
+        right: initial;
+        box-sizing: border-box;
+    /*     width: 100% !important;
+        max-width: 100% !important;
+        flex: 0 0 100% !important;*/
     }
     .grey-bg .logo {
         position: static;
@@ -355,14 +362,15 @@ h3{
     .collapse {
         display: block;
     }
-    [class^="col"], [class^="row"], .container {
+    .col-md-6 {
         width: 100% !important;
         max-width: 100% !important;
-        flex: 0 0 100% !important;
-        clear: both;
-        float: none !important;
+        flex: none !important;
     }
     .legend-color {
         display: none !important;
+    }
+    .break-page-print {
+        page-break-before: always;
     }
 }

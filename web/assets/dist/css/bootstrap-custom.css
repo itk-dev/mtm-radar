@@ -9005,21 +9005,21 @@ a.text-dark:focus, a.text-dark:hover {
       border-bottom: 1px solid #dee2e6;
       width: 100%; } }
 
-#chart-wrapper .legend-color {
+.legend-color {
   display: inline-block;
   width: 15px;
   height: 3px;
   margin-right: 10px;
   vertical-align: middle; }
-  #chart-wrapper .legend-color-0 {
+  .legend-color-0 {
     background-color: #C00122; }
-  #chart-wrapper .legend-color-1 {
+  .legend-color-1 {
     background-color: #FECE60; }
-  #chart-wrapper .legend-color-2 {
+  .legend-color-2 {
     background-color: #7DBA6D; }
-  #chart-wrapper .legend-color-3 {
+  .legend-color-3 {
     background-color: #22A136; }
-  #chart-wrapper .legend-color-4 {
+  .legend-color-4 {
     background-color: #181715; }
 
 .logo {
@@ -9045,27 +9045,38 @@ a.text-dark:focus, a.text-dark:hover {
     display: block !important;
     page-break-inside: avoid; }
     .question h4 {
-      font-size: 20pt; }
+      font-size: 13pt !important; }
     .question p {
-      font-size: 13pt; }
+      font-size: 9pt !important; }
   .grey-bg {
     display: block !important;
     page-break-inside: avoid;
     position: static;
-    background: none; }
+    background: none;
+    -webkit-box-flex: 0;
+        -ms-flex: none;
+            flex: none;
+    height: auto !important;
+    top: initial;
+    right: initial;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    /*     width: 100% !important;
+        max-width: 100% !important;
+        flex: 0 0 100% !important;*/ }
   .grey-bg .logo {
     position: static; }
   .survey {
     padding-bottom: 0; }
   .collapse {
     display: block; }
-  [class^="col"], [class^="row"], .container {
+  .col-md-6 {
     width: 100% !important;
     max-width: 100% !important;
     -webkit-box-flex: 0 !important;
-        -ms-flex: 0 0 100% !important;
-            flex: 0 0 100% !important;
-    clear: both;
-    float: none !important; }
+        -ms-flex: none !important;
+            flex: none !important; }
   .legend-color {
-    display: none !important; } }
+    display: none !important; }
+  .break-page-print {
+    page-break-before: always; } }

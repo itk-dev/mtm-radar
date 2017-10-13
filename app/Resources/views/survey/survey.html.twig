@@ -24,7 +24,7 @@
     <div class="row full-height">
         <div class="col-md-8">
             <div id="validation-errors" class="alert alert-danger alert-dismissible" style="display: none" role="alert">{{ 'Please fill in all required fields' | trans }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <button type="button" class="close" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -93,20 +93,20 @@
         </div>
 
         <div class="col-md-4 grey-bg aside">
+
             <section id="survey-info" class="mt-3 mb-3">
                 {% include '_partials/survey_metadata.html.twig' with {expandfirst: true} %}
             </section>
 
-            <div id="chart-wrapper">
+            <div id="chartinfo-wrapper">
                 <p class="lead mt-3">{{ labels.chart.title|default('Model of answers'|trans) }}</p>
                 <h4>{{ survey.title }}</h4>
-
-                <canvas id="chart"></canvas>
-
+                <div id="chart-wrapper">
+                    <canvas id="chart"></canvas>
+                </div>
                 {% include '_partials/category_ranges.html.twig' %}
                 
                 {% include '_partials/chart_legend.html.twig' %}
-                
             </div>
             {% include '_partials/logo.html.twig' %}
         </div>
@@ -129,6 +129,9 @@
         });
         $('[type="submit"]').on('click', function(){
             $(window).off('beforeunload');
+        });
+        $(".close").on("click", function(e) {   
+            $("#validation-errors").hide();
         });
     </script>
 {% endblock %}

@@ -87,10 +87,10 @@
         var showQuestion = function () {
             var current = sections.hide().eq(index).show();
             if (current.find('.question').length>0) {
-                $('#chart-wrapper').show();
+                $('#chartinfo-wrapper').show();
                 $('#survey-info').hide();
             } else {
-                $('#chart-wrapper').hide();
+                $('#chartinfo-wrapper').hide();
                 $('#survey-info').show();
             }
             $(window).scrollTop(0);
