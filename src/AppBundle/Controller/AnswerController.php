@@ -7,6 +7,7 @@ use AppBundle\Entity\Survey;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,6 +64,20 @@ class AnswerController extends Controller
         return $this->render('answer/show.html.twig', [
             'answer' => $answer,
         ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="answer_edit")
+     * @Method("GET")
+     * @Security("has_role('ROLE_ADMIN')")
+     *
+     * @param Answer $answer
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function editAction(Answer $answer)
+    {
+        return $this->redirectToRoute('survey_answer_edit', ['id' => $answer->getSurvey()->getId(), 'answer' => $answer->getId()]);
     }
 
     /**

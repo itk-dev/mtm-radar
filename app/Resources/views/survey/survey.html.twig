@@ -10,8 +10,9 @@
     <div class="replies">
         <div class="btn-group choices" data-toggle="buttons">
             {% for choice in choices %}
-                <label class="btn btn-default reply-index-{{ loop.index0 }} reply-value-{{ choice.value }}">
-                    <input type="radio" name="{{ loop.parent.full_name }}" value="{{ choice.value }}" autocomplete="off" required/> {{ choice.label }}
+                {% set is_checked = choice is selectedchoice(value) %}
+                <label class="btn btn-default reply-index-{{ loop.index0 }} reply-value-{{ choice.value }} {{ is_checked ? 'active' }}">
+                    <input type="radio" name="{{ loop.parent.full_name }}" value="{{ choice.value }}" autocomplete="off" {% if is_checked %}checked{% endif %} required/> {{ choice.label }}
                 </label>
             {% endfor %}
         </div>

@@ -128,6 +128,12 @@
                 var index = $(this).closest('[data-index]').data('index');
                 updateReply(index, $(this).val());
             });
+            survey.find('input[type="radio"]').each(function () {
+                if ($(this).prop('checked')) {
+                    var index = $(this).closest('[data-index]').data('index');
+                    updateReply(index, $(this).val());
+                }
+            });
             next();
         }
     };
