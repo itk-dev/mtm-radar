@@ -68,6 +68,9 @@ easy_admin:
                     - name: answer_show
                       type: route
                       label: action.show
+                    - name: answer_edit
+                      type: route
+                      label: action.edit
                 fields:
                     - property: title
                     - property: survey

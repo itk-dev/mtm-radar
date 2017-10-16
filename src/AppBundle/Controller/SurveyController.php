@@ -8,12 +8,14 @@ use AppBundle\Form\Type\ReplyType;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
@@ -84,6 +86,64 @@ class SurveyController extends Controller
     }
 
     /**
+     * @Route("/{id}/answer/{answer}/edit", name="survey_answer_edit")
+     * @Method("GET")
+     * @Security("has_role('ROLE_ADMIN')")
+     *
+     * @param Survey $survey
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function editAnswer(Request $request, Survey $survey, Answer $answer)
+    {
+        if ($answer->getSurvey()->getId() !== $survey->getId()) {
+            throw new BadRequestHttpException();
+        }
+        $form = $this->buildAnswerForm($answer, $survey, 'PUT');
+
+        return $this->render('survey/survey.html.twig', [
+            'survey' => $survey,
+            'answer' => $answer,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/answer/{answer}/edit", name="survey_answer_update")
+     * @Method("PUT")
+     * @Security("has_role('ROLE_ADMIN')")
+     *
+     * @param Survey $survey
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function updateAnswer(Request $request, Survey $survey, Answer $answer)
+    {
+        $form = $this->buildAnswerForm($answer, $survey, 'PUT');
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $serializer = $this->container->get('serializer');
+            $answer->setReplies(json_decode($serializer->serialize($answer->getReplies(), 'json')));
+            $data = $serializer->serialize($survey, 'json', ['groups' => ['survey'], 'enable_max_depth' => true]);
+            $data = json_decode($data);
+            $answer->setSurvey($survey)
+                ->setData($data);
+            $this->entityManager->persist($answer);
+            $this->entityManager->flush();
+            $this->addFlash('info', 'Answer updated successfully');
+
+            return $this->redirectToRoute('answer_show', ['id' => $answer->getId()]);
+        }
+
+        return $this->render('survey/survey.html.twig', [
+            'survey' => $survey,
+            'answer' => $answer,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
      * @Route("/{id}/data", name="survey_show_data")
      *
      * @param Request             $request
@@ -104,12 +164,16 @@ class SurveyController extends Controller
         return $response;
     }
 
-    private function buildAnswerForm(Answer $answer, Survey $survey)
+    private function buildAnswerForm(Answer $answer, Survey $survey, $method = 'POST')
     {
-        // Create an initial empty reply for all questions.
-        $answer->setReplies($survey->getQuestions()->map(function () {
-            return null;
-        }));
+        // Ensure that each question has a reply.
+        $replies = $answer->getReplies();
+        foreach ($survey->getQuestions() as $index => $question) {
+            if (!isset($replies[$index])) {
+                $replies[$index] = null;
+            }
+        }
+        $answer->setReplies($replies);
 
         $form = $this->createFormBuilder($answer)
             ->add('title', TextType::class, [
@@ -130,6 +194,7 @@ class SurveyController extends Controller
                     'comment_required' => $this->getParameter('survey.reply.comment_required'),
                 ],
             ])
+            ->setMethod($method)
             ->getForm();
 
         return $form;

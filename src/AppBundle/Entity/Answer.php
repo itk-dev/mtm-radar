@@ -58,6 +58,11 @@ class Answer
      */
     private $data;
 
+    public function __construct()
+    {
+        $this->replies = new ArrayCollection();
+    }
+
     public function __toString()
     {
         return 'Answer#'.$this->getId();

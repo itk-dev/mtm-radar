@@ -48,9 +48,13 @@ $theme-colors: (
 );
 
 // Text
+$h1-font-size: 2rem;
+$h2-font-size: 1.8rem;
+$h3-font-size: 1.6rem;
 $headings-font-weight:   700;
 $paragraph-margin-bottom: 1.5rem;
 $font-family-sans-serif: $font-open-sans;
+
 
 // Round corners
 $border-radius:          .15rem;
@@ -81,6 +85,17 @@ h1{
         font-size: 1.5rem;
     }
 }
+h2{
+    @include media-breakpoint-down(md){
+        font-size: 1.3rem;
+    }
+}
+h3{
+    @include media-breakpoint-down(md){
+        font-size: 1.1rem;
+    }
+}
+
 
 // grey sidebar
 .grey-bg {
@@ -222,8 +237,8 @@ h1{
     .btn {
         border-radius: 0;
         @include media-breakpoint-up(md) {
-            padding-top: 3rem;
-            padding-bottom: 3rem;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
         }
         font-weight: 400;
         &.survey-prev {
@@ -264,32 +279,31 @@ h1{
 }
 
 // Chart legend
-#chart-wrapper {
-    .legend {
-        &-color {
-            display: inline-block;
-            width: 15px;
-            height: 3px;
-            margin-right: 10px;
-            vertical-align: middle;
-            &-0 {
-                background-color: $red-dark;
-            }
-            &-1 {
-                background-color: $yellow;
-            }
-            &-2 {
-                background-color: $green;
-            }
-            &-3 {
-                background-color: $green-dark;
-            }
-            &-4 {
-                background-color: $black;
-            }
+.legend {
+    &-color {
+        display: inline-block;
+        width: 15px;
+        height: 3px;
+        margin-right: 10px;
+        vertical-align: middle;
+        &-0 {
+            background-color: $red-dark;
+        }
+        &-1 {
+            background-color: $yellow;
+        }
+        &-2 {
+            background-color: $green;
+        }
+        &-3 {
+            background-color: $green-dark;
+        }
+        &-4 {
+            background-color: $black;
         }
     }
 }
+
 // Logo
 .logo {
     @include media-breakpoint-up(md) {
@@ -306,22 +320,57 @@ h1{
     }
 }
 
-
 // Print 
-
 @media print {
-    .survey,
-    .survey-info
-    {
-        break-after: always;
-        page-break-after: always;
+    body, html {
+        overflow: visible;
+        height: 100%;
     }
-    .grey-bg
-    {
-        break-before: always;
-        page-break-before: always;
+    p a {
+        word-wrap: break-word;
+    }
+    .question {
+        h4 {
+            font-size: 13pt !important;
+        }
+        p {
+            font-size: 9pt !important;
+        }
+        display: block !important;
+        page-break-inside: avoid;
+    }
+     .grey-bg {
+        display: block !important;
+        page-break-inside: avoid;
+        position: static;
+        background: none;
+        flex: none;
+        height: auto !important;
+        top: initial;
+        right: initial;
+        box-sizing: border-box;
+    /*     width: 100% !important;
+        max-width: 100% !important;
+        flex: 0 0 100% !important;*/
+    }
+    .grey-bg .logo {
+        position: static;
+    }
+    .survey {
+        padding-bottom: 0;
     }
     .collapse {
         display: block;
+    }
+    .col-md-6 {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: none !important;
+    }
+    .legend-color {
+        display: none !important;
+    }
+    .break-page-print {
+        page-break-before: always;
     }
 }

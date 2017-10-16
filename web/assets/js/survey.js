@@ -55,7 +55,10 @@
                     fill: true,
                     backgroundColor: 'rgba(0,155,221,0.2)',
                     borderColor: '#009BDD',
-                    pointRadius: 8,
+                    pointRadius: 2,
+                    pointBorderWidth: 0,
+                    pointBackgroundColor: '#009BDD',
+                    pointStyle: 'circle',
                     data: []
                 }]
             },
@@ -84,10 +87,10 @@
         var showQuestion = function () {
             var current = sections.hide().eq(index).show();
             if (current.find('.question').length>0) {
-                $('#chart-wrapper').show();
+                $('#chartinfo-wrapper').show();
                 $('#survey-info').hide();
             } else {
-                $('#chart-wrapper').hide();
+                $('#chartinfo-wrapper').hide();
                 $('#survey-info').show();
             }
             $(window).scrollTop(0);
@@ -124,6 +127,12 @@
             survey.find('input[type="radio"]').on('change', function () {
                 var index = $(this).closest('[data-index]').data('index');
                 updateReply(index, $(this).val());
+            });
+            survey.find('input[type="radio"]').each(function () {
+                if ($(this).prop('checked')) {
+                    var index = $(this).closest('[data-index]').data('index');
+                    updateReply(index, $(this).val());
+                }
             });
             next();
         }
