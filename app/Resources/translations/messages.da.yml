@@ -1,4 +1,13 @@
 # Frontend
+#
+# Note: Most of these can be overridden in the survey configuration, e.g
+#
+# labels:
+#  description: Baggrund og formål
+#  instructions: Vejledning
+#  sections: Kapitler
+#  answer:
+#   title: Overskrift
 
 Comment: Kommentarer #Uddyb/begrund dit svar
 Next question: Næste
@@ -18,6 +27,7 @@ Print answer: Udskriv besvarelsen
 Reply: Svar
 Your answer has been saved: Din besvarelse er nu gemt
 Legend: Singaturforklaring
+Back: Forrige
 
 # Admin
 

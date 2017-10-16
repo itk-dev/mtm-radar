@@ -74,7 +74,9 @@
                             </div>
                             <div class="row prev-next-btns">
                                 <div class="col col-md-6">
-                                    {% if not loop.first %}
+                                    {% if loop.first %}
+                                        <button type="button" class="btn btn-default btn-lg btn-block survey-prev text-left">{{ labels.back|default('Back' | trans) }}</button>
+                                    {% else %}
                                         <button type="button" class="btn btn-default btn-lg btn-block survey-prev text-left">{{ labels.prev|default('Previous question' | trans) }}</button>
                                     {% endif %}
                                 </div>
