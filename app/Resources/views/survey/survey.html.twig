@@ -107,7 +107,7 @@
                     <canvas id="chart"></canvas>
                 </div>
                 {% include '_partials/category_ranges.html.twig' %}
-                
+
                 {% include '_partials/chart_legend.html.twig' %}
             </div>
             {% include '_partials/logo.html.twig' %}
@@ -132,7 +132,7 @@
         $('[type="submit"]').on('click', function(){
             $(window).off('beforeunload');
         });
-        $(".close").on("click", function(e) {   
+        $(".close").on("click", function(e) {
             $("#validation-errors").hide();
         });
     </script>
