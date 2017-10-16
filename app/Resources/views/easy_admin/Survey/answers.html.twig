@@ -1,10 +1,31 @@
-<div class="survey-answer">
-	{% for answer in value %}
-		<a href="{{ path('answer_show', {id: answer.id}) }}">
-			{{ answer.createdAt | date }}
-			{{ answer.id }}
-		</a>
-	{% else %}
-		{{ 'No answers' | trans }}
-	{% endfor %}
-</div>
+{% if 'list' == view %}
+    <a href="{{ path('easyadmin', {action: 'show', entity: 'Survey', id: item.id}) }}">
+        {% include '@EasyAdmin/default/field_association.html.twig' %}
+    </a>
+{% elseif 'show' == view %}
+    <div class="survey-answer">
+        {% if value %}
+            <form action="{{ path('survey_compare_answers', {id: item.id}) }}">
+                <table class="table">
+                    {% for answer in value %}
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="answers[]" value="{{ answer.id }}" />
+                            </td>
+                            <td>
+                                <a href="{{ path('answer_show', {id: answer.id}) }}">
+                                    {{ answer.title }}
+                                </a>
+                            </td>
+                            <td>{{ answer.author }}</td>
+                            <td>{{ answer.createdAt | date }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <button class="btn btn-default" type="submit">{{ 'Compare answers' | trans }}</button>
+            </form>
+        {% else %}
+            {{ 'No answers' | trans }}
+        {% endif %}
+    </div>
+{% endif %}

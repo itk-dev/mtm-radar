@@ -2,6 +2,16 @@
 // import validation from 'jquery-validation';
 
 (function ($) {
+    var backgroundColors = [
+        'rgba(0,155,221,0.2)',
+        'rgba(155,0,221,0.2)',
+        'rgba(0,221,155,0.2)'
+    ];
+    var borderColors = [
+        '#009BDD',
+        '#00DD9B',
+        '#9B00DD'
+    ];
     var loadQuestions = function (survey) {
         var questions = survey.find('.question').map(function () {
             return {
@@ -53,8 +63,8 @@
                 datasets: [{
                     label: 'Answer',
                     fill: true,
-                    backgroundColor: 'rgba(0,155,221,0.2)',
-                    borderColor: '#009BDD',
+                    backgroundColor: backgroundColors[0],
+                    borderColor: borderColors[0],
                     pointRadius: 2,
                     pointBorderWidth: 0,
                     pointBackgroundColor: '#009BDD',
@@ -117,7 +127,39 @@
             }
         };
 
-        if (replies) {
+        if (typeof surveyReplies !== 'undefined') {
+            var showReplies = function() {
+                var indexes = $('.answer-handle:checked').map(function() {
+                    return $(this).data('index');
+                }).get();
+                $('.reply').each(function() {
+                    var index = $(this).data('answer-index');
+                    $(this).toggle(indexes.indexOf(index) > -1);
+                });
+
+                chart.data.datasets = surveyReplies.filter(function(element, index) {
+                    return indexes.indexOf(index) > -1;
+                }).map(function (replies, index) {
+                    return {
+                        label: 'Answer',
+                        fill: true,
+                        backgroundColor: backgroundColors[index],
+                        borderColor: borderColors[index],
+                        pointRadius: 2,
+                        pointBorderWidth: 0,
+                        pointBackgroundColor: '#009BDD',
+                        pointStyle: 'circle',
+                        data: replies.map(function (reply) {
+                            return reply.value;
+                        })
+                    };
+                });
+                chart.update();
+            }
+
+            $('.answer-handle').on('change', showReplies);
+            showReplies();
+        } else if (replies) {
             replies.forEach(function (reply, index) {
                 updateReply(index, reply.value);
             });
