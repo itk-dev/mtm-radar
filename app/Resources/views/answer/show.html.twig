@@ -47,20 +47,20 @@
             </div>
         </div>
         <div class="col-md-6 grey-bg aside">
-            
-                <p class="lead mt-3">{{ labels.chart.title|default('Model of answers'|trans) }}</p>
-                <h4>{{ survey.title }}</h4>
-                <div id="chart-wrapper" class="mb-3 mt-3">
-                    <canvas id="chart"></canvas>
+
+            <p class="lead mt-3">{{ labels.chart.title|default('Model of answers'|trans) }}</p>
+            <h4>{{ survey.title }}</h4>
+            <div id="chart-wrapper" class="mb-3 mt-3">
+                <canvas id="chart"></canvas>
+            </div>
+            <div class="row">
+                <div class="col">
+                    {% include '_partials/category_ranges.html.twig' %}
                 </div>
-                <div class="row">
-                    <div class="col">
-                        {% include '_partials/category_ranges.html.twig' %}
-                    </div>
-                    <div class="col">
-                        {% include '_partials/chart_legend.html.twig' %}
-                    </div>
+                <div class="col">
+                    {% include '_partials/chart_legend.html.twig' %}
                 </div>
+            </div>
 
             {% include '_partials/logo.html.twig' %}
         </div>
@@ -74,7 +74,5 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('assets/dist/js/Chart.min.js')}}"></script>
-    <script src="{{ asset('assets/dist/js/jquery.validate.min.js')}}"></script>
-    <script src="{{ asset('assets/dist/js/survey.min.js')}}"></script>
+    {% include '_partials/survey_scripts.twig.html' %}
 {% endblock %}

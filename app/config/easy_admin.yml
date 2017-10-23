@@ -37,10 +37,6 @@ easy_admin:
             show:
                 fields:
                     - property: title
-                    - property: description
-                    - property: configuration
-                      template: configuration.html.twig
-                    - property: questions
                     - property: answers
                       template: answers.html.twig
 

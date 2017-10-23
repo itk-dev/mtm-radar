@@ -3,9 +3,16 @@
         {% include '@EasyAdmin/default/field_association.html.twig' %}
     </a>
 {% elseif 'show' == view %}
+    {# @TODO: Get this from app parameters #}
+    {%
+        set requiredAnswers = {
+            min: 2,
+            max: 2
+        }
+    %}
     <div class="survey-answer">
         {% if value %}
-            <form action="{{ path('survey_compare_answers', {id: item.id}) }}">
+            <form id="survey-answers" action="{{ path('survey_compare_answers', {id: item.id}) }}">
                 <table class="table">
                     {% for answer in value %}
                         <tr>
@@ -22,8 +29,30 @@
                         </tr>
                     {% endfor %}
                 </table>
+
+                <div class="alert alert-warning" style="display: none" id="select-answers-message">
+                    {% if requiredAnswers.min == requiredAnswers.max %}
+                        {{ 'Please select %num% answers' | trans({'%num%': requiredAnswers.min}) }}
+                    {% else %}
+                        {{ 'Please select %min%–%max% answers' | trans({'%min%': requiredAnswers.min, '%max%': requiredAnswers.max}) }}
+                    {% endif %}
+                </div>
+
                 <button class="btn btn-default" type="submit">{{ 'Compare answers' | trans }}</button>
             </form>
+            <script>(function ($) {
+                    $('form#survey-answers').on('submit', function(e) {
+                        var checkedAnswers = $('[name="answers[]"]:checked'),
+                            min = {{ requiredAnswers.min | json_encode | raw }},
+                            max = {{ requiredAnswers.max | json_encode | raw }};
+                        if (checkedAnswers.length < min || max < checkedAnswers.length) {
+                            $('#select-answers-message').show();
+                            e.preventDefault();
+                        } else {
+                            $('#select-answers-message').hide();
+                        }
+                    });
+                }(jQuery))</script>
         {% else %}
             {{ 'No answers' | trans }}
         {% endif %}

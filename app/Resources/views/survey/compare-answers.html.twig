@@ -97,6 +97,5 @@
         surveyReplies.push({{ answer.replies | json_encode | raw }});
         {% endfor %}
     </script>
-    <script src="{{ asset('assets/dist/js/Chart.min.js')}}"></script>
-    <script src="{{ asset('assets/dist/js/survey.min.js')}}"></script>
+    {% include '_partials/survey_scripts.twig.html' %}
 {% endblock %}

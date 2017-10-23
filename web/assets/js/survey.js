@@ -2,16 +2,45 @@
 // import validation from 'jquery-validation';
 
 (function ($) {
-    var backgroundColors = [
+    var getConfiguration = function(key, configuration) {
+        return (typeof SurveyConfiguration !== 'undefined'
+                && SurveyConfiguration
+                && typeof SurveyConfiguration[key] !== 'undefined'
+                && SurveyConfiguration[key]) ? SurveyConfiguration[key] : configuration;
+    };
+    var backgroundColors = getConfiguration('backgroundColors', [
         'rgba(0,155,221,0.2)',
         'rgba(155,0,221,0.2)',
         'rgba(0,221,155,0.2)'
-    ];
-    var borderColors = [
+    ]);
+    var borderColors = getConfiguration('borderColors', [
         '#009BDD',
         '#00DD9B',
         '#9B00DD'
-    ];
+    ]);
+    var pointBackgroundColors = getConfiguration('pointBackgroundColors', [
+        '#009BDD',
+        '#00DD9B',
+        '#9B00DD'
+    ]);
+    var datasetConfig = getConfiguration('datasetConfig', {
+        fill: true,
+        backgroundColor: backgroundColors[0],
+        borderColor: borderColors[0],
+        pointRadius: 2,
+        pointBorderWidth: 0,
+        pointBackgroundColor: pointBackgroundColors[0],
+        pointStyle: 'circle',
+        data: []
+    });
+    var getDatasetConfig = function(index, config) {
+        index || (index = 0);
+        return $.extend({}, datasetConfig, {
+            backgroundColor: backgroundColors[index],
+            borderColor: borderColors[index],
+            pointBackgroundColor: pointBackgroundColors[index],
+        }, config);
+    };
     var loadQuestions = function (survey) {
         var questions = survey.find('.question').map(function () {
             return {
@@ -60,17 +89,7 @@
                 labels: questions.map(function (question, index) {
                     return (index + 1) + '. ';
                 }),
-                datasets: [{
-                    label: 'Answer',
-                    fill: true,
-                    backgroundColor: backgroundColors[0],
-                    borderColor: borderColors[0],
-                    pointRadius: 2,
-                    pointBorderWidth: 0,
-                    pointBackgroundColor: '#009BDD',
-                    pointStyle: 'circle',
-                    data: []
-                }]
+                datasets: [getDatasetConfig()]
             },
             options: {
                 legend: {
@@ -128,6 +147,9 @@
         };
 
         if (typeof surveyReplies !== 'undefined') {
+            var labels = $('.answer-handle').map(function() {
+                return $.trim($(this).parent().text());
+            }).get();
             var showReplies = function() {
                 var indexes = $('.answer-handle:checked').map(function() {
                     return $(this).data('index');
@@ -140,20 +162,14 @@
                 chart.data.datasets = surveyReplies.filter(function(element, index) {
                     return indexes.indexOf(index) > -1;
                 }).map(function (replies, index) {
-                    return {
-                        label: 'Answer',
-                        fill: true,
-                        backgroundColor: backgroundColors[index],
-                        borderColor: borderColors[index],
-                        pointRadius: 2,
-                        pointBorderWidth: 0,
-                        pointBackgroundColor: '#009BDD',
-                        pointStyle: 'circle',
+                    return getDatasetConfig(index, {
+                        label: labels[index],
                         data: replies.map(function (reply) {
                             return reply.value;
                         })
-                    };
+                    });
                 });
+                chart.options.legend.display = true;
                 chart.update();
             }
 
