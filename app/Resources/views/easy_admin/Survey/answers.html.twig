@@ -7,7 +7,7 @@
     {%
         set requiredAnswers = {
             min: 2,
-            max: 2
+            max: 5
         }
     %}
     <div class="survey-answer">
@@ -30,26 +30,26 @@
                     {% endfor %}
                 </table>
 
-                <div class="alert alert-warning" style="display: none" id="select-answers-message">
+                <div class="alert alert-info" id="select-answers-message">
                     {% if requiredAnswers.min == requiredAnswers.max %}
-                        {{ 'Please select %num% answers' | trans({'%num%': requiredAnswers.min}) }}
+                        {{ 'Select %num% answers' | trans({'%num%': requiredAnswers.min}) }}
                     {% else %}
-                        {{ 'Please select %min%–%max% answers' | trans({'%min%': requiredAnswers.min, '%max%': requiredAnswers.max}) }}
+                        {{ 'Select %min%–%max% answers' | trans({'%min%': requiredAnswers.min, '%max%': requiredAnswers.max}) }}
                     {% endif %}
                 </div>
 
                 <button class="btn btn-default" type="submit">{{ 'Compare answers' | trans }}</button>
             </form>
             <script>(function ($) {
+                    var min = {{ requiredAnswers.min | json_encode | raw }},
+                        max = {{ requiredAnswers.max | json_encode | raw }};
                     $('form#survey-answers').on('submit', function(e) {
-                        var checkedAnswers = $('[name="answers[]"]:checked'),
-                            min = {{ requiredAnswers.min | json_encode | raw }},
-                            max = {{ requiredAnswers.max | json_encode | raw }};
+                        var checkedAnswers = $('[name="answers[]"]:checked');;
                         if (checkedAnswers.length < min || max < checkedAnswers.length) {
-                            $('#select-answers-message').show();
+                            $('#select-answers-message').removeClass('alert-info').addClass('alert-error');
                             e.preventDefault();
                         } else {
-                            $('#select-answers-message').hide();
+                            $('#select-answers-message').removeClass('alert-error').addClass('alert-info');
                         }
                     });
                 }(jQuery))</script>

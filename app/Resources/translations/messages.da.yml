@@ -47,8 +47,8 @@ Title: Titel
 User: Bruger
 
 Compare answers: Sammenlign besvarelser
-Please select %num% answers: Vælg venligst %num% besvarelser
-Please select %min%–%max% answers: Vælg venligst %min%–%max% besvarelser
+Select %num% answers: Vælg %num% besvarelser
+Select %min%–%max% answers: Vælg %min%–%max% besvarelser
 
 action.cancel: Annuller
 action.delete: Slet
