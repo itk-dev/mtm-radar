@@ -8,21 +8,24 @@
                 && typeof SurveyConfiguration[key] !== 'undefined'
                 && SurveyConfiguration[key]) ? SurveyConfiguration[key] : configuration;
     };
-    var backgroundColors = getConfiguration('backgroundColors', [
-        'rgba(0,155,221,0.2)',
-        'rgba(155,0,221,0.2)',
-        'rgba(0,221,155,0.2)'
-    ]);
     var borderColors = getConfiguration('borderColors', [
         '#009BDD',
         '#00DD9B',
         '#9B00DD'
     ]);
-    var pointBackgroundColors = getConfiguration('pointBackgroundColors', [
-        '#009BDD',
-        '#00DD9B',
-        '#9B00DD'
-    ]);
+    var hexToRgba = function(color, transparency) {
+        var match = new RegExp('^#([0-9a-z]{2})([0-9a-z]{2})([0-9a-z]{2})$', 'i').exec(color);
+        if (match) {
+            return 'rgba(' + [parseInt(match[1], 16), parseInt(match[2], 16), parseInt(match[3], 16), transparency].join(', ') + ')';
+        }
+
+        return color;
+    };
+    var backgroundColorsTransparency = getConfiguration('backgroundColorsTransparency', 0.2);
+    var backgroundColors = getConfiguration('backgroundColors', borderColors.map(function (color) {
+        return hexToRgba(color, backgroundColorsTransparency);
+    }));
+    var pointBackgroundColors = borderColors;
     var datasetConfig = getConfiguration('datasetConfig', {
         fill: true,
         backgroundColor: backgroundColors[0],
