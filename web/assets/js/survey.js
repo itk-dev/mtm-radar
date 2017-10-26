@@ -153,7 +153,7 @@
 
         if (typeof surveyReplies !== 'undefined') {
             var labels = $('.answer-handle').map(function() {
-                return $.trim($(this).parent().text());
+                return $.trim($(this).parent().find('.chart-label').text());
             }).get();
             var showReplies = function() {
                 var indexes = $('.answer-handle:checked').map(function() {

@@ -20,14 +20,18 @@
                 <ul class="list-group mb-3">
                     {% for answer in answers %}
                         <li class="list-group-item">
-                            <label>
+                            <label style="display: block">
                                 <input type="checkbox" class="answer-handle" data-index="{{ loop.index0 }}" checked/>
-                                <strong>{{ 'Reply %index%' | trans({'%index%': loop.index}) }} - {{ 'by' | trans }} Jesper Pedersen <!-- TODO: get dynamic data --></strong>
+                                <strong><span class="chart-label">{{ 'Reply %index%' | trans({'%index%': loop.index}) }}</span> – {{ 'by %author%' | trans({'%author%': answer.author}) }}</strong>
+                                {% if answer.title %}
+                                    <br/>
+                                    {{ 'Answer title' | trans }}: {{ answer.title }}
+                                {% endif %}
+                                {% if answer.description %}
+                                    <br/>
+                                    {{ 'Answer description' | trans }}: {{ answer.description }}
+                                {% endif %}
                             </label>
-                            <br>
-                            {{ 'Answer title' | trans }}: Test  <!-- TODO: get dynamic data -->
-                            <br>
-                            {{ 'Answer description' | trans }}: Beskrivelses teksten <!-- TODO: get dynamic data -->
                         </li>
                     {% endfor %}
                 </ul>
