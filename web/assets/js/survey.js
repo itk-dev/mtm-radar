@@ -161,20 +161,21 @@
                     var index = $(this).data('answer-index');
                     $(this).toggle(indexes.indexOf(index) > -1);
                 });
-
-                chart.data.datasets = surveyReplies.filter(function(element, index) {
-                    return indexes.indexOf(index) > -1;
-                }).map(function (replies, index) {
-                    return getDatasetConfig(index, {
-                        label: labels[index],
-                        data: replies.map(function (reply) {
-                            return reply.value;
-                        })
-                    });
+                chart.data.datasets.forEach(function (dataset, index) {
+                    dataset.hidden = indexes.indexOf(index) === -1;
                 });
-                chart.options.legend.display = true;
                 chart.update();
             }
+
+            chart.data.datasets = surveyReplies.map(function (replies, index) {
+                return getDatasetConfig(index, {
+                    label: labels[index],
+                    data: replies.map(function (reply) {
+                        return reply.value;
+                    })
+                });
+            });
+            chart.options.legend.display = true;
 
             $('.answer-handle').on('change', showReplies);
             showReplies();
