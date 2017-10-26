@@ -10,8 +10,10 @@
     };
     var borderColors = getConfiguration('borderColors', [
         '#009BDD',
-        '#00DD9B',
-        '#9B00DD'
+        '#82338E',
+        '#E820B4',
+        '#1FE53E',
+        '#12E3E3'
     ]);
     var hexToRgba = function(color, transparency) {
         var match = new RegExp('^#([0-9a-z]{2})([0-9a-z]{2})([0-9a-z]{2})$', 'i').exec(color);
