@@ -16,14 +16,18 @@
                         <div class="col text-right"><a href="javascript:window.print()" class="btn btn-secondary d-print-none"><i class="fa fa-print"></i> {{ 'Print answer' | trans }}</a></div>
                     </div>
                 </section>
-
-                <ul class="list-inline">
+                <p>{{ 'Selected answers' | trans }}</p>
+                <ul class="list-group mb-3">
                     {% for answer in answers %}
-                        <li class="list-inline-item">
+                        <li class="list-group-item">
                             <label>
                                 <input type="checkbox" class="answer-handle" data-index="{{ loop.index0 }}" checked/>
-                                {{ 'Reply %index%' | trans({'%index%': loop.index}) }}
+                                <strong>{{ 'Reply %index%' | trans({'%index%': loop.index}) }} - {{ 'by' | trans }} Jesper Pedersen <!-- TODO: get dynamic data --></strong>
                             </label>
+                            <br>
+                            {{ 'Answer title' | trans }}: Test  <!-- TODO: get dynamic data -->
+                            <br>
+                            {{ 'Answer description' | trans }}: Beskrivelses teksten <!-- TODO: get dynamic data -->
                         </li>
                     {% endfor %}
                 </ul>
