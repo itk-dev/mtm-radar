@@ -25,11 +25,11 @@
                                 <strong><span class="chart-label">{{ 'Reply %index%' | trans({'%index%': loop.index}) }}</span> – {{ 'by %author%' | trans({'%author%': answer.author}) }}</strong>
                                 {% if answer.title %}
                                     <br/>
-                                    {{ 'Answer title' | trans }}: {{ answer.title }}
+                                    {{ labels.answer.title|default('Title' | trans) }}: {{ answer.title }}
                                 {% endif %}
                                 {% if answer.description %}
                                     <br/>
-                                    {{ 'Answer description' | trans }}: {{ answer.description }}
+                                    {{ labels.answer.description|default('Description' | trans) }}: {{ answer.description }}
                                 {% endif %}
                             </label>
                         </li>
