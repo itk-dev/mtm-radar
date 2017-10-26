@@ -1,4 +1,4 @@
-/* global Chart, jQuery */
+/* global Chart, jQuery, surveyReplies, SurveyConfiguration */
 // import validation from 'jquery-validation';
 
 (function ($) {
