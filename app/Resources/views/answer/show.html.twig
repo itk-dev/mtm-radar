@@ -22,16 +22,22 @@
                     <p class="lead break-page-print">{{ 'Summary of your replies' | trans }}</p> 
                     <section id="survey-author-info" class="mb-3">
                         <div class="row">
+                            {% if answer.author %}
                             <div class="col">
-                                <p><strong>{{ 'Answered by' | trans }}: </strong>Jesper Pedersen</p> <!-- TODO: get dynamic data -->
+                                <p><strong>{{ 'Answered by' | trans }}: </strong>{{ answer.author }}</p>
                             </div>
+                            {% if answer.title %}
+                            {% endif %}
                             <div class="col">
-                                <p><strong>{{ 'Answer title' | trans }}: </strong>Test</p> <!-- TODO: get dynamic data -->
+                                <p><strong>{{ 'Answer title' | trans }}: </strong>{{ answer.title }}</p>
                             </div>
+                            {% endif %}
+                            {% if answer.description %}
                             <div class="col-12">
                                 <p><strong>{{ 'Answer description' | trans }}: </strong><br> 
-                                    Beskrivelses teksten</p> <!-- TODO: get dynamic data -->
+                                    {{ answer.description }}</p>
                             </div>
+                            {% endif %}
                         </div>
                     </section>
                     {% for question in survey.questions %}
