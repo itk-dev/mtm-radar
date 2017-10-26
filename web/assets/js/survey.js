@@ -1,7 +1,51 @@
-/* global Chart, jQuery */
+/* global Chart, jQuery, surveyReplies, SurveyConfiguration */
 // import validation from 'jquery-validation';
 
 (function ($) {
+    var getConfiguration = function(key, configuration) {
+        return (typeof SurveyConfiguration !== 'undefined'
+                && SurveyConfiguration
+                && typeof SurveyConfiguration[key] !== 'undefined'
+                && SurveyConfiguration[key]) ? SurveyConfiguration[key] : configuration;
+    };
+    var borderColors = getConfiguration('borderColors', [
+        '#009BDD',
+        '#82338E',
+        '#E820B4',
+        '#1FE53E',
+        '#12E3E3'
+    ]);
+    var hexToRgba = function(color, transparency) {
+        var match = new RegExp('^#([0-9a-z]{2})([0-9a-z]{2})([0-9a-z]{2})$', 'i').exec(color);
+        if (match) {
+            return 'rgba(' + [parseInt(match[1], 16), parseInt(match[2], 16), parseInt(match[3], 16), transparency].join(', ') + ')';
+        }
+
+        return color;
+    };
+    var backgroundColorsTransparency = getConfiguration('backgroundColorsTransparency', 0.2);
+    var backgroundColors = getConfiguration('backgroundColors', borderColors.map(function (color) {
+        return hexToRgba(color, backgroundColorsTransparency);
+    }));
+    var pointBackgroundColors = borderColors;
+    var datasetConfig = getConfiguration('datasetConfig', {
+        fill: true,
+        backgroundColor: backgroundColors[0],
+        borderColor: borderColors[0],
+        pointRadius: 2,
+        pointBorderWidth: 0,
+        pointBackgroundColor: pointBackgroundColors[0],
+        pointStyle: 'circle',
+        data: []
+    });
+    var getDatasetConfig = function(index, config) {
+        index || (index = 0);
+        return $.extend({}, datasetConfig, {
+            backgroundColor: backgroundColors[index],
+            borderColor: borderColors[index],
+            pointBackgroundColor: pointBackgroundColors[index],
+        }, config);
+    };
     var loadQuestions = function (survey) {
         var questions = survey.find('.question').map(function () {
             return {
@@ -50,17 +94,7 @@
                 labels: questions.map(function (question, index) {
                     return (index + 1) + '. ';
                 }),
-                datasets: [{
-                    label: 'Answer',
-                    fill: true,
-                    backgroundColor: 'rgba(0,155,221,0.2)',
-                    borderColor: '#009BDD',
-                    pointRadius: 2,
-                    pointBorderWidth: 0,
-                    pointBackgroundColor: '#009BDD',
-                    pointStyle: 'circle',
-                    data: []
-                }]
+                datasets: [getDatasetConfig()]
             },
             options: {
                 legend: {
@@ -117,7 +151,37 @@
             }
         };
 
-        if (replies) {
+        if (typeof surveyReplies !== 'undefined') {
+            var labels = $('.answer-handle').map(function() {
+                return $.trim($(this).parent().find('.chart-label').text());
+            }).get();
+            var showReplies = function() {
+                var indexes = $('.answer-handle:checked').map(function() {
+                    return $(this).data('index');
+                }).get();
+                $('.reply').each(function() {
+                    var index = $(this).data('answer-index');
+                    $(this).toggle(indexes.indexOf(index) > -1);
+                });
+                chart.data.datasets.forEach(function (dataset, index) {
+                    dataset.hidden = indexes.indexOf(index) === -1;
+                });
+                chart.update();
+            }
+
+            chart.data.datasets = surveyReplies.map(function (replies, index) {
+                return getDatasetConfig(index, {
+                    label: labels[index],
+                    data: replies.map(function (reply) {
+                        return reply.value;
+                    })
+                });
+            });
+            chart.options.legend.display = true;
+
+            $('.answer-handle').on('change', showReplies);
+            showReplies();
+        } else if (replies) {
             replies.forEach(function (reply, index) {
                 updateReply(index, reply.value);
             });

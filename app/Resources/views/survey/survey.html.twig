@@ -123,9 +123,8 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('assets/dist/js/Chart.min.js')}}"></script>
     <script src="{{ asset('assets/dist/js/jquery.validate.min.js')}}"></script>
-    <script src="{{ asset('assets/dist/js/survey.min.js')}}"></script>
+    {% include '_partials/survey_scripts.twig.html' %}
     <script>
         $(window).on('beforeunload', function(){
             return {{ 'Are you sure you want to leave this page?'|trans | json_encode | raw }};

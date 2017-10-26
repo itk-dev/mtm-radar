@@ -86,6 +86,31 @@ class SurveyController extends Controller
     }
 
     /**
+     * @Route("/{id}/compare", name="survey_compare_answers")
+     * @Method("GET")
+     *
+     * @param Request $request
+     * @param Survey $survey
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function compareAnswers(Request $request, Survey $survey)
+    {
+        $answerIds = $request->get('answers');
+        $answers = $this->entityManager->getRepository(Answer::class)->findBy(['id' => $answerIds]);
+        foreach ($answers as $answer) {
+            if ($survey !== $answer->getSurvey()) {
+                return new BadRequestHttpException('Answers do not belong to same survey.');
+            }
+        }
+
+        return $this->render('survey/compare-answers.html.twig', [
+            'survey' => $survey,
+            'answers' => $answers,
+        ]);
+    }
+
+    /**
      * @Route("/{id}/answer/{answer}/edit", name="survey_answer_edit")
      * @Method("GET")
      * @Security("has_role('ROLE_ADMIN')")

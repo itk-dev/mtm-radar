@@ -25,9 +25,17 @@ Current chart progress: Foreløbig model af besvarelse
 Summary of your replies: Opsummering af dine svar
 Print answer: Udskriv besvarelsen
 Reply: Svar
+Reply %index%: Svar %index%
+by %author%: af %author%
 Your answer has been saved: Din besvarelse er nu gemt
 Legend: Singaturforklaring
 Back: Forrige
+Answered by: Besvaret af
+by: af
+Answer title: Titel
+Answer description: Beskrivelse
+Comparison of answers: Sammenligning af svar
+Selected answers: Valgte besvarelser
 
 # Admin
 
@@ -45,6 +53,10 @@ Share survey: Del spørgeskema
 Survey: Spørgeskema
 Title: Titel
 User: Bruger
+
+Compare answers: Sammenlign besvarelser
+Select %num% answers: Vælg %num% besvarelser
+Select %min%–%max% answers: Vælg %min%–%max% besvarelser
 
 action.cancel: Annuller
 action.delete: Slet

@@ -1,10 +1,60 @@
-<div class="survey-answer">
-	{% for answer in value %}
-		<a href="{{ path('answer_show', {id: answer.id}) }}">
-			{{ answer.createdAt | date }}
-			{{ answer.id }}
-		</a>
-	{% else %}
-		{{ 'No answers' | trans }}
-	{% endfor %}
-</div>
+{% if 'list' == view %}
+    <a href="{{ path('easyadmin', {action: 'show', entity: 'Survey', id: item.id}) }}">
+        {% include '@EasyAdmin/default/field_association.html.twig' %}
+    </a>
+{% elseif 'show' == view %}
+    {# @TODO: Get this from app parameters #}
+    {%
+        set requiredAnswers = {
+            min: 2,
+            max: 5
+        }
+    %}
+    <div class="survey-answer">
+        {% if value %}
+            <form id="survey-answers" action="{{ path('survey_compare_answers', {id: item.id}) }}">
+                <table class="table">
+                    {% for answer in value %}
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="answers[]" value="{{ answer.id }}" />
+                            </td>
+                            <td>
+                                <a href="{{ path('answer_show', {id: answer.id}) }}">
+                                    {{ answer.title }}
+                                </a>
+                            </td>
+                            <td>{{ answer.author }}</td>
+                            <td>{{ answer.createdAt | date }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+                <div class="alert alert-info" id="select-answers-message">
+                    {% if requiredAnswers.min == requiredAnswers.max %}
+                        {{ 'Select %num% answers' | trans({'%num%': requiredAnswers.min}) }}
+                    {% else %}
+                        {{ 'Select %min%–%max% answers' | trans({'%min%': requiredAnswers.min, '%max%': requiredAnswers.max}) }}
+                    {% endif %}
+                </div>
+
+                <button class="btn btn-default" type="submit">{{ 'Compare answers' | trans }}</button>
+            </form>
+            <script>(function ($) {
+                    var min = {{ requiredAnswers.min | json_encode | raw }},
+                        max = {{ requiredAnswers.max | json_encode | raw }};
+                    $('form#survey-answers').on('submit', function(e) {
+                        var checkedAnswers = $('[name="answers[]"]:checked');;
+                        if (checkedAnswers.length < min || max < checkedAnswers.length) {
+                            $('#select-answers-message').removeClass('alert-info').addClass('alert-error');
+                            e.preventDefault();
+                        } else {
+                            $('#select-answers-message').removeClass('alert-error').addClass('alert-info');
+                        }
+                    });
+                }(jQuery))</script>
+        {% else %}
+            {{ 'No answers' | trans }}
+        {% endif %}
+    </div>
+{% endif %}

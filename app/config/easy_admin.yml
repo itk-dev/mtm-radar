@@ -31,15 +31,12 @@ easy_admin:
                     - property: description
                     - property: questions
                     - property: answers
+                      template: answers.html.twig
                     - property: createdAt
 
             show:
                 fields:
                     - property: title
-                    - property: description
-                    - property: configuration
-                      template: configuration.html.twig
-                    - property: questions
                     - property: answers
                       template: answers.html.twig
 
@@ -72,6 +69,7 @@ easy_admin:
                       type: route
                       label: action.edit
                 fields:
+                    - property: survey
                     - property: title
                     - property: survey
                     - property: author
