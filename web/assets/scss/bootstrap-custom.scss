@@ -118,9 +118,11 @@ h3{
         padding-bottom: 10rem;
     }
     .question {
-        animation: blurfade .4s ease-out forwards;
-        opacity: 0;
-        filter: blur(2px);
+        @media screen {
+            animation: blurfade .4s ease-out forwards;
+            opacity: 0;
+            filter: blur(2px);
+        }
         .reply {
             border-bottom: 1px solid $gray-400;
             margin-bottom: 1rem;
@@ -326,6 +328,9 @@ h3{
         overflow: visible;
         height: 100%;
     }
+    .full-height {
+        display: block;
+    }
     p a {
         word-wrap: break-word;
     }
@@ -339,7 +344,7 @@ h3{
         display: block !important;
         page-break-inside: avoid;
     }
-     .grey-bg {
+    .aside {
         display: block !important;
         page-break-inside: avoid;
         position: static;
@@ -349,20 +354,18 @@ h3{
         top: initial;
         right: initial;
         box-sizing: border-box;
-    /*     width: 100% !important;
-        max-width: 100% !important;
-        flex: 0 0 100% !important;*/
-    }
-    .grey-bg .logo {
-        position: static;
-    }
+
+        .logo {
+            position: static;
+        }
+     }
     .survey {
         padding-bottom: 0;
     }
     .collapse {
         display: block;
     }
-    .col-md-6 {
+    .main, .aside {
         width: 100% !important;
         max-width: 100% !important;
         flex: none !important;

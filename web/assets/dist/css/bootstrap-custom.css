@@ -8874,15 +8874,17 @@ a.text-dark:focus, a.text-dark:hover {
   .survey {
     padding-bottom: 10rem; } }
 
-.survey .question {
-  -webkit-animation: blurfade .4s ease-out forwards;
-          animation: blurfade .4s ease-out forwards;
-  opacity: 0;
-  -webkit-filter: blur(2px);
-          filter: blur(2px); }
-  .survey .question .reply {
-    border-bottom: 1px solid #ced4da;
-    margin-bottom: 1rem; }
+@media screen {
+  .survey .question {
+    -webkit-animation: blurfade .4s ease-out forwards;
+            animation: blurfade .4s ease-out forwards;
+    opacity: 0;
+    -webkit-filter: blur(2px);
+            filter: blur(2px); } }
+
+.survey .question .reply {
+  border-bottom: 1px solid #ced4da;
+  margin-bottom: 1rem; }
 
 #accordion div:first-child {
   border-bottom: 1px solid #dee2e6;
@@ -9039,6 +9041,8 @@ a.text-dark:focus, a.text-dark:hover {
   body, html {
     overflow: visible;
     height: 100%; }
+  .full-height {
+    display: block; }
   p a {
     word-wrap: break-word; }
   .question {
@@ -9048,7 +9052,7 @@ a.text-dark:focus, a.text-dark:hover {
       font-size: 13pt !important; }
     .question p {
       font-size: 9pt !important; }
-  .grey-bg {
+  .aside {
     display: block !important;
     page-break-inside: avoid;
     position: static;
@@ -9060,17 +9064,14 @@ a.text-dark:focus, a.text-dark:hover {
     top: initial;
     right: initial;
     -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-    /*     width: 100% !important;
-        max-width: 100% !important;
-        flex: 0 0 100% !important;*/ }
-  .grey-bg .logo {
-    position: static; }
+            box-sizing: border-box; }
+    .aside .logo {
+      position: static; }
   .survey {
     padding-bottom: 0; }
   .collapse {
     display: block; }
-  .col-md-6 {
+  .main, .aside {
     width: 100% !important;
     max-width: 100% !important;
     -webkit-box-flex: 0 !important;
