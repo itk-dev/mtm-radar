@@ -9,7 +9,7 @@
 {% block body %}
     {% set labels = survey.configuration.labels|default(null) %}
     <div class="row full-height">
-        <div class="col-md-6">
+        <div class="col-md-6 main">
             <div class="survey" data-configuration="{{ survey.configuration|json_encode }}" data-replies="{{ answer.replies | json_encode }}">
                 <section class="header mt-3">
                     <div class="row">
