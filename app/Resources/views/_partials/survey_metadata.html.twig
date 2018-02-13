@@ -4,10 +4,10 @@
 <div id="accordion" data-children=".item">
     {% if survey.description %}
         <div class="item description mb-3">
-            <a data-toggle="collapse" data-parent="#accordion" href="#description" aria-expanded="{{expandfirst ? 'true' : 'false' }}" aria-controls="description">
+            <a data-toggle="collapse" data-parent="#accordion" href="#description" aria-expanded="false" aria-controls="description">
                 {{ labels.description|default('Survey description'|trans) }}
             </a>
-            <div id="description" class="collapse {{expandfirst ? 'show' }} " role="tabpanel">
+            <div id="description" class="collapse" role="tabpanel">
                 {{ survey.description | raw }}
             </div>
         </div>
@@ -25,3 +25,6 @@
 
     {% endif %}
 </div>
+<hr>
+{# TODO: Link to correct file #}
+<p><a href="/survey-questions.pdf"><i class="fa fa-download"></i> {{ 'Download questions as pdf'|trans }}</a></p>
