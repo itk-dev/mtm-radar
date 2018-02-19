@@ -6,7 +6,7 @@ ivory_ck_editor:
             toolbar:
                 -
                     name: "styles"
-                    items: ['Format', 'Bold', 'Italic', 'BulletedList', 'Link']
+                    items: ['Format', 'Bold', 'Italic', 'BulletedList', 'Link', 'Unlink']
 
 easy_admin:
     site_name: '%site_name%'
@@ -47,6 +47,9 @@ easy_admin:
                       type: ckeditor
                     - property: instructions
                       type: ckeditor
+                    - property: preparations
+                      type: ckeditor
+                      help: 'Use <code>survey://all_questions</code> to insert the url to all survey questions'
                     - property: configuration
                       type: AppBundle\Form\Type\ConfigurationType
                     - property: questions

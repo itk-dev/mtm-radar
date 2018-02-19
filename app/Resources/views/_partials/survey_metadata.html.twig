@@ -22,9 +22,16 @@
                 {{ survey.instructions | raw }}
             </div>
         </div>
+    {% endif %}
 
+    {% if survey.preparations %}
+        <div class="item preparations mb-3">
+            <a data-toggle="collapse" data-parent="#accordion" href="#preparations" aria-expanded="true" aria-controls="preparations">
+                {{ labels.preparations|default('Survey preparations'|trans) }}
+            </a>
+            <div id="preparations" class="show" role="tabpanel">
+                {{ survey.preparations|replace({'survey://all_questions': path('survey_questions', {id: survey.id})})|raw }}
+            </div>
+        </div>
     {% endif %}
 </div>
-<hr>
-{# TODO: Link to correct file #}
-<p><a href="/survey-questions.pdf"><i class="fa fa-download"></i> {{ 'Download questions as pdf'|trans }}</a></p>

@@ -51,6 +51,21 @@ class SurveyController extends Controller
     }
 
     /**
+     * @Route("/{id}/questions", name="survey_questions")
+     * @Method("GET")
+     *
+     * @param Survey $survey
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function questionsAction(Survey $survey)
+    {
+        return $this->render('survey/answers.html.twig', [
+            'survey' => $survey,
+        ]);
+    }
+
+    /**
      * @Route("/{id}/answer")
      * @Method("POST")
      *

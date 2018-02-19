@@ -44,6 +44,12 @@ class Survey
     private $instructions;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey", "answer"})
+     */
+    private $preparations;
+
+    /**
      * @ORM\Column(type="json_array")
      * @Groups({"survey", "answer"})
      */
@@ -257,6 +263,30 @@ class Survey
     public function getInstructions()
     {
         return $this->instructions;
+    }
+
+    /**
+     * Set preparations.
+     *
+     * @param string $preparations
+     *
+     * @return Survey
+     */
+    public function setPreparations($preparations)
+    {
+        $this->preparations = $preparations;
+
+        return $this;
+    }
+
+    /**
+     * Get preparations.
+     *
+     * @return string
+     */
+    public function getPreparations()
+    {
+        return $this->preparations;
     }
 
     /**
