@@ -46,7 +46,7 @@
                                 {{ form_row(form.description, {label: labels.answer.description|default(null)}) }}
 
                                 <button type="button" class="btn btn-primary btn-lg btn-block survey-next">{{ labels.start|default('Start survey' | trans) }}</button>
-
+                                <p class="mt-2"><b>{{ 'Warning'|trans }}</b> - {{ 'It is not possible to save until you finish the survey'|trans }}</p>
                             </section>
                         </div>
                     </div>
