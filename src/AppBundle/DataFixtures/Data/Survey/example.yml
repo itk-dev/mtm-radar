@@ -28,7 +28,7 @@ configuration:
     answer:
         labels:
             title: Overskrift
-            author: Udfyldt af
+            name: Udfyldt af
     labels:
         title: Hat og briller
         description: Formål

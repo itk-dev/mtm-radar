@@ -17,7 +17,12 @@ description: |
     tellus ut neque.  Nulla facilisis, risus a rhoncus fermentum,
     tellus tellus lacinia purus, et dictum nunc justo sit amet elit.
 
-author: John Doe
+name: John Doe
+company: The stuff company
+address: |
+    Some street
+    City of stuff
+documentationId: stuff-87
 
 replies:
     - value: 1
