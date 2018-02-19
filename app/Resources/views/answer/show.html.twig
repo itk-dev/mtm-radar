@@ -28,9 +28,20 @@
                                 <p><strong>{{ 'Answered by' | trans }}: </strong>{{ answer.name }}</p>
                             </div>
                         {% endif %}
-                        {% if answer.title %}
+                        {% if answer.company %}
                             <div class="col">
-                                <p><strong>{{ labels.answer.title|default('Title' | trans) }}: </strong>{{ answer.title }}</p>
+                                <p><strong>{{ 'Company' | trans }}: </strong>{{ answer.company }}</p>
+                            </div>
+                        {% endif %}
+                        {% if answer.documentationId %}
+                            <div class="col">
+                                <p><strong>{{ 'Documentation id' | trans }}: </strong>{{ answer.documentationId }}</p>
+                            </div>
+                        {% endif %}
+                        {% if answer.address %}
+                            <div class="col-12">
+                                <p><strong>{{ 'Address' | trans }}: </strong><br>
+                                    {{ answer.address }}</p>
                             </div>
                         {% endif %}
                         {% if answer.description %}

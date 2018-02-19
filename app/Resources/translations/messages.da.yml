@@ -27,7 +27,7 @@ Summary of your replies: Opsummering af dine svar
 Print answer: Udskriv besvarelsen
 Reply: Svar
 Reply %index%: Svar %index%
-by %author%: af %author%
+by %name%: af %name%
 Your answer has been saved: Din besvarelse er nu gemt
 Legend: Singaturforklaring
 Back: Forrige
@@ -44,7 +44,10 @@ All questions: Alle spørgsmål
 
 Answer: Besvarelse
 Answers: Besvarelser
-Author: Besvaret af
+Name: Navn
+Company: Firma
+Documentation id: eDoc-nummer
+Address: Adresse
 Change password: Skift adgangskode
 Created at: Oprettet
 Description: Beskrivelse
