@@ -102,3 +102,21 @@ easy_admin:
                           choices: &role_list
                               ROLE_USER: ROLE_USER
                               ROLE_ADMIN: ROLE_ADMIN
+
+        Setting:
+            controller: ItkDev\ConfigBundle\Controller\SettingController
+            class: ItkDev\ConfigBundle\Entity\Setting
+            disabled_actions: [new, delete]
+            list:
+                fields:
+                    - property: name
+                    - property: description
+                    - property: value
+                      label: Value
+                      template: '@ItkDevConfig/easy_admin/Setting/display_value.html.twig'
+
+            edit:
+                fields:
+                    - property: name
+                      type_options:
+                          disabled: true

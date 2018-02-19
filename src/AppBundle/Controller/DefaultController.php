@@ -17,6 +17,6 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->redirectToRoute('easyadmin');
+        return $this->render('default/index.html.twig');
     }
 }
