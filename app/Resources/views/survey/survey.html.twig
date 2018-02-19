@@ -125,9 +125,15 @@
     {{ parent() }}
     <script src="{{ asset('assets/dist/js/jquery.validate.min.js')}}"></script>
     {% include '_partials/survey_scripts.twig.html' %}
-    <script>
-        $(window).on('beforeunload', function(){
-            return {{ 'Are you sure you want to leave this page?'|trans | json_encode | raw }};
+    <script>(function ($) {
+        var dirty = false;
+        $('form :input').change(function() {
+            dirty = true;
+        });
+        $(window).on('beforeunload', function() {
+            if (dirty) {
+                return {{ 'Are you sure you want to leave this page?'|trans | json_encode | raw }};
+            }
         });
         $('[type="submit"]').on('click', function(){
             $(window).off('beforeunload');
@@ -135,5 +141,5 @@
         $(".close").on("click", function(e) {
             $("#validation-errors").hide();
         });
-    </script>
+    }(jQuery))</script>
 {% endblock %}
