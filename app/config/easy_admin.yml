@@ -75,7 +75,8 @@ easy_admin:
                     - property: survey
                     - property: title
                     - property: survey
-                    - property: author
+                    - property: name
+                    - property: company
                     - property: description
                     - property: createdAt
 

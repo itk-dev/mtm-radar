@@ -41,8 +41,11 @@
                                     <h1 class="title" >{{ survey.title }}</h1>
                                 </header>
 
-                                {{ form_row(form.author, {label: labels.answer.author|default(null)}) }}
-                                {{ form_row(form.title, {label: labels.answer.title|default(null)}) }}
+                                {{ form_row(form.name, {label: labels.answer.name|default(null)}) }}
+                                {{ form_row(form.company, {label: labels.answer.company|default(null)}) }}
+                                {{ form_row(form.documentationId, {label: labels.answer.documentationId|default(null)}) }}
+
+                                {{ form_row(form.address, {label: labels.answer.address|default(null)}) }}
                                 {{ form_row(form.description, {label: labels.answer.description|default(null)}) }}
 
                                 <button type="button" class="btn btn-primary btn-lg btn-block survey-next">{{ labels.start|default('Start survey' | trans) }}</button>

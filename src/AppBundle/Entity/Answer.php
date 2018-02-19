@@ -32,10 +32,28 @@ class Answer
      * @ORM\Column(type="string", length=255)
      * @Groups({"survey", "answer"})
      */
-    private $author;
+    private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"survey", "answer"})
+     */
+    private $company;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey", "answer"})
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"survey", "answer"})
+     */
+    private $documentationId;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"survey", "answer"})
      */
     private $title;
@@ -127,27 +145,82 @@ class Answer
     }
 
     /**
-     * Set author.
+     * Set name.
      *
-     * @param string $author
+     * @param string $name
      *
      * @return Answer
      */
-    public function setAuthor($author)
+    public function setName($name)
     {
-        $this->author = $author;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get author.
+     * Get name.
      *
      * @return string
      */
-    public function getAuthor()
+    public function getName()
     {
-        return $this->author;
+        return $this->name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * @param mixed $company
+     */
+    public function setCompany($company)
+    {
+        $this->company = $company;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddress()
+    {
+        return $this->address;
+        return $this;
+    }
+
+    /**
+     * @param mixed $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDocumentationId()
+    {
+        return $this->documentationId;
+    }
+
+    /**
+     * @param mixed $documentationId
+     */
+    public function setDocumentationId($documentationId)
+    {
+        $this->documentationId = $documentationId;
+
+        return $this;
     }
 
     /**
