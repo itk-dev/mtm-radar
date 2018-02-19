@@ -12,7 +12,7 @@
 
     <div class="content">
         {% if craue_setting('frontpage_content') %}
-            {{ craue_setting('frontpage_content') }}
+            {{ craue_setting('frontpage_content')|raw }}
         {% else %}
             {% set url = path('easyadmin', {entity: 'Setting', action: 'edit', 'id': 'frontpage_content'}) %}
             Go to <a href="{{ url }}">{{ url }}</a> and edit the frontpage content.
