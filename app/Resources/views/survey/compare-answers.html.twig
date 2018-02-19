@@ -22,7 +22,7 @@
                         <li class="list-group-item">
                             <label style="display: block">
                                 <input type="checkbox" class="answer-handle" data-index="{{ loop.index0 }}" checked/>
-                                <strong><span class="chart-label">{{ 'Reply %index%' | trans({'%index%': loop.index}) }}</span> – {{ 'by %author%' | trans({'%author%': answer.author}) }}</strong>
+                                <strong><span class="chart-label">{{ 'Reply %index%' | trans({'%index%': loop.index}) }}</span> – {{ 'by %name%' | trans({'%name%': answer.name}) }}</strong>
                                 {% if answer.title %}
                                     <br/>
                                     {{ labels.answer.title|default('Title' | trans) }}: {{ answer.title }}
@@ -38,7 +38,7 @@
 
                 <p class="lead break-page-print">{{ 'Summary of your replies' | trans }}</p>
 
-                {# @TODO: Show comparison of author, title and description? #}
+                {# @TODO: Show comparison of name, title and description? #}
                 {% for question in survey.questions %}
                     <section class="question mb-3" data-index="{{ loop.index0 }}" id="{{ loop.index0 }}">
                         <div class="row">

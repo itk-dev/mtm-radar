@@ -73,9 +73,11 @@ easy_admin:
                       label: action.edit
                 fields:
                     - property: survey
-                    - property: title
-                    - property: survey
-                    - property: author
+                    - property: name
+                    - property: company
+                    - property: documentationId
+                    - property: address
+                      template: address.html.twig
                     - property: description
                     - property: createdAt
 

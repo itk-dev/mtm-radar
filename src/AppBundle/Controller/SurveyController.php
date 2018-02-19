@@ -105,7 +105,7 @@ class SurveyController extends Controller
      * @Method("GET")
      *
      * @param Request $request
-     * @param Survey $survey
+     * @param Survey  $survey
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -216,15 +216,21 @@ class SurveyController extends Controller
         $answer->setReplies($replies);
 
         $form = $this->createFormBuilder($answer)
-            ->add('title', TextType::class, [
-                'label' => 'Title',
+            ->add('name', TextType::class, [
+                'label' => 'Name',
+            ])
+            ->add('company', TextType::class, [
+                'label' => 'Company',
+            ])
+            ->add('documentationId', TextType::class, [
+                'label' => 'Documentation id',
+            ])
+            ->add('address', TextareaType::class, [
+                'label' => 'Address',
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
                 'required' => false,
-            ])
-            ->add('author', TextType::class, [
-                'label' => 'Author',
             ])
             ->add('replies', CollectionType::class, [
                 'label' => 'Replies',

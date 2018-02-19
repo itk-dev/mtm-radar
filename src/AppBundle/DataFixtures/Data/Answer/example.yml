@@ -18,7 +18,12 @@ description: |
     tellus tellus lacinia purus, et dictum nunc justo sit amet elit.
 
 
-author: Jane Doe
+name: Jane Doe
+company: Stuff the bear
+address: |
+    Street of stuff
+    City of stuff
+documentationId: stuff-42
 
 replies:
     - value: 3

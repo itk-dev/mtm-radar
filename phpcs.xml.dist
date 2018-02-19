@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ruleset name="dokk1">
-  <description>PHP CodeSniffer configuration for Dokk1 Gæstehåndtering</description>
 
-  <file>app/</file>
-  <file>src/</file>
-  <file>tests/</file>
+<ruleset name="mtm-radar">
+    <description>PHP CodeSniffer configuration for aakb/mtm-radar</description>
 
-  <exclude-pattern>app/App(Cache|Kernel)\.php</exclude-pattern>
+    <file>app/</file>
+    <file>src/</file>
+    <file>tests/</file>
 
-  <!-- No warnings -->
-  <arg value="n"/>
-  <!-- Show progress -->
-  <arg value="p"/>
+		<exclude-pattern>app/App(Cache|Kernel)\.php</exclude-pattern>
 
-  <rule ref="PSR2"/>
+		<!-- No warnings -->
+		<arg value="n"/>
+		<!-- Show progress -->
+		<arg value="p"/>
+
+    <rule ref="vendor/squizlabs/php_codesniffer/src/Standards/PSR2"/>
 </ruleset>
