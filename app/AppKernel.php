@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Itk\Bundle\EasyAdminUserBundle\EasyAdminUserBundle(),
+            new ItkDev\DatabaseBundle\ItkDevDatabaseBundle(),
             new AppBundle\AppBundle(),
         ];
 

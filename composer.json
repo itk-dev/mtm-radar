@@ -27,6 +27,7 @@
         "egeloen/ckeditor-bundle": "^6.0",
         "friendsofphp/php-cs-fixer": "^2.10",
         "incenteev/composer-parameter-handler": "^2.1",
+        "itk-dev/database-bundle": "^1.1",
         "itk/easyadmin-user-bundle": "dev-feature/RADAR-17-admin-security",
         "javiereguiluz/easyadmin-bundle": "^1.17",
         "sensio/distribution-bundle": "^5.0",
