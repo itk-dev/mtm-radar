@@ -22,6 +22,8 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Itk\Bundle\EasyAdminUserBundle\EasyAdminUserBundle(),
             new ItkDev\DatabaseBundle\ItkDevDatabaseBundle(),
+            new Craue\ConfigBundle\CraueConfigBundle(),
+            new ItkDev\ConfigBundle\ItkDevConfigBundle(),
             new AppBundle\AppBundle(),
         ];
 

@@ -59,12 +59,7 @@ doctrine:
         user: '%database_user%'
         password: '%database_password%'
         charset: UTF8
-        # if using pdo_sqlite as your database driver:
-        #   1. add the path in parameters.yml
-        #     e.g. database_path: '%kernel.project_dir%/var/data/data.sqlite'
-        #   2. Uncomment database_path in parameters.yml.dist
-        #   3. Uncomment next line:
-        #path: '%database_path%'
+        schema_filter: ~^(?!craue_config_setting)~
 
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
@@ -88,3 +83,16 @@ swiftmailer:
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
+
+craue_config:
+    entity_name: ItkDev\ConfigBundle\Entity\Setting
+
+# Optionally, enable caching for craue/config-bundle (cf. https://github.com/craue/CraueConfigBundle/#enable-caching-optional)
+services:
+  craue_config_cache_provider:
+    class: Symfony\Component\Cache\Adapter\FilesystemAdapter
+    public: false
+    arguments:
+      - 'craue_config'
+      - 0
+      - '%kernel.cache_dir%'
