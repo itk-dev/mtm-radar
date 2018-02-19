@@ -1,6 +1,3 @@
 label.required:after {
   content: ' *';
   color: red; }
-
-.address {
-  white-space: pre; }

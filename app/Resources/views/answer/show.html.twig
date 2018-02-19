@@ -23,33 +23,29 @@
                 <p class="lead break-page-print">{{ 'Summary of your replies' | trans }}</p>
                 <section id="survey-author-info" class="mb-3">
                     <div class="row">
-                        {% if answer.name %}
-                            <div class="col">
-                                <p><strong>{{ 'Answered by' | trans }}: </strong>{{ answer.name }}</p>
-                            </div>
-                        {% endif %}
-                        {% if answer.company %}
-                            <div class="col">
-                                <p><strong>{{ 'Company' | trans }}: </strong>{{ answer.company }}</p>
-                            </div>
-                        {% endif %}
-                        {% if answer.documentationId %}
-                            <div class="col">
-                                <p><strong>{{ 'Documentation id' | trans }}: </strong>{{ answer.documentationId }}</p>
-                            </div>
-                        {% endif %}
-                        {% if answer.address %}
-                            <div class="col-12">
+
+                        <div class="col-md-4">
+                            {% if answer.name %}
+                                <p><strong>{{ 'Answered by' | trans }}: </strong><br>{{ answer.name }}</p>
+                            {% endif %}
+
+                            {% if answer.company %}
+                                <p><strong>{{ 'Company' | trans }}: </strong><br>{{ answer.company }}</p>
+                            {% endif %}
+                            {% if answer.documentationId %}
+                                <p><strong>{{ 'Documentation id' | trans }}: </strong><br>{{ answer.documentationId }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-8">
+                            {% if answer.address %}
                                 <p><strong>{{ 'Address' | trans }}: </strong><br>
                                     <span class="address">{{ answer.address }}</span></p>
-                            </div>
-                        {% endif %}
-                        {% if answer.description %}
-                            <div class="col-12">
+                            {% endif %}
+                            {% if answer.description %}
                                 <p><strong>{{ labels.answer.description|default('Description' | trans) }}: </strong><br>
                                     {{ answer.description }}</p>
-                            </div>
-                        {% endif %}
+                            {% endif %}
+                        </div>
                     </div>
                 </section>
                 {% for question in survey.questions %}
