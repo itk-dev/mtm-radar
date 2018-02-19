@@ -297,7 +297,7 @@ class Survey
     {
         $category = null;
         foreach ($this->getQuestions() as $question) {
-            if ($question->getCategory() !== null) {
+            if (null !== $question->getCategory()) {
                 $category = $question->getCategory();
             } else {
                 $question->setCategory($category);

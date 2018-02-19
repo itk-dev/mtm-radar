@@ -19,7 +19,7 @@ class LoadAnswer extends LoadData
             $criteria[$name] = $value;
         }
         $survey = $this->manager->getRepository(Survey::class)->findOneBy($criteria);
-        if ($survey === null) {
+        if (null === $survey) {
             throw new \RuntimeException('No such survey: '.json_encode($criteria));
         }
 

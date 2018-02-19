@@ -105,7 +105,7 @@ class SurveyController extends Controller
      * @Method("GET")
      *
      * @param Request $request
-     * @param Survey $survey
+     * @param Survey  $survey
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
