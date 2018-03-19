@@ -11,8 +11,8 @@ body {
 body main.container {
   padding: 60px 15px 0; }
 
-header .navbar {
-  img-max-height: 50px; }
+header .navbar img {
+  max-height: 50px; }
 
 .footer {
   position: absolute;
