@@ -51,6 +51,7 @@
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Ivory\\CKEditorBundle\\Composer\\CKEditorScriptHandler::install",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
@@ -101,7 +102,9 @@
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         },
-        "branch-alias": null
+        "branch-alias": null,
+        "ckeditor-tag": "4.8.0",
+        "ckeditor-clear": "drop"
     },
     "repositories": {
         "itk_easyadmin_user_bundle": {

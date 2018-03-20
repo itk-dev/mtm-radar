@@ -68,7 +68,7 @@ abstract class LoadData extends ContainerAwareFixture implements OrderedFixtureI
         $metadata = null;
         $idGenerator = null;
         $idGeneratorType = null;
-        if (null !== $entity->getId()) {
+        if (method_exists($entity, 'getId') && null !== $entity->getId()) {
             // Remove id generator and set id manually.
             $metadata = $this->manager->getClassMetadata(get_class($entity));
             $idGenerator = $metadata->idGenerator;
