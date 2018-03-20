@@ -9595,7 +9595,8 @@ a.text-dark:hover, a.text-dark:focus {
       left: 0; } }
   .logo img {
     margin-top: 1.5rem;
-    margin-bottom: 1.5rem; }
+    margin-bottom: 1.5rem;
+    height: 50px; }
 
 @media print {
   body, html {

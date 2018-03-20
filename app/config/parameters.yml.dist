@@ -4,7 +4,7 @@
 parameters:
     site_url: http://mtm-radar.vm
     site_name: MTM Radar
-    site_logo_url: /assets/images/logo.png
+    site_logo_url: /assets/images/AAK_02_venstrejusteret_sh.svg
     router.request_context.host: mtm-radar.vm
     database_host: 127.0.0.1
     database_port: ~
@@ -29,7 +29,7 @@ parameters:
     # Require comments on replies?
     survey.reply.comment_required: true
 
-    survey.logo.url: /assets/images/AAK_TM_venstre_70.png
+    survey.logo.url: /assets/images/AAK_02_venstrejusteret_sh.svg
     survey.logo.alt: Teknik og Miljø – Aarhus Kommune
 
     locale: da
