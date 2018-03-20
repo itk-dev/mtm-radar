@@ -16,8 +16,14 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-                        new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new JavierEguiluz\Bundle\EasyAdminBundle\EasyAdminBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new Itk\Bundle\EasyAdminUserBundle\EasyAdminUserBundle(),
+            new ItkDev\DatabaseBundle\ItkDevDatabaseBundle(),
+            new Craue\ConfigBundle\CraueConfigBundle(),
+            new ItkDev\ConfigBundle\ItkDevConfigBundle(),
             new AppBundle\AppBundle(),
         ];
 

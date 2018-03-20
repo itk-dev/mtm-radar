@@ -2,12 +2,15 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Survey
 {
@@ -17,36 +20,49 @@ class Survey
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="UUID")
-     * @Groups({"survey", "answers"})
+     * @Groups({"survey", "answer"})
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"survey", "answers"})
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Groups({"survey", "answer"})
      */
     private $title;
 
     /**
-     * @ORM\Column(type="text")
-     * @Groups({"survey", "answers"})
+     * @ORM\Column(type="text", nullable=false)
+     * @Assert\NotBlank()
+     * @Groups({"survey", "answer"})
      */
     private $description;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey", "answer"})
+     */
+    private $instructions;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey", "answer"})
+     */
+    private $preparations;
+
+    /**
      * @ORM\Column(type="json_array")
-     * @Groups({"survey", "answers"})
+     * @Groups({"survey", "answer"})
      */
     private $configuration;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Question", mappedBy="survey")
-     * @Groups({"survey", "answers"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Question", mappedBy="survey", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @Groups({"survey", "answer"})
      */
     private $questions;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Answers", mappedBy="survey")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Answer", mappedBy="survey", cascade={"remove"}, orphanRemoval=true)
      */
     private $answers;
 
@@ -55,8 +71,13 @@ class Survey
      */
     public function __construct()
     {
-        $this->questions = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->answers = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->questions = new ArrayCollection();
+        $this->answers = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle() ?? 'Survey#'.$this->getId();
     }
 
     /**
@@ -100,9 +121,10 @@ class Survey
      *
      * @return Survey
      */
-    public function addQuestion(\AppBundle\Entity\Question $question)
+    public function addQuestion(Question $question)
     {
         $this->questions[] = $question;
+        $question->setSurvey($this);
 
         return $this;
     }
@@ -112,9 +134,10 @@ class Survey
      *
      * @param \AppBundle\Entity\Question $question
      */
-    public function removeQuestion(\AppBundle\Entity\Question $question)
+    public function removeQuestion(Question $question)
     {
         $this->questions->removeElement($question);
+        $question->setSurvey(null);
     }
 
     /**
@@ -130,13 +153,14 @@ class Survey
     /**
      * Add answer.
      *
-     * @param \AppBundle\Entity\Answers $answer
+     * @param \AppBundle\Entity\Answer $answer
      *
      * @return Survey
      */
-    public function addAnswer(\AppBundle\Entity\Answers $answer)
+    public function addAnswer(Answer $answer)
     {
         $this->answers[] = $answer;
+        $answer->setSurvey($this);
 
         return $this;
     }
@@ -144,11 +168,12 @@ class Survey
     /**
      * Remove answer.
      *
-     * @param \AppBundle\Entity\Answers $answer
+     * @param \AppBundle\Entity\Answer $answer
      */
-    public function removeAnswer(\AppBundle\Entity\Answers $answer)
+    public function removeAnswer(Answer $answer)
     {
         $this->answers->removeElement($answer);
+        $answer->setSurvey(null);
     }
 
     /**
@@ -207,5 +232,95 @@ class Survey
     public function getConfiguration()
     {
         return $this->configuration;
+    }
+
+    public function getRating()
+    {
+        $configuration = $this->getConfiguration();
+
+        return isset($configuration['rating']) ? $configuration['rating'] : [];
+    }
+
+    /**
+     * Set instructions.
+     *
+     * @param string $instructions
+     *
+     * @return Survey
+     */
+    public function setInstructions($instructions)
+    {
+        $this->instructions = $instructions;
+
+        return $this;
+    }
+
+    /**
+     * Get instructions.
+     *
+     * @return string
+     */
+    public function getInstructions()
+    {
+        return $this->instructions;
+    }
+
+    /**
+     * Set preparations.
+     *
+     * @param string $preparations
+     *
+     * @return Survey
+     */
+    public function setPreparations($preparations)
+    {
+        $this->preparations = $preparations;
+
+        return $this;
+    }
+
+    /**
+     * Get preparations.
+     *
+     * @return string
+     */
+    public function getPreparations()
+    {
+        return $this->preparations;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function setQuestionCategories()
+    {
+        $category = null;
+        foreach ($this->getQuestions() as $question) {
+            if (null !== $question->getCategory()) {
+                $category = $question->getCategory();
+            } else {
+                $question->setCategory($category);
+            }
+        }
+    }
+
+    public function getCategoryRanges()
+    {
+        $ranges = [];
+        $questions = $this->getQuestions();
+        $start = 0;
+        while ($start < count($questions)) {
+            $category = $questions[$start]->getCategory();
+            $end = $start;
+            while ($end < count($questions) && $questions[$end]->getCategory() === $category) {
+                ++$end;
+            }
+            $key = $start.($start === $end - 1 ? '' : '-'.($end - 1));
+            $ranges[$key] = $category;
+            $start = $end;
+        }
+
+        return $ranges;
     }
 }

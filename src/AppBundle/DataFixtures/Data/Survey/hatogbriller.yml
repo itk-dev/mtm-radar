@@ -1,0 +1,240 @@
+title: Hat og briller
+
+description: |
+    Non nobis, Domine, non nobis, sed nomini tuo da gloriam.
+    Non nobis, Domine, non nobis, sed nomini tuo da gloriam.
+    Non nobis, Domine, non nobis, sed nomini tuo da gloriam.
+
+configuration:
+    min: 1
+    rating:
+        - Strongly disagree
+        - Disagree
+        - Neutral
+        - Agree
+        - Strongly agree
+
+questions:
+    -
+        title: Klog vækst
+        text: Non nobis, Domine, non nobis, sed nomini tuo da gloriam.
+
+    -
+        title: Forbundethed
+        text: Yada, yada, yada, …
+
+    -
+        title: Bidrag til nærområde
+        text: |
+            Pellentesque dapibus suscipit ligula.  Donec posuere augue
+            in quam.  Etiam vel tortor sodales tellus ultricies
+            commodo.  Suspendisse potenti.  Aenean in sem ac leo
+            mollis blandit.  Donec neque quam, dignissim in, mollis
+            nec, sagittis eu, wisi.  Phasellus lacus.  Etiam laoreet
+            quam sed arcu.  Phasellus at dui in ligula mollis
+            ultricies.  Integer placerat tristique nisl.  Praesent
+            augue.  Fusce commodo.  Vestibulum convallis, lorem a
+            tempus semper, dui dui euismod elit, vitae placerat urna
+            tortor vitae lacus.  Nullam libero mauris, consequat quis,
+            varius et, dictum id, arcu.  Mauris mollis tincidunt
+            felis.  Aliquam feugiat tellus ut neque.  Nulla facilisis,
+            risus a rhoncus fermentum, tellus tellus lacinia purus, et
+            dictum nunc justo sit amet elit.
+
+    -
+        title: Væsentlige kulturværdier
+        text: |
+            Pellentesque dapibus suscipit ligula.  Donec posuere augue
+            in quam.  Etiam vel tortor sodales tellus ultricies
+            commodo.  Suspendisse potenti.  Aenean in sem ac leo
+            mollis blandit.  Donec neque quam, dignissim in, mollis
+            nec, sagittis eu, wisi.  Phasellus lacus.  Etiam laoreet
+            quam sed arcu.  Phasellus at dui in ligula mollis
+            ultricies.  Integer placerat tristique nisl.  Praesent
+            augue.  Fusce commodo.  Vestibulum convallis, lorem a
+            tempus semper, dui dui euismod elit, vitae placerat urna
+            tortor vitae lacus.  Nullam libero mauris, consequat quis,
+            varius et, dictum id, arcu.  Mauris mollis tincidunt
+            felis.  Aliquam feugiat tellus ut neque.  Nulla facilisis,
+            risus a rhoncus fermentum, tellus tellus lacinia purus, et
+            dictum nunc justo sit amet elit.
+
+    -
+        title: Opholdsarealer af høj kvalitet
+        text: |
+            Pellentesque dapibus suscipit ligula.  Donec posuere augue
+            in quam.  Etiam vel tortor sodales tellus ultricies
+            commodo.  Suspendisse potenti.  Aenean in sem ac leo
+            mollis blandit.  Donec neque quam, dignissim in, mollis
+            nec, sagittis eu, wisi.  Phasellus lacus.  Etiam laoreet
+            quam sed arcu.  Phasellus at dui in ligula mollis
+            ultricies.  Integer placerat tristique nisl.  Praesent
+            augue.  Fusce commodo.  Vestibulum convallis, lorem a
+            tempus semper, dui dui euismod elit, vitae placerat urna
+            tortor vitae lacus.  Nullam libero mauris, consequat quis,
+            varius et, dictum id, arcu.  Mauris mollis tincidunt
+            felis.  Aliquam feugiat tellus ut neque.  Nulla facilisis,
+            risus a rhoncus fermentum, tellus tellus lacinia purus, et
+            dictum nunc justo sit amet elit.
+
+    -
+        title: En grønnere by
+        text: |
+            Pellentesque dapibus suscipit ligula.  Donec posuere augue
+            in quam.  Etiam vel tortor sodales tellus ultricies
+            commodo.  Suspendisse potenti.  Aenean in sem ac leo
+            mollis blandit.  Donec neque quam, dignissim in, mollis
+            nec, sagittis eu, wisi.  Phasellus lacus.  Etiam laoreet
+            quam sed arcu.  Phasellus at dui in ligula mollis
+            ultricies.  Integer placerat tristique nisl.  Praesent
+            augue.  Fusce commodo.  Vestibulum convallis, lorem a
+            tempus semper, dui dui euismod elit, vitae placerat urna
+            tortor vitae lacus.  Nullam libero mauris, consequat quis,
+            varius et, dictum id, arcu.  Mauris mollis tincidunt
+            felis.  Aliquam feugiat tellus ut neque.  Nulla facilisis,
+            risus a rhoncus fermentum, tellus tellus lacinia purus, et
+            dictum nunc justo sit amet elit.
+
+    -
+        title: Dyrke fitidsinteresser
+        text: |
+            Pellentesque dapibus suscipit ligula.  Donec posuere augue
+            in quam.  Etiam vel tortor sodales tellus ultricies
+            commodo.  Suspendisse potenti.  Aenean in sem ac leo
+            mollis blandit.  Donec neque quam, dignissim in, mollis
+            nec, sagittis eu, wisi.  Phasellus lacus.  Etiam laoreet
+            quam sed arcu.  Phasellus at dui in ligula mollis
+            ultricies.  Integer placerat tristique nisl.  Praesent
+            augue.  Fusce commodo.  Vestibulum convallis, lorem a
+            tempus semper, dui dui euismod elit, vitae placerat urna
+            tortor vitae lacus.  Nullam libero mauris, consequat quis,
+            varius et, dictum id, arcu.  Mauris mollis tincidunt
+            felis.  Aliquam feugiat tellus ut neque.  Nulla facilisis,
+            risus a rhoncus fermentum, tellus tellus lacinia purus, et
+            dictum nunc justo sit amet elit.
+
+    -
+        title: Sammenhæng til nærområde
+        text: |
+            Pellentesque dapibus suscipit ligula.  Donec posuere augue
+            in quam.  Etiam vel tortor sodales tellus ultricies
+            commodo.  Suspendisse potenti.  Aenean in sem ac leo
+            mollis blandit.  Donec neque quam, dignissim in, mollis
+            nec, sagittis eu, wisi.  Phasellus lacus.  Etiam laoreet
+            quam sed arcu.  Phasellus at dui in ligula mollis
+            ultricies.  Integer placerat tristique nisl.  Praesent
+            augue.  Fusce commodo.  Vestibulum convallis, lorem a
+            tempus semper, dui dui euismod elit, vitae placerat urna
+            tortor vitae lacus.  Nullam libero mauris, consequat quis,
+            varius et, dictum id, arcu.  Mauris mollis tincidunt
+            felis.  Aliquam feugiat tellus ut neque.  Nulla facilisis,
+            risus a rhoncus fermentum, tellus tellus lacinia purus, et
+            dictum nunc justo sit amet elit.
+
+    -
+        title: Fortætning med kvalitet
+        text: |
+            Pellentesque dapibus suscipit ligula.  Donec posuere augue
+            in quam.  Etiam vel tortor sodales tellus ultricies
+            commodo.  Suspendisse potenti.  Aenean in sem ac leo
+            mollis blandit.  Donec neque quam, dignissim in, mollis
+            nec, sagittis eu, wisi.  Phasellus lacus.  Etiam laoreet
+            quam sed arcu.  Phasellus at dui in ligula mollis
+            ultricies.  Integer placerat tristique nisl.  Praesent
+            augue.  Fusce commodo.  Vestibulum convallis, lorem a
+            tempus semper, dui dui euismod elit, vitae placerat urna
+            tortor vitae lacus.  Nullam libero mauris, consequat quis,
+            varius et, dictum id, arcu.  Mauris mollis tincidunt
+            felis.  Aliquam feugiat tellus ut neque.  Nulla facilisis,
+            risus a rhoncus fermentum, tellus tellus lacinia purus, et
+            dictum nunc justo sit amet elit.
+
+    -
+        title: Varierede boligtyper
+        text: |
+            Pellentesque dapibus suscipit ligula.  Donec posuere augue
+            in quam.  Etiam vel tortor sodales tellus ultricies
+            commodo.  Suspendisse potenti.  Aenean in sem ac leo
+            mollis blandit.  Donec neque quam, dignissim in, mollis
+            nec, sagittis eu, wisi.  Phasellus lacus.  Etiam laoreet
+            quam sed arcu.  Phasellus at dui in ligula mollis
+            ultricies.  Integer placerat tristique nisl.  Praesent
+            augue.  Fusce commodo.  Vestibulum convallis, lorem a
+            tempus semper, dui dui euismod elit, vitae placerat urna
+            tortor vitae lacus.  Nullam libero mauris, consequat quis,
+            varius et, dictum id, arcu.  Mauris mollis tincidunt
+            felis.  Aliquam feugiat tellus ut neque.  Nulla facilisis,
+            risus a rhoncus fermentum, tellus tellus lacinia purus, et
+            dictum nunc justo sit amet elit.
+
+    -
+        title: Bæredygtig transport
+        text: |
+            Pellentesque dapibus suscipit ligula.  Donec posuere augue
+            in quam.  Etiam vel tortor sodales tellus ultricies
+            commodo.  Suspendisse potenti.  Aenean in sem ac leo
+            mollis blandit.  Donec neque quam, dignissim in, mollis
+            nec, sagittis eu, wisi.  Phasellus lacus.  Etiam laoreet
+            quam sed arcu.  Phasellus at dui in ligula mollis
+            ultricies.  Integer placerat tristique nisl.  Praesent
+            augue.  Fusce commodo.  Vestibulum convallis, lorem a
+            tempus semper, dui dui euismod elit, vitae placerat urna
+            tortor vitae lacus.  Nullam libero mauris, consequat quis,
+            varius et, dictum id, arcu.  Mauris mollis tincidunt
+            felis.  Aliquam feugiat tellus ut neque.  Nulla facilisis,
+            risus a rhoncus fermentum, tellus tellus lacinia purus, et
+            dictum nunc justo sit amet elit.
+
+    -
+        title: Klimaeffekt
+        text: |
+            Pellentesque dapibus suscipit ligula.  Donec posuere augue
+            in quam.  Etiam vel tortor sodales tellus ultricies
+            commodo.  Suspendisse potenti.  Aenean in sem ac leo
+            mollis blandit.  Donec neque quam, dignissim in, mollis
+            nec, sagittis eu, wisi.  Phasellus lacus.  Etiam laoreet
+            quam sed arcu.  Phasellus at dui in ligula mollis
+            ultricies.  Integer placerat tristique nisl.  Praesent
+            augue.  Fusce commodo.  Vestibulum convallis, lorem a
+            tempus semper, dui dui euismod elit, vitae placerat urna
+            tortor vitae lacus.  Nullam libero mauris, consequat quis,
+            varius et, dictum id, arcu.  Mauris mollis tincidunt
+            felis.  Aliquam feugiat tellus ut neque.  Nulla facilisis,
+            risus a rhoncus fermentum, tellus tellus lacinia purus, et
+            dictum nunc justo sit amet elit.
+
+    -
+        title: En blandet by
+        text: |
+            Pellentesque dapibus suscipit ligula.  Donec posuere augue
+            in quam.  Etiam vel tortor sodales tellus ultricies
+            commodo.  Suspendisse potenti.  Aenean in sem ac leo
+            mollis blandit.  Donec neque quam, dignissim in, mollis
+            nec, sagittis eu, wisi.  Phasellus lacus.  Etiam laoreet
+            quam sed arcu.  Phasellus at dui in ligula mollis
+            ultricies.  Integer placerat tristique nisl.  Praesent
+            augue.  Fusce commodo.  Vestibulum convallis, lorem a
+            tempus semper, dui dui euismod elit, vitae placerat urna
+            tortor vitae lacus.  Nullam libero mauris, consequat quis,
+            varius et, dictum id, arcu.  Mauris mollis tincidunt
+            felis.  Aliquam feugiat tellus ut neque.  Nulla facilisis,
+            risus a rhoncus fermentum, tellus tellus lacinia purus, et
+            dictum nunc justo sit amet elit.
+
+    -
+        title: Samskabelse
+        text: |
+            Pellentesque dapibus suscipit ligula.  Donec posuere augue
+            in quam.  Etiam vel tortor sodales tellus ultricies
+            commodo.  Suspendisse potenti.  Aenean in sem ac leo
+            mollis blandit.  Donec neque quam, dignissim in, mollis
+            nec, sagittis eu, wisi.  Phasellus lacus.  Etiam laoreet
+            quam sed arcu.  Phasellus at dui in ligula mollis
+            ultricies.  Integer placerat tristique nisl.  Praesent
+            augue.  Fusce commodo.  Vestibulum convallis, lorem a
+            tempus semper, dui dui euismod elit, vitae placerat urna
+            tortor vitae lacus.  Nullam libero mauris, consequat quis,
+            varius et, dictum id, arcu.  Mauris mollis tincidunt
+            felis.  Aliquam feugiat tellus ut neque.  Nulla facilisis,
+            risus a rhoncus fermentum, tellus tellus lacinia purus, et
+            dictum nunc justo sit amet elit.

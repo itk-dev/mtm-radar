@@ -1,0 +1,14 @@
+.easyadmin {
+	&.edit-survey {
+		// Hide number column in question list.
+		.field-question {
+			> .control-label {
+				display: none;
+			}
+
+			> div {
+				width: 100%;
+			}
+		}
+	}
+}

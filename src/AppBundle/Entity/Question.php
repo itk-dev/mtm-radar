@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -22,25 +23,39 @@ class Question
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Survey", inversedBy="questions")
+     * @ORM\JoinColumn(name="survey_id", referencedColumnName="id", nullable=false)
      */
     private $survey;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"survey", "answers"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"survey", "answer"})
+     */
+    private $category;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Assert\NotBlank()
+     * @Groups({"survey", "answer"})
      */
     private $title;
 
     /**
-     * @ORM\Column(type="text")
-     * @Groups({"survey", "answers"})
+     * @ORM\Column(type="text", nullable=false)
+     * @Assert\NotBlank()
+     * @Groups({"survey", "answer"})
      */
     private $text;
+
+    public function __toString()
+    {
+        return $this->getSurvey().' - '.$this->getTitle();
+    }
 
     /**
      * Get id.
      *
-     * @return guid
+     * @return string
      */
     public function getId()
     {
@@ -78,7 +93,7 @@ class Question
      *
      * @return Question
      */
-    public function setSurvey(\AppBundle\Entity\Survey $survey = null)
+    public function setSurvey(Survey $survey = null)
     {
         $this->survey = $survey;
 
@@ -117,5 +132,29 @@ class Question
     public function getText()
     {
         return $this->text;
+    }
+
+    /**
+     * Set category.
+     *
+     * @param string $category
+     *
+     * @return Question
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category.
+     *
+     * @return string
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }

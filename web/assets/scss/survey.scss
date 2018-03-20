@@ -1,0 +1,7 @@
+// Survey
+label.required {
+    &:after {
+        content: ' *';
+        color: red;
+    }
+}

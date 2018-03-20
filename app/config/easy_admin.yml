@@ -1,20 +1,122 @@
+ivory_ck_editor:
+    input_sync: true
+    default_config: base_config
+    configs:
+        base_config:
+            toolbar:
+                -
+                    name: "styles"
+                    items: ['Format', 'Bold', 'Italic', 'BulletedList', 'Link', 'Unlink']
+
 easy_admin:
+    site_name: '%site_name%'
+    design:
+        assets:
+            css:
+                - 'assets/dist/css/easyadmin.css'
+
     entities:
         Survey:
             class: AppBundle\Entity\Survey
+            list:
+                actions:
+                    - shareSurvey
+                    - show
+                    - edit
+                    - delete
+
+                fields:
+                    - property: title
+                      # template: share.html.twig
+                    - property: description
+                    - property: questions
+                    - property: answers
+                      template: answers.html.twig
+                    - property: createdAt
+
+            show:
+                fields:
+                    - property: title
+                    - property: answers
+                      template: answers.html.twig
+
             form:
                 fields:
                     - property: title
                     - property: description
+                      type: ckeditor
+                    - property: instructions
+                      type: ckeditor
+                    - property: preparations
+                      type: ckeditor
+                      help: 'Use <code>survey://all_questions</code> to insert the url to all survey questions'
                     - property: configuration
-                      type: AppBundle\Form\ConfigurationType
+                      type: AppBundle\Form\Type\ConfigurationType
                     - property: questions
                       type: collection
                       type_options:
-                        entry_type: AppBundle\Form\QuestionType
+                        entry_type: AppBundle\Form\Type\QuestionType
                         by_reference: false
                         required: true
                       embedded: true
 
-        Answers:
-            class: AppBundle\Entity\Answers
+        Answer:
+            class: AppBundle\Entity\Answer
+            disabled_actions: [edit, delete]
+            list:
+                actions:
+                    - name: answer_show
+                      type: route
+                      label: action.show
+                    - name: answer_edit
+                      type: route
+                      label: action.edit
+                fields:
+                    - property: survey
+                    - property: name
+                    - property: company
+                    - property: documentationId
+                    - property: address
+                      template: address.html.twig
+                    - property: description
+                    - property: createdAt
+
+        User:
+            class: Itk\Bundle\EasyAdminUserBundle\Entity\User
+            list:
+                fields:
+                    - property: email
+                    - property: roles
+                    - property: last_login
+                      type: datetime
+
+            form:
+                fields:
+                    - property: email
+                      type: email
+                    - property: roles
+                      type: choice
+                      type_options:
+                          multiple: true
+                          expanded: true
+                          choices: &role_list
+                              ROLE_USER: ROLE_USER
+                              ROLE_ADMIN: ROLE_ADMIN
+
+        Setting:
+            controller: ItkDev\ConfigBundle\Controller\SettingController
+            class: ItkDev\ConfigBundle\Entity\Setting
+            disabled_actions: [new, delete]
+            list:
+                fields:
+                    - property: name
+                    - property: description
+                    - property: value
+                      label: Value
+                      template: '@ItkDevConfig/easy_admin/Setting/display_value.html.twig'
+
+            edit:
+                fields:
+                    - property: name
+                      type_options:
+                          disabled: true

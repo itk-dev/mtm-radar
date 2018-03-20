@@ -4,46 +4,28 @@ namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Question;
 use AppBundle\Entity\Survey;
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Yaml\Yaml;
 
-class LoadSurvey extends AbstractFixture implements OrderedFixtureInterface
+class LoadSurvey extends LoadData
 {
-    public function load(ObjectManager $manager)
-    {
-        $finder = (new Finder())->files()->name('*.yml')->in(__DIR__.'/../Survey');
-        foreach ($finder as $file) {
-            $yaml = file_get_contents($file->getRealPath());
-            $data = Yaml::parse($yaml, Yaml::PARSE_OBJECT_FOR_MAP);
-            echo $file->getFilename(), PHP_EOL;
-
-            $survey = new Survey();
-            $survey
-                ->setTitle($data->title)
-                ->setDescription($data->description)
-                ->setConfiguration([
-                    'min' => $data->min,
-                    'rating' => $data->rating,
-                ]);
-
-            foreach ($data->questions as $item) {
-                $question = new Question();
-                $question
-                    ->setSurvey($survey)
-                    ->setTitle($item->title ?? '')
-                    ->setText($item->text ?? '');
-                $manager->persist($question);
-            }
-            $manager->persist($survey);
-        }
-        $manager->flush();
-    }
-
     public function getOrder()
     {
-        return 1;
+        return 2;
+    }
+
+    protected function loadItem($data)
+    {
+        $survey = new Survey();
+        foreach ($data['questions'] as $item) {
+            $question = $this->setValues(new Question(), $item)
+                ->setSurvey($survey);
+            $survey->addQuestion($question);
+        }
+        unset($data['questions']);
+
+        $this->setValue($survey, 'configuration', $data['configuration']);
+        unset($data['configuration']);
+
+        $survey = $this->setValues($survey, $data);
+        $this->persist($survey);
     }
 }

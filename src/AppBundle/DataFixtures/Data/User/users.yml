@@ -1,0 +1,11 @@
+-
+    email: admin@example.com
+    plain_password: password
+    roles: [ROLE_ADMIN]
+    enabled: true
+
+-
+    email: user@example.com
+    plain_password: password
+    roles: [ROLE_USER]
+    enabled: true
