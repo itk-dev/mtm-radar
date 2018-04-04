@@ -73,8 +73,8 @@
                                 {% set form_field = form.replies[loop.index0] %}
                                 {# use custom "block choice_widget_expanded" (see above) to render radio buttons #}
                                 {% form_theme form_field.value _self %}
-                                {{ form_row(form_field.value, {label: labels.answer.reply.value|default(null)}) }}
-                                {{ form_row(form_field.comment, {label: labels.answer.reply.comment|default(null)}) }}
+                                {{ form_row(form_field.value, {label: labels.answer.reply.value|default('Reply')}) }}
+                                {{ form_row(form_field.comment, {label: labels.answer.reply.comment|default('Comment')}) }}
                             </div>
                             <div class="row prev-next-btns">
                                 <div class="col col-md-6">
