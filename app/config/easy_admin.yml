@@ -82,7 +82,7 @@ easy_admin:
                     - property: createdAt
 
         User:
-            class: Itk\Bundle\EasyAdminUserBundle\Entity\User
+            class: AppBundle\Entity\User
             list:
                 fields:
                     - property: email
