@@ -2,8 +2,8 @@
 
 namespace AppBundle\Controller;
 
-use Itk\Bundle\EasyAdminUserBundle\Traits\EasyAdminControllerUserManager;
-use JavierEguiluz\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
+use ItkDev\EasyAdminUserBundle\Traits\EasyAdminControllerUserManager;
 
 class AdminController extends BaseAdminController
 {
