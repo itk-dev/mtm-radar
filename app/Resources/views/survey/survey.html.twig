@@ -8,10 +8,10 @@
 {# @see: https://getbootstrap.com/docs/4.0/components/buttons/#checkbox-and-radio-buttons #}
 {% block choice_widget_expanded -%}
     <div class="replies">
-        <div class="btn-group choices" data-toggle="buttons">
+        <div class="btn-group btn-group-toggle choices" data-toggle="buttons">
             {% for choice in choices %}
                 {% set is_checked = choice is selectedchoice(value) %}
-                <label class="btn btn-default reply-index-{{ loop.index0 }} reply-value-{{ choice.value }} {{ is_checked ? 'active' }}">
+                <label class="btn btn-secondary reply-index-{{ loop.index0 }} reply-value-{{ choice.value }} {{ is_checked ? 'active' }}">
                     <input type="radio" name="{{ loop.parent.full_name }}" value="{{ choice.value }}" autocomplete="off" {% if is_checked %}checked{% endif %} required/> {{ choice.label }}
                 </label>
             {% endfor %}
