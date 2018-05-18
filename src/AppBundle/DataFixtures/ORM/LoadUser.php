@@ -2,7 +2,7 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use Itk\Bundle\EasyAdminUserBundle\Entity\User;
+use AppBundle\Entity\User;
 
 class LoadUser extends LoadData
 {

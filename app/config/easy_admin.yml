@@ -23,7 +23,7 @@ easy_admin:
                     - shareSurvey
                     - show
                     - edit
-                    - delete
+                    - '-delete'
 
                 fields:
                     - property: title
@@ -35,6 +35,9 @@ easy_admin:
                     - property: createdAt
 
             show:
+                actions:
+                    - '-delete'
+
                 fields:
                     - property: title
                     - property: answers
@@ -62,7 +65,7 @@ easy_admin:
 
         Answer:
             class: AppBundle\Entity\Answer
-            disabled_actions: [edit, delete]
+            disabled_actions: [edit]
             list:
                 actions:
                     - name: answer_show
