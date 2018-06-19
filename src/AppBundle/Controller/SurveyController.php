@@ -113,6 +113,18 @@ class SurveyController extends Controller
     {
         $answerIds = $request->get('answers');
         $answers = $this->entityManager->getRepository(Answer::class)->findBy(['id' => $answerIds]);
+        usort($answers, function (Answer $a, Answer $b) use ($answerIds) {
+            $indexA = array_search($a->getId(), $answerIds, true) ?: 0;
+            $indexB = array_search($b->getId(), $answerIds, true) ?: 0;
+
+            if ($indexA < $indexB) {
+                return -1;
+            } elseif ($indexB < $indexA) {
+                return 1;
+            }
+
+            return 0;
+        });
         foreach ($answers as $answer) {
             if ($survey !== $answer->getSurvey()) {
                 return new BadRequestHttpException('Answers do not belong to same survey.');
