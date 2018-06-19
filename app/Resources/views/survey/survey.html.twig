@@ -113,7 +113,10 @@
                 {% include '_partials/category_ranges.html.twig' %}
 
                 {% include '_partials/chart_legend.html.twig' %}
+
+                <p><a href="{{ path('survey_questions', {id: survey.id}) }}" target="_blank">Se alle spørgsmål</a></p>
             </div>
+
             {% include '_partials/logo.html.twig' %}
         </div>
     </div>
