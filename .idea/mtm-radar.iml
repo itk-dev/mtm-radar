@@ -40,7 +40,6 @@
           <root url="file://$MODULE_DIR$/vendor/craue/config-bundle" />
           <root url="file://$MODULE_DIR$/vendor/egulias/email-validator" />
           <root url="file://$MODULE_DIR$/vendor/friendsofphp/php-cs-fixer" />
-          <root url="file://$MODULE_DIR$/vendor/gecko-packages/gecko-php-unit" />
           <root url="file://$MODULE_DIR$/vendor/itk-dev/config-bundle" />
           <root url="file://$MODULE_DIR$/vendor/itk-dev/database-bundle" />
           <root url="file://$MODULE_DIR$/vendor/php-cs-fixer/diff" />
@@ -51,7 +50,6 @@
           <root url="file://$MODULE_DIR$/vendor/craue/config-bundle" />
           <root url="file://$MODULE_DIR$/vendor/egulias/email-validator" />
           <root url="file://$MODULE_DIR$/vendor/friendsofphp/php-cs-fixer" />
-          <root url="file://$MODULE_DIR$/vendor/gecko-packages/gecko-php-unit" />
           <root url="file://$MODULE_DIR$/vendor/itk-dev/config-bundle" />
           <root url="file://$MODULE_DIR$/vendor/itk-dev/database-bundle" />
           <root url="file://$MODULE_DIR$/vendor/php-cs-fixer/diff" />
