@@ -49,7 +49,7 @@
 
                 <button class="btn btn-default" type="submit">{{ 'Compare answers' | trans }}</button>
             </form>
-            <script src="{{ asset('assets/js/tablesort.min.js') }}"></script>
+            <script src="{{ asset('assets/dist/js/tablesort.min.js') }}"></script>
             <script>(function ($) {
                     var min = {{ requiredAnswers.min | json_encode | raw }},
                         max = {{ requiredAnswers.max | json_encode | raw }};
