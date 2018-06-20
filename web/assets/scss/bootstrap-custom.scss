@@ -265,6 +265,17 @@ h3{
                 margin-right: .5rem;
             }
         }
+
+        &.survey-frontpage {
+            @include media-breakpoint-up(md) {
+                padding-left: 3rem;
+            }
+            background-color: $gray-100;
+            &:hover {
+                background-color: darken($gray-200, 5%)
+            }
+        }
+
         &.survey-next {
             @include media-breakpoint-up(md) {
                 padding-right: 3rem;
