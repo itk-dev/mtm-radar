@@ -14,18 +14,27 @@
         {% if value %}
             <form id="survey-answers" action="{{ path('survey_compare_answers', {id: item.id}) }}">
                 <table class="table">
+                    <thead>
+                        <tr>
+                            <th data-sort-method="none"/>
+                            {# <th>{{ 'Title'| trans }}</th> #}
+                            <th>{{ 'Name'| trans }}</th>
+                            <th>{{ 'Company'| trans }}</th>
+                            <th>{{ 'Documentation id'| trans }}</th>
+                            <th data-sort-default>{{ 'Created at'| trans }}</th>
+                            <th/>
+                        </tr>
+                    </thead>
                     {% for answer in value %}
                         <tr>
                             <td>
                                 <input type="checkbox" name="answers[]" value="{{ answer.id }}" />
                             </td>
-                            <td>
-                                <a href="{{ path('answer_show', {id: answer.id}) }}">
-                                    {{ answer.title }}
-                                </a>
-                            </td>
+                            {# <td>{{ answer.title }}</td> #}
                             <td>{{ answer.name }}</td>
-                            <td>{{ answer.createdAt | date }}</td>
+                            <td>{{ answer.company }}</td>
+                            <td>{{ answer.documentationId }}</td>
+                            <td data-sort="{{ answer.createdAt | date('YmdHisP') }}">{{ answer.createdAt | date }}</td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -40,6 +49,7 @@
 
                 <button class="btn btn-default" type="submit">{{ 'Compare answers' | trans }}</button>
             </form>
+            <script src="{{ asset('assets/dist/js/tablesort.min.js') }}"></script>
             <script>(function ($) {
                     var min = {{ requiredAnswers.min | json_encode | raw }},
                         max = {{ requiredAnswers.max | json_encode | raw }};
@@ -51,6 +61,10 @@
                         } else {
                             $('#select-answers-message').removeClass('alert-error').addClass('alert-info');
                         }
+                    });
+
+                    $(function() {
+                        new Tablesort($('#survey-answers table')[0]);
                     });
                 }(jQuery))</script>
         {% else %}

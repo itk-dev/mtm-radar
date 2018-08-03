@@ -151,6 +151,11 @@
             }
         };
 
+        var frontpage = function () {
+            index = 0;
+            showQuestion();
+        };
+
         if (typeof surveyReplies !== 'undefined') {
             var labels = $('.answer-handle').map(function() {
                 return $.trim($(this).parent().find('.chart-label').text());
@@ -188,6 +193,7 @@
         } else {
             survey.find('.survey-prev').on('click', prev);
             survey.find('.survey-next').on('click', next);
+            survey.find('.survey-frontpage').on('click', frontpage);
             survey.find('input[type="radio"]').on('change', function () {
                 var index = $(this).closest('[data-index]').data('index');
                 updateReply(index, $(this).val());

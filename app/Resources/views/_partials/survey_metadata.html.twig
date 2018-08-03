@@ -36,4 +36,15 @@
             </div>
         {% endif %}
     {% endif %}
+
+    {% if craue_setting('gdpr_message') %}
+        <div class="item gdpr mb-3">
+            <a data-toggle="collapse" data-parent="#accordion" href="#gdpr" aria-expanded="false" aria-controls="gdpr">
+                {{ labels.gdpr|default('GDPR'|trans) }}
+            </a>
+            <div id="gdpr" class="collapse" role="tabpanel">
+                {{ craue_setting('gdpr_message') | raw }}
+            </div>
+        </div>
+    {% endif %}
 </div>

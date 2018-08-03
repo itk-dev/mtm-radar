@@ -12,6 +12,7 @@
 Comment: Kommentarer #Uddyb/begrund dit svar
 Next question: Næste
 Previous question: Forrige
+Go to frontpage: Til startsiden
 Save answer: Gem besvarelse
 Please fill in all required fields: Udfyld venligst alle felter
 Start survey: Start spørgeskema
@@ -46,7 +47,7 @@ Answers: Besvarelser
 Name: Navn
 Company: Firma
 Documentation id: eDoc-nummer
-Address: Adresse
+Address: Adresse på projektet
 Change password: Skift adgangskode
 Created at: Oprettet
 Description: Beskrivelse
@@ -84,4 +85,5 @@ Text: Tekst
 
 Download questions as pdf: Hent spørgsmålene som pdf
 Warning: Bemærk
-It is not possible to save until you finish the survey: Det er ikke muligt at gemme før du har besvaret alle spørgsmål.
+It is not possible to save until you finish the survey: Det er ikke muligt at gemme før du har besvaret alle spørgsmål, derfor kan det være en fordel at gennemse spørgsmålene før du begynder. Klik på link til spørgsmål i højre spalte.
+GDPR: Databehandling
