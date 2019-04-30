@@ -47,6 +47,12 @@ class Question
      */
     private $text;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"survey", "answer"})
+     */
+    private $image;
+
     public function __toString()
     {
         return $this->getSurvey().' - '.$this->getTitle();
@@ -156,5 +162,23 @@ class Question
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     * @return Question
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+        return $this;
     }
 }

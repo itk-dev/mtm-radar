@@ -70,6 +70,12 @@
 
                                 <div class="text">{{ question.text | raw }}</div>
 
+                                {% if question.image|default(null) %}
+                                    <div class="image">
+                                        <img src="{{ question.image }}"/>
+                                    </div>
+                                {% endif %}
+
                                 {% set form_field = form.replies[loop.index0] %}
                                 {# use custom "block choice_widget_expanded" (see above) to render radio buttons #}
                                 {% form_theme form_field.value _self %}

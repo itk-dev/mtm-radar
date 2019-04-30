@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new ItkDev\DatabaseBundle\ItkDevDatabaseBundle(),
             new Craue\ConfigBundle\CraueConfigBundle(),
             new ItkDev\ConfigBundle\ItkDevConfigBundle(),
+            new FM\ElfinderBundle\FMElfinderBundle(),
             new AppBundle\AppBundle(),
         ];
 

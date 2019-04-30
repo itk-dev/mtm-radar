@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: easy_admin.yml }
+    - { resource: fm_elfinder.yml }
     - { resource: '@EasyAdminUserBundle/Resources/config/config.yml' }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
