@@ -1,0 +1,70 @@
+<script>(function ($) {
+    var blankImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
+    var setValue = null
+    var settings = {}
+
+    var setValueCallback = function(value, id) {
+        setImage(value, id)
+        window.setValue = setValue
+    }
+
+    var setImage = function(value, id) {
+        getElement('image-url', id).val(value)
+        getElement('image-display', id).attr('src', value || blankImage)
+        getElement('image-remove', id).toggle(!!value)
+    }
+
+    var getId = function(el) {
+        return $(el).data('elfinder-id')
+    }
+
+    var getElement = function(type, id) {
+        try {
+            var selector = '[data-type="elfinder-'+type+'"]'
+            if (id) {
+                selector += '[data-elfinder-id="'+id+'"]'
+            }
+            return $(selector)
+        } catch (ex) {
+            return null
+        }
+    }
+
+    var getElfinderUrl = function(id) {
+        return settings.urls[id]
+    }
+
+    if ('undefined' !== window.elfinderSettings) {
+        settings = window.elfinderSettings
+
+        $('[data-type="elfinder-image-select"], [data-type="elfinder-image-display"]').on('click', function() {
+            var id = getId(this)
+            var url = getElfinderUrl(id)
+
+            if (null !== url) {
+                setValue = window.setValue
+                window.setValue = setValueCallback
+                window.open(url, 'elfinderWindow', 'height=450, width=900')
+            }
+        })
+
+        $('[data-type="elfinder-image-remove"]').on('click', function() {
+            if (confirm(settings.messages.confirm_remove_image)) {
+                var id = getId(this)
+                setImage(null, id)
+            }
+        })
+
+        $(function() {
+            getElement('image-remove').each(function() {
+                var id = getId(this)
+                $(this).toggle(!!getElement('image-url', id).val())
+            })
+        })
+    }
+}(jQuery))
+</script>
+
+{# Local Variables: #}
+{# mode: js #}
+{# End: #}

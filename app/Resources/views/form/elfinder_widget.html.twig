@@ -1,33 +1,25 @@
 {#% extends '@FMElfinderBundle/elfinder_widget.html.twig' %#}
 
 {% block elfinder_widget %}
-    <input type="text" class="form-control" readonly {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %} data-type="elfinder-input-field" />
+    <input type="hidden" class="form-control" data-type="elfinder-image-url" data-elfinder-id="{{ id }}" readonly {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %} data-type="elfinder-input-field" />
     {% if enable and instance is defined %}
-        <script type="text/javascript" charset="utf-8">
-            live('click', '[data-type="elfinder-input-field"][id="{{ id }}"]', function (event) {
-                var childWin = window.open("{{path('elfinder', {'instance': instance, 'homeFolder': homeFolder })}}?id={{ id }}", "popupWindow", "height=450, width=900");
-            });
-            function live (eventType, elementQuerySelector, cb) {
-                document.addEventListener(eventType, function (event) {
-                    var qs = document.querySelectorAll(elementQuerySelector);
-                    if (qs) {
-                        var el = event.target, index = -1;
-                        while (el && ((index = Array.prototype.indexOf.call(qs, el)) === -1)) {
-                            el = el.parentElement;
-                        }
-                        if (index > -1) {
-                            cb.call(el, event);
-                        }
+        <script>
+            if ('undefined' === typeof window.elfinderSettings) {
+                window.elfinderSettings = {
+                    urls: {},
+                    messages: {
+                        confirm_remove_image: {{ 'Confirm remove image'|trans|json_encode|raw }}
                     }
-                })
+                }
             }
-            function setValue(value, element_id) {
-                document.querySelector('[data-type="elfinder-input-field"]' + (element_id ? '[id="'+ element_id +'"]': '')).value = value;
-                document.querySelector('[data-type="elfinder-image-preview"]' + (element_id ? '[id="'+ element_id +'-image"]': '')).src = value;
-            }
+            window.elfinderSettings.urls[{{ id|json_encode|raw }}] = {{ path('elfinder', {'instance': instance, 'homeFolder': homeFolder, id: id })|json_encode|raw }}
         </script>
     {% endif %}
-    {% if value|default(null) %}
-        <div class="image"><img data-type="elfinder-image-preview" id="{{ id }}-image" src="{{ value }}"/></div>
-    {% endif %}
+
+    <div class="image-controls">
+        <button data-type="elfinder-image-select" data-elfinder-id="{{ id }}" type="button" class="btn">{{ 'Select image'|trans }}</button>
+        <button data-type="elfinder-image-remove" data-elfinder-id="{{ id }}" type="button" class="btn btn-danger">{{ 'Remove image'|trans }}</button>
+    </div>
+    <div class="image-display"><img data-type="elfinder-image-display" data-elfinder-id="{{ id }}" src="{{ value|default('data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=') }}"/></div>
+
 {% endblock %}
