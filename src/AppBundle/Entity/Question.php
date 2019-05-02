@@ -174,11 +174,13 @@ class Question
 
     /**
      * @param mixed $image
+     *
      * @return Question
      */
     public function setImage($image)
     {
         $this->image = $image;
+
         return $this;
     }
 }
