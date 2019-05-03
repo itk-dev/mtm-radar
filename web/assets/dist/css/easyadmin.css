@@ -1,7 +1,7 @@
-.easyadmin.edit-survey .field-question > .control-label {
+.easyadmin.new-survey .field-question > .control-label, .easyadmin.edit-survey .field-question > .control-label {
   display: none; }
 
-.easyadmin.edit-survey .field-question > div {
+.easyadmin.new-survey .field-question > div, .easyadmin.edit-survey .field-question > div {
   width: 100%; }
 
 th[role=columnheader]:not(.no-sort) {

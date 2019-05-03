@@ -1,4 +1,13 @@
 <script>(function ($) {
+    if ('undefined' === typeof window.elfinderSettings) {
+        window.elfinderSettings = {
+            urls: {},
+            messages: {
+                confirm_remove_image: {{ 'Confirm remove image'|trans|json_encode|raw }}
+            }
+        }
+    }
+
     var blankImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
     var setValue = null
     var settings = {}
@@ -34,33 +43,42 @@
         return settings.urls[id]
     }
 
-    if ('undefined' !== window.elfinderSettings) {
+    var selectImage = function() {
+        var id = getId(this)
+        var url = getElfinderUrl(id)
+
+        if (null !== url) {
+            setValue = window.setValue
+            window.setValue = setValueCallback
+            window.open(url, 'elfinderWindow', 'height=450, width=900')
+        }
+    }
+
+    var removeImage = function() {
+        if (confirm(settings.messages.confirm_remove_image)) {
+            var id = getId(this)
+            setImage(null, id)
+        }
+    }
+
+    var initialize = function() {
+        $('[data-type="elfinder-image-select"], [data-type="elfinder-image-display"]').on('click', selectImage)
+        $('[data-type="elfinder-image-remove"]').on('click', removeImage)
+
+        getElement('image-remove').each(function() {
+            var id = getId(this)
+            $(this).toggle(!!getElement('image-url', id).val())
+        })
+
+        $('.field-collection [data-prototype]').on('easyadmin.collection.item-added easyadmin.collection.item-deleted', function(event) {
+            initialize()
+        })
+    }
+
+    if ('undefined' !== typeof window.elfinderSettings) {
         settings = window.elfinderSettings
 
-        $('[data-type="elfinder-image-select"], [data-type="elfinder-image-display"]').on('click', function() {
-            var id = getId(this)
-            var url = getElfinderUrl(id)
-
-            if (null !== url) {
-                setValue = window.setValue
-                window.setValue = setValueCallback
-                window.open(url, 'elfinderWindow', 'height=450, width=900')
-            }
-        })
-
-        $('[data-type="elfinder-image-remove"]').on('click', function() {
-            if (confirm(settings.messages.confirm_remove_image)) {
-                var id = getId(this)
-                setImage(null, id)
-            }
-        })
-
-        $(function() {
-            getElement('image-remove').each(function() {
-                var id = getId(this)
-                $(this).toggle(!!getElement('image-url', id).val())
-            })
-        })
+        $(initialize)
     }
 }(jQuery))
 </script>

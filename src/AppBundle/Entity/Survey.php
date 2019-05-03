@@ -57,6 +57,7 @@ class Survey
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Question", mappedBy="survey", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @Assert\Valid()
      * @Groups({"survey", "answer"})
      */
     private $questions;
