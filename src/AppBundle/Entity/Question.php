@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Question
 {
@@ -26,6 +27,11 @@ class Question
      * @ORM\JoinColumn(name="survey_id", referencedColumnName="id", nullable=false)
      */
     private $survey;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $rank;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -117,6 +123,26 @@ class Question
     }
 
     /**
+     * @return mixed
+     */
+    public function getRank()
+    {
+        return $this->rank;
+    }
+
+    /**
+     * @param mixed $rank
+     *
+     * @return Question
+     */
+    public function setRank($rank)
+    {
+        $this->rank = $rank;
+
+        return $this;
+    }
+
+    /**
      * Set text.
      *
      * @param string $text
@@ -182,5 +208,14 @@ class Question
         $this->image = $image;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function setQuestionRank()
+    {
+        $this->getSurvey()->setQuestionRanks();
     }
 }
