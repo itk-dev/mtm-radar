@@ -20,6 +20,6 @@
         <button data-type="elfinder-image-select" data-elfinder-id="{{ id }}" type="button" class="btn">{{ 'Select image'|trans }}</button>
         <button data-type="elfinder-image-remove" data-elfinder-id="{{ id }}" type="button" class="btn btn-danger">{{ 'Remove image'|trans }}</button>
     </div>
-    <div class="image-display"><img data-type="elfinder-image-display" data-elfinder-id="{{ id }}" src="{{ value|default('data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=') }}"/></div>
+    <div class="image-display"><img class="img-responsive" data-type="elfinder-image-display" data-elfinder-id="{{ id }}" src="{{ value|default('data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=') }}"/></div>
 
 {% endblock %}
