@@ -75,6 +75,18 @@ class Survey
     {
         $this->questions = new ArrayCollection();
         $this->answers = new ArrayCollection();
+        $this->configuration = [
+            'rating' => [
+                '1' => 'i ringe grad',
+                '2' => 'i nogen grad',
+                '3' => 'i høj grad',
+                '4' => 'i meget høj grad',
+                '0' => 'ikke relevant',
+            ],
+            'chart' => [
+                'type' => 'radar',
+            ],
+        ];
     }
 
     public function __toString()
