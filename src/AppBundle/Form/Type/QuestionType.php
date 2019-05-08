@@ -3,6 +3,7 @@
 namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Question;
+use FM\ElfinderBundle\Form\Type\ElFinderType;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -22,6 +23,11 @@ class QuestionType extends AbstractType
                 'attr' => [
                     'rows' => 4,
                 ],
+            ])
+            ->add('image', ElFinderType::class, [
+                'instance' => 'form',
+                'enable' => true,
+                'required' => false,
             ]);
     }
 

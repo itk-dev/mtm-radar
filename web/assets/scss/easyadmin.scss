@@ -1,4 +1,5 @@
 .easyadmin {
+	&.new-survey,
 	&.edit-survey {
 		// Hide number column in question list.
 		.field-question {
@@ -47,4 +48,8 @@ th[aria-sort]:not(.no-sort):after {
 th[role=columnheader]:not(.no-sort):hover:after {
 	visibility: visible;
 	opacity: 1;
+}
+
+.image-display {
+    margin: 1em 0;
 }

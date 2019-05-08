@@ -57,6 +57,8 @@ class Survey
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Question", mappedBy="survey", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"rank" = "ASC"})
+     * @Assert\Valid()
      * @Groups({"survey", "answer"})
      */
     private $questions;
@@ -73,6 +75,18 @@ class Survey
     {
         $this->questions = new ArrayCollection();
         $this->answers = new ArrayCollection();
+        $this->configuration = [
+            'rating' => [
+                '1' => 'i ringe grad',
+                '2' => 'i nogen grad',
+                '3' => 'i høj grad',
+                '4' => 'i meget høj grad',
+                '0' => 'ikke relevant',
+            ],
+            'chart' => [
+                'type' => 'radar',
+            ],
+        ];
     }
 
     public function __toString()
@@ -293,6 +307,12 @@ class Survey
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
+    public function updateQuestions()
+    {
+        $this->setQuestionCategories();
+        $this->setQuestionRanks();
+    }
+
     public function setQuestionCategories()
     {
         $category = null;
@@ -302,6 +322,15 @@ class Survey
             } else {
                 $question->setCategory($category);
             }
+        }
+    }
+
+    public function setQuestionRanks()
+    {
+        $rank = 0;
+        foreach ($this->getQuestions() as $question) {
+            $question->setRank($rank);
+            ++$rank;
         }
     }
 

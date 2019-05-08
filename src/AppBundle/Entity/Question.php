@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Question
 {
@@ -26,6 +27,11 @@ class Question
      * @ORM\JoinColumn(name="survey_id", referencedColumnName="id", nullable=false)
      */
     private $survey;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $rank;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -46,6 +52,12 @@ class Question
      * @Groups({"survey", "answer"})
      */
     private $text;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"survey", "answer"})
+     */
+    private $image;
 
     public function __toString()
     {
@@ -111,6 +123,26 @@ class Question
     }
 
     /**
+     * @return mixed
+     */
+    public function getRank()
+    {
+        return $this->rank;
+    }
+
+    /**
+     * @param mixed $rank
+     *
+     * @return Question
+     */
+    public function setRank($rank)
+    {
+        $this->rank = $rank;
+
+        return $this;
+    }
+
+    /**
      * Set text.
      *
      * @param string $text
@@ -156,5 +188,34 @@ class Question
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     *
+     * @return Question
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function setQuestionRank()
+    {
+        $this->getSurvey()->setQuestionRanks();
     }
 }

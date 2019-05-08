@@ -1,0 +1,88 @@
+<script>(function ($) {
+    if ('undefined' === typeof window.elfinderSettings) {
+        window.elfinderSettings = {
+            urls: {},
+            messages: {
+                confirm_remove_image: {{ 'Confirm remove image'|trans|json_encode|raw }}
+            }
+        }
+    }
+
+    var blankImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
+    var setValue = null
+    var settings = {}
+
+    var setValueCallback = function(value, id) {
+        setImage(value, id)
+        window.setValue = setValue
+    }
+
+    var setImage = function(value, id) {
+        getElement('image-url', id).val(value)
+        getElement('image-display', id).attr('src', value || blankImage)
+        getElement('image-remove', id).toggle(!!value)
+    }
+
+    var getId = function(el) {
+        return $(el).data('elfinder-id')
+    }
+
+    var getElement = function(type, id) {
+        try {
+            var selector = '[data-type="elfinder-'+type+'"]'
+            if (id) {
+                selector += '[data-elfinder-id="'+id+'"]'
+            }
+            return $(selector)
+        } catch (ex) {
+            return null
+        }
+    }
+
+    var getElfinderUrl = function(id) {
+        return settings.urls[id]
+    }
+
+    var selectImage = function() {
+        var id = getId(this)
+        var url = getElfinderUrl(id)
+
+        if (null !== url) {
+            setValue = window.setValue
+            window.setValue = setValueCallback
+            window.open(url, 'elfinderWindow', 'height=450, width=900')
+        }
+    }
+
+    var removeImage = function() {
+        if (confirm(settings.messages.confirm_remove_image)) {
+            var id = getId(this)
+            setImage(null, id)
+        }
+    }
+
+    var initialize = function() {
+        $('[data-type="elfinder-image-select"], [data-type="elfinder-image-display"]').on('click', selectImage)
+        $('[data-type="elfinder-image-remove"]').on('click', removeImage)
+
+        getElement('image-remove').each(function() {
+            var id = getId(this)
+            $(this).toggle(!!getElement('image-url', id).val())
+        })
+
+        $('.field-collection [data-prototype]').on('easyadmin.collection.item-added easyadmin.collection.item-deleted', function(event) {
+            initialize()
+        })
+    }
+
+    if ('undefined' !== typeof window.elfinderSettings) {
+        settings = window.elfinderSettings
+
+        $(initialize)
+    }
+}(jQuery))
+</script>
+
+{# Local Variables: #}
+{# mode: js #}
+{# End: #}

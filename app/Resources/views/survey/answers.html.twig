@@ -39,6 +39,12 @@
                                         <h1>{{ loop.index }}. <span  class="title">{{ question.title }}</span></h1>
 
                                         <div class="text">{{ question.text | raw }}</div>
+
+                                        {% if question.image|default(null) %}
+                                            <div class="img-fluid image">
+                                                <img src="{{ question.image }}"/>
+                                            </div>
+                                        {% endif %}
                                     </div>
                                 </section>
                             {% endfor %}

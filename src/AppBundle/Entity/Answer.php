@@ -192,6 +192,7 @@ class Answer
     public function getAddress()
     {
         return $this->address;
+
         return $this;
     }
 
