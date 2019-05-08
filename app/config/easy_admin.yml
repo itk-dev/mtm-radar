@@ -33,6 +33,9 @@ easy_admin:
                     - property: title
                       # template: share.html.twig
                     - property: description
+                      template: richtext.html.twig
+                      richtext:
+                          max_length: 80
                     - property: questions
                     - property: answers
                       template: answers.html.twig
