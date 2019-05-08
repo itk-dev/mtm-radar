@@ -12,6 +12,33 @@
   <body>
     <div class="container-fluid full-height">
       {% block body %}{% endblock %}
+
+      {% if 'ROLE_ADMIN' in app.user.roles|default([]) %}
+          <div class="admin-links" style="position: absolute; bottom: 1rem; left: 1rem;">
+              <div class="btn-group dropup">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{ 'Admin menu'|trans }}
+                  </button>
+                  <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}">{{ 'Sign out'|trans }}</a>
+                      <a class="dropdown-item" href="{{ path('admin') }}">{{ 'Go to admin'|trans }}</a>
+                      {% if app.request.attributes.get('_route') in ['survey_answer', 'survey_questions'] %}
+                          {% set params = app.request.attributes.get('_route_params') %}
+                          {% if 'id' in params|keys %}
+                              {% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+                              {% set editUrl = path('admin', {
+                                  action: 'edit',
+                                  entity: 'Survey',
+                                  id: params['id'],
+                                  referer: currentPath
+                                  }) %}
+                              <a class="dropdown-item" href="{{ editUrl }}">{{ 'Edit survey'|trans }}</a>
+                          {% endif %}
+                      {% endif %}
+                  </div>
+              </div>
+          </div>
+      {% endif %}
     </div>
 
     <script src="{{ asset('assets/dist/js/jquery.min.js') }}"></script>
