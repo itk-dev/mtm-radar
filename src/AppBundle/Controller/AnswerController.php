@@ -5,12 +5,11 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Answer;
 use AppBundle\Entity\Survey;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
@@ -27,8 +26,7 @@ class AnswerController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="answer_submit")
-     * @Method("POST")
+     * @Route("/{id}", name="answer_submit", methods={"POST"})
      *
      * @param Request $request
      * @param Survey  $survey
@@ -51,8 +49,7 @@ class AnswerController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="answer_show")
-     * @Method("GET")
+     * @Route("/{id}", name="answer_show", methods={"GET"})
      *
      * @param Request $request
      * @param Answer  $answer
@@ -67,8 +64,7 @@ class AnswerController extends Controller
     }
 
     /**
-     * @Route("/{id}/edit", name="answer_edit")
-     * @Method("GET")
+     * @Route("/{id}/edit", name="answer_edit", methods={"GET"})
      * @Security("has_role('ROLE_ADMIN')")
      *
      * @param Answer $answer
@@ -81,8 +77,7 @@ class AnswerController extends Controller
     }
 
     /**
-     * @Route("/{id}/data", name="answer_show_data")
-     * @Method("GET")
+     * @Route("/{id}/data", name="answer_show_data", methods={"GET"})
      *
      * @param Request             $request
      * @param Answer              $answer

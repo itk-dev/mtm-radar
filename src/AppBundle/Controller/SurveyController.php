@@ -6,8 +6,6 @@ use AppBundle\Entity\Answer;
 use AppBundle\Entity\Survey;
 use AppBundle\Form\Type\ReplyType;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -16,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
@@ -32,8 +31,7 @@ class SurveyController extends Controller
     }
 
     /**
-     * @Route("/{id}/answer", name="survey_answer")
-     * @Method("GET")
+     * @Route("/{id}/answer", name="survey_answer", methods={"GET"})
      *
      * @param Survey $survey
      *
@@ -51,8 +49,7 @@ class SurveyController extends Controller
     }
 
     /**
-     * @Route("/{id}/questions", name="survey_questions")
-     * @Method("GET")
+     * @Route("/{id}/questions", name="survey_questions", methods={"GET"})
      *
      * @param Survey $survey
      *
@@ -66,8 +63,7 @@ class SurveyController extends Controller
     }
 
     /**
-     * @Route("/{id}/answer")
-     * @Method("POST")
+     * @Route("/{id}/answer", methods={"POST"})
      *
      * @param Request $request
      * @param Survey  $survey
@@ -101,8 +97,7 @@ class SurveyController extends Controller
     }
 
     /**
-     * @Route("/{id}/compare", name="survey_compare_answers")
-     * @Method("GET")
+     * @Route("/{id}/compare", name="survey_compare_answers", methods={"GET"})
      *
      * @param Request $request
      * @param Survey  $survey
@@ -138,8 +133,7 @@ class SurveyController extends Controller
     }
 
     /**
-     * @Route("/{id}/answer/{answer}/edit", name="survey_answer_edit")
-     * @Method("GET")
+     * @Route("/{id}/answer/{answer}/edit", name="survey_answer_edit", methods={"GET"})
      * @Security("has_role('ROLE_ADMIN')")
      *
      * @param Survey $survey
@@ -161,8 +155,7 @@ class SurveyController extends Controller
     }
 
     /**
-     * @Route("/{id}/answer/{answer}/edit", name="survey_answer_update")
-     * @Method("PUT")
+     * @Route("/{id}/answer/{answer}/edit", name="survey_answer_update", methods={"PUT"})
      * @Security("has_role('ROLE_ADMIN')")
      *
      * @param Survey $survey
