@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ruleset name="mtm-radar">
-    <description>PHP CodeSniffer configuration for aakb/mtm-radar</description>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
 
-    <file>app/</file>
+    <arg name="basepath" value="."/>
+    <arg name="cache" value=".phpcs-cache"/>
+    <arg name="colors"/>
+    <arg name="extensions" value="php"/>
+
+    <rule ref="PSR2"/>
+
+    <file>bin/</file>
+    <file>config/</file>
+    <file>public/</file>
     <file>src/</file>
     <file>tests/</file>
 
-		<exclude-pattern>app/App(Cache|Kernel)\.php</exclude-pattern>
-
-		<!-- No warnings -->
-		<arg value="n"/>
-		<!-- Show progress -->
-		<arg value="p"/>
-
-    <rule ref="vendor/squizlabs/php_codesniffer/src/Standards/PSR2"/>
 </ruleset>

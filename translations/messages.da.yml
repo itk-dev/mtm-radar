@@ -1,0 +1,100 @@
+# Frontend
+#
+# Note: Most of these can be overridden in the survey configuration, e.g
+#
+# labels:
+#  description: Baggrund og formål
+#  instructions: Vejledning
+#  sections: Kapitler
+#  answer:
+#   title: Overskrift
+
+Comment: Kommentarer #Uddyb/begrund dit svar
+Next question: Næste
+Previous question: Forrige
+Go to frontpage: Til startsiden
+Save answer: Gem besvarelse
+Please fill in all required fields: Udfyld venligst alle felter
+Start survey: Start spørgeskema
+Survey description: Beskrivelse
+Survey instructions: Vejledning
+Survey preparations: Se alle spørgsmål
+Question %number% of %max_number%: Spørgsmål %number%/%max_number%
+Sections: Afsnit
+Model of answers: Model af besvarelse
+Current chart progress: Foreløbig model af besvarelse
+Summary of your replies: Opsummering af dine svar
+Print answer: Udskriv besvarelsen
+Reply: Svar
+Reply %index%: Svar %index%
+by %name%: af %name%
+Your answer has been saved: Din besvarelse er nu gemt
+Legend: Singaturforklaring
+Back: Forrige
+Answered by: Besvaret af
+by: af
+Answer title: Titel
+Answer description: Beskrivelse
+Comparison of answers: Sammenligning af svar
+Selected answers: Valgte besvarelser
+All questions: Alle spørgsmål
+No reply: Intet svar
+
+'Use <code>survey://all_questions</code> to insert the url to all survey questions': 'Brug <code>survey://all_questions</code> for at indsætte url''en til alle spørgsmål, fx &lta href="survey://all_questions"&gt;Se alle spørgsmål&lt;/a&gt;'
+# Admin
+
+Answer: Besvarelse
+Answers: Besvarelser
+Name: Navn
+Company: Firma
+Documentation id: eDoc-nummer
+Address: Adresse på projektet
+Change password: Skift adgangskode
+Created at: Oprettet
+Description: Beskrivelse
+Email: E-mailadresse
+Last login: Seneste login
+Questions: Spørgsmål
+Roles: Roler
+Share survey: Del spørgeskema
+Survey: Spørgeskema
+Title: Titel
+User: Bruger
+
+Compare answers: Sammenlign besvarelser
+Select %num% answers: Vælg %num% besvarelser
+Select %min%–%max% answers: Vælg %min%–%max% besvarelser
+
+action.cancel: Annuller
+action.delete: Slet
+action.edit: Rediger
+action.list: Tilbage til listen
+action.new: Ny
+action.save: Gem
+action.search: Søg
+action.show: Vis
+
+
+ROLE_USER: Bruger
+ROLE_ADMIN: Administrator
+
+Instructions: Vejledning
+Preparations: Se alle spørgsmål
+Configuration: Indstillinger
+Category: Kategori
+Text: Tekst
+
+Download questions as pdf: Hent spørgsmålene som pdf
+Warning: Bemærk
+It is not possible to save until you finish the survey: Det er ikke muligt at gemme før du har besvaret alle spørgsmål, derfor kan det være en fordel at gennemse spørgsmålene før du begynder. Klik på link til spørgsmål i højre spalte.
+GDPR: Databehandling
+
+Image: Billede
+Select image: Vælg billede
+Remove image: Fjern billede
+Confirm remove image: Bekræft at du vil fjerne billedet.
+
+Admin menu: Administration
+Edit survey: Rediger spørgeskema
+Go to admin: Gå til administrationen
+Sign out: Log af
