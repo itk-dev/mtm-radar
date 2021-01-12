@@ -56,7 +56,12 @@ class Survey
     private $configuration;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Question", mappedBy="survey", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\Question",
+     *     mappedBy="survey",
+     *     cascade={"persist", "remove"},
+     *     orphanRemoval=true
+     * )
      * @ORM\OrderBy({"rank" = "ASC"})
      * @Assert\Valid()
      * @Groups({"survey", "answer"})

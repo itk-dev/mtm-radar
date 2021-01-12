@@ -3,7 +3,6 @@
 namespace App\DataFixtures\ORM;
 
 use App\Entity\User;
-use Craue\ConfigBundle\Util\Config;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 

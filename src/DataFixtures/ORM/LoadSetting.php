@@ -14,7 +14,7 @@ class LoadSetting extends LoadData
         return 4;
     }
 
-    /** @var Config  */
+    /** @var Config */
     private $config;
 
     public function __construct(Config $config, PropertyAccessorInterface $accessor)

@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use EasyCorp\Bundle\EasyAdminBundle\Controller\EasyAdminController;
-use ItkDev\EasyAdminUserBundle\Traits\EasyAdminControllerUserManager;
 use ItkDev\UserBundle\User\UserManager;
 
 class AdminController extends EasyAdminController
@@ -23,7 +22,8 @@ class AdminController extends EasyAdminController
         return $this->redirectToRoute('survey_answer', ['id' => $id]);
     }
 
-    public function createNewUserEntity() {
+    public function createNewUserEntity()
+    {
         return $this->userManager->createUser();
     }
 }

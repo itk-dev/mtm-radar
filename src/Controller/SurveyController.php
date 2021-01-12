@@ -6,9 +6,7 @@ use App\Entity\Answer;
 use App\Entity\Survey;
 use App\Form\Type\ReplyType;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -43,8 +41,6 @@ class SurveyController extends AbstractController
     /**
      * @Route("/{id}/answer", name="survey_answer", methods={"GET"})
      *
-     * @param Survey $survey
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function getAction(Survey $survey)
@@ -61,8 +57,6 @@ class SurveyController extends AbstractController
     /**
      * @Route("/{id}/questions", name="survey_questions", methods={"GET"})
      *
-     * @param Survey $survey
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function questionsAction(Survey $survey)
@@ -74,9 +68,6 @@ class SurveyController extends AbstractController
 
     /**
      * @Route("/{id}/answer", methods={"POST"})
-     *
-     * @param Request $request
-     * @param Survey  $survey
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -108,9 +99,6 @@ class SurveyController extends AbstractController
 
     /**
      * @Route("/{id}/compare", name="survey_compare_answers", methods={"GET"})
-     *
-     * @param Request $request
-     * @param Survey  $survey
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -145,8 +133,6 @@ class SurveyController extends AbstractController
     /**
      * @Route("/{id}/answer/{answer}/edit", name="survey_answer_edit", methods={"GET"})
      *
-     * @param Survey $survey
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function editAnswer(Request $request, Survey $survey, Answer $answer)
@@ -169,8 +155,6 @@ class SurveyController extends AbstractController
 
     /**
      * @Route("/{id}/answer/{answer}/edit", name="survey_answer_update", methods={"PUT"})
-     *
-     * @param Survey $survey
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -207,16 +191,16 @@ class SurveyController extends AbstractController
     /**
      * @Route("/{id}/data", name="survey_show_data")
      *
-     * @param Request             $request
-     * @param Survey              $survey
-     * @param SerializerInterface $serializer
-     *
      * @return JsonResponse
      */
     public function getDataAction(Request $request, Survey $survey, SerializerInterface $serializer)
     {
         $callback = $request->get('callback');
-        $data = $serializer->serialize(['survey' => $survey], 'json', ['groups' => ['survey'], 'enable_max_depth' => true]);
+        $data = $serializer->serialize(
+            ['survey' => $survey],
+            'json',
+            ['groups' => ['survey'], 'enable_max_depth' => true]
+        );
         $response = new JsonResponse($data, 200, [], true);
         if ($callback) {
             $response->setCallback($callback);

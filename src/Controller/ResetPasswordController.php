@@ -36,8 +36,11 @@ class ResetPasswordController extends AbstractController
     /** @var array */
     private $options;
 
-    public function __construct(ResetPasswordHelperInterface $resetPasswordHelper, TranslatorInterface $translator, array $resetPasswordControllerOptions)
-    {
+    public function __construct(
+        ResetPasswordHelperInterface $resetPasswordHelper,
+        TranslatorInterface $translator,
+        array $resetPasswordControllerOptions
+    ) {
         $this->resetPasswordHelper = $resetPasswordHelper;
         $this->translator = $translator;
         $resolver = new OptionsResolver();

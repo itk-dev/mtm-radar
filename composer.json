@@ -34,7 +34,6 @@
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "friendsofphp/php-cs-fixer": "^2.17",
         "friendsoftwig/twigcs": "^4.0",
-        "squizlabs/php_codesniffer": "^3.5",
         "symfony/maker-bundle": "^1.27",
         "symfony/stopwatch": "^5.2",
         "symfony/web-profiler-bundle": "^5.2"
@@ -78,25 +77,18 @@
         "check-coding-standards/php-cs-fixer": [
             "php -n vendor/bin/php-cs-fixer --config=.php_cs.dist fix --dry-run"
         ],
-        "check-coding-standards/phpcs": [
-            "vendor/bin/phpcs --standard=phpcs.xml.dist"
-        ],
         "check-coding-standards/twigcs": [
-            "vendor/bin/twigcs lint app/Resources/views"
+            "vendor/bin/twigcs templates/"
         ],
         "check-coding-standards": [
             "@check-coding-standards/php-cs-fixer",
-            "@check-coding-standards/phpcs"
+            "@check-coding-standards/twigcs"
         ],
         "apply-coding-standards/php-cs-fixer": [
             "php -n vendor/bin/php-cs-fixer --config=.php_cs.dist fix"
         ],
-        "apply-coding-standards/phpcs": [
-            "vendor/bin/phpcbf --standard=phpcs.xml.dist"
-        ],
         "apply-coding-standards": [
-            "@apply-coding-standards/php-cs-fixer",
-            "@apply-coding-standards/phpcs"
+            "@apply-coding-standards/php-cs-fixer"
         ],
         "install-git-hooks": [
             "ln -sf ../../githooks/pre-commit .git/hooks"
