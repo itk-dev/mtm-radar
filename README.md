@@ -1,11 +1,11 @@
-# Ask a spider
+# MTM-radar
 
 ## Installation
 
 ```
-composer install
-bin/console doctrine:database:create
-bin/console doctrine:migrations:migrate --no-interaction
+docker-compose up -d
+docker-compose exec phpfpm composer install
+docker-compose exec phpfpm bin/console doctrine:migrations:migrate --no-interaction
 ```
 
 ## Create administrator users
@@ -14,23 +14,23 @@ bin/console doctrine:migrations:migrate --no-interaction
 ### Super administrator
 
 ```
-bin/console fos:user:create --super-admin super-admin@example.com super-admin@example.com
+docker-compose exec phpfpm bin/console fos:user:create --super-admin super-admin@example.com super-admin@example.com
 ```
 
 ```
-bin/console fos:user:create admin@example.com admin@example.com
+docker-compose exec phpfpm bin/console fos:user:create admin@example.com admin@example.com
 ```
 
 ### Administrator
 
 ```
-bin/console fos:user:promote admin@example.com ROLE_ADMIN
+docker-compose exec phpfpm bin/console fos:user:promote admin@example.com ROLE_ADMIN
 ```
 
 ## Loading fixtures
 
 ```
-bin/console doctrine:fixtures:load --no-interaction
+docker-compose exec phpfpm bin/console doctrine:fixtures:load --no-interaction
 ```
 
 After loading fixtures, you can sign in with username `admin@example.com` and password `password`.
