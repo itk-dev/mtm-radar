@@ -1,7 +1,7 @@
 <div class="legend">
-    <p><strong>{{ 'Legend' | trans }}</strong></p>
+    <p><strong>{{ 'Legend'|trans }}</strong></p>
     <dl>
-        {% for value, label in survey.rating %}
+        {% for label in survey.rating %}
             <dd><span class="legend-color legend-color-{{ loop.index0 }}"></span>{{ loop.index }}. {{ label }}</dd>
         {% endfor %}
     </dl>

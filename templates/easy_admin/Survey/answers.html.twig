@@ -4,12 +4,10 @@
     </a>
 {% elseif 'show' == view %}
     {# @TODO: Get this from app parameters #}
-    {%
-        set requiredAnswers = {
-            min: 2,
-            max: 5
-        }
-    %}
+    {% set required_answers = {
+        min: 2,
+        max: 5
+    } %}
     <div class="survey-answer">
         {% if value %}
             <form id="survey-answers" action="{{ path('survey_compare_answers', {id: item.id}) }}">
@@ -17,11 +15,11 @@
                     <thead>
                         <tr>
                             <th data-sort-method="none"/>
-                            {# <th>{{ 'Title'| trans }}</th> #}
-                            <th>{{ 'Name'| trans }}</th>
-                            <th>{{ 'Company'| trans }}</th>
-                            <th>{{ 'Documentation id'| trans }}</th>
-                            <th data-sort-default>{{ 'Created at'| trans }}</th>
+                            {# <th>{{ 'Title'|trans }}</th> #}
+                            <th>{{ 'Name'|trans }}</th>
+                            <th>{{ 'Company'|trans }}</th>
+                            <th>{{ 'Documentation id'|trans }}</th>
+                            <th data-sort-default>{{ 'Created at'|trans }}</th>
                             <th/>
                         </tr>
                     </thead>
@@ -34,25 +32,25 @@
                             <td>{{ answer.name }}</td>
                             <td>{{ answer.company }}</td>
                             <td>{{ answer.documentationId }}</td>
-                            <td data-sort="{{ answer.createdAt | date('YmdHisP') }}">{{ answer.createdAt | date }}</td>
+                            <td data-sort="{{ answer.createdAt|date('YmdHisP') }}">{{ answer.createdAt|date }}</td>
                         </tr>
                     {% endfor %}
                 </table>
 
                 <div class="alert alert-info" id="select-answers-message">
-                    {% if requiredAnswers.min == requiredAnswers.max %}
-                        {{ 'Select %num% answers' | trans({'%num%': requiredAnswers.min}) }}
+                    {% if required_answers.min == required_answers.max %}
+                        {{ 'Select %num% answers'|trans({'%num%': required_answers.min}) }}
                     {% else %}
-                        {{ 'Select %min%–%max% answers' | trans({'%min%': requiredAnswers.min, '%max%': requiredAnswers.max}) }}
+                        {{ 'Select %min%–%max% answers'|trans({'%min%': required_answers.min, '%max%': required_answers.max}) }}
                     {% endif %}
                 </div>
 
-                <button class="btn btn-default" type="submit">{{ 'Compare answers' | trans }}</button>
+                <button class="btn btn-default" type="submit">{{ 'Compare answers'|trans }}</button>
             </form>
             <script src="{{ asset('assets/dist/js/tablesort.min.js') }}"></script>
             <script>(function ($) {
-                    var min = {{ requiredAnswers.min | json_encode | raw }},
-                        max = {{ requiredAnswers.max | json_encode | raw }};
+                    var min = {{ required_answers.min|json_encode|raw }},
+                        max = {{ required_answers.max|json_encode|raw }};
                     $('form#survey-answers').on('submit', function(e) {
                         var checkedAnswers = $('[name="answers[]"]:checked');;
                         if (checkedAnswers.length < min || max < checkedAnswers.length) {
@@ -68,7 +66,7 @@
                     });
                 }(jQuery))</script>
         {% else %}
-            {{ 'No answers' | trans }}
+            {{ 'No answers'|trans }}
         {% endif %}
     </div>
 {% endif %}

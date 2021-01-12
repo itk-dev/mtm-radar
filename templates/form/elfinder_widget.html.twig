@@ -12,7 +12,7 @@
                  }
              }
          }
-         window.elfinderSettings.urls[{{ id|json_encode|raw }}] = {{ path('elfinder', {'instance': instance, 'homeFolder': homeFolder, id: id })|json_encode|raw }}
+         window.elfinderSettings.urls[{{ id|json_encode|raw }}] = {{ path('elfinder', {'instance': instance, 'homeFolder': homeFolder, id: id})|json_encode|raw }}
         </script>
     {% endif %}
 

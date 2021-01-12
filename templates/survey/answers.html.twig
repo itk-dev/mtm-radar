@@ -5,8 +5,6 @@
 {% endblock %}
 
 {% block body %}
-    {% set labels = survey.configuration.labels|default(null) %}
-
     <div class="row full-height">
         <div class="col-md-12">
             <div class="survey">
@@ -36,9 +34,9 @@
                                             </div>
                                         </div>
 
-                                        <h1>{{ loop.index }}. <span  class="title">{{ question.title }}</span></h1>
+                                        <h1>{{ loop.index }}. <span class="title">{{ question.title }}</span></h1>
 
-                                        <div class="text">{{ question.text | raw }}</div>
+                                        <div class="text">{{ question.text|raw }}</div>
 
                                         {% if question.image|default(null) %}
                                             <div class="img-fluid image">

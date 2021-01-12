@@ -25,14 +25,14 @@
                       {% if app.request.attributes.get('_route') in ['survey_answer', 'survey_questions'] %}
                           {% set params = app.request.attributes.get('_route_params') %}
                           {% if 'id' in params|keys %}
-                              {% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
-                              {% set editUrl = path('easyadmin', {
+                              {% set current_path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+                              {% set edit_url = path('easyadmin', {
                                   action: 'edit',
                                   entity: 'Survey',
                                   id: params['id'],
-                                  referer: currentPath
+                                  referer: current_path
                                   }) %}
-                              <a class="dropdown-item" href="{{ editUrl }}">{{ 'Edit survey'|trans }}</a>
+                              <a class="dropdown-item" href="{{ edit_url }}">{{ 'Edit survey'|trans }}</a>
                           {% endif %}
                       {% endif %}
                   </div>

@@ -8,7 +8,7 @@
                 {{ labels.description|default('Survey description'|trans) }}
             </a>
             <div id="description" class="collapse" role="tabpanel">
-                {{ survey.description | raw }}
+                {{ survey.description|raw }}
             </div>
         </div>
     {% endif %}
@@ -19,7 +19,7 @@
                 {{ labels.instructions|default('Survey instructions'|trans) }}
             </a>
             <div id="instructions" class="collapse" role="tabpanel">
-                {{ survey.instructions | raw }}
+                {{ survey.instructions|raw }}
             </div>
         </div>
     {% endif %}
@@ -43,7 +43,7 @@
                 {{ labels.gdpr|default('GDPR'|trans) }}
             </a>
             <div id="gdpr" class="collapse" role="tabpanel">
-                {{ craue_setting('gdpr_message') | raw }}
+                {{ craue_setting('gdpr_message')|raw }}
             </div>
         </div>
     {% endif %}
