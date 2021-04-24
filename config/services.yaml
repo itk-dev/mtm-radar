@@ -1,0 +1,59 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    'env(SITE_NAME)': 'MTM Radar'
+    'env(SITE_LOGO_URL)': '/assets/images/AAK_02_venstrejusteret_sh.svg'
+    'env(SURVEY_LOGO_URL)': '/assets/images/AAK_02_venstrejusteret_sh.svg'
+    'env(SURVEY_LOGO_ALT)': 'Teknik og Miljø – Aarhus Kommune'
+    'env(DEFAULT_LOCALE)': 'da'
+
+    default_locale: '%env(DEFAULT_LOCALE)%'
+
+    site_url: '%env(SITE_URL)%'
+    site_name: '%env(SITE_NAME)%'
+    site_logo_url: '%env(SITE_LOGO_URL)%'
+    survey.reply.comment_required: true
+    survey_logo_url: '%env(SURVEY_LOGO_URL)%'
+    survey_logo_alt: '%env(SURVEY_LOGO_ALT)%'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+        bind:
+            $surveyOption:
+                survey.reply.comment_required: '%survey.reply.comment_required%'
+
+            $resetPasswordControllerOptions:
+                from_email: '%env(MAILER_FROM_EMAIL)%'
+                from_name: '%env(MAILER_FROM_NAME)%'
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller/'
+        tags: ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    # @see https://www.doctrine-project.org/projects/doctrine-migrations-bundle/en/3.0/index.html#migration-dependencies
+    Doctrine\Migrations\Version\DbalMigrationFactory: ~
+    App\Migrations\Factory\MigrationFactoryDecorator:
+        decorates: Doctrine\Migrations\Version\DbalMigrationFactory
+        arguments: ['@App\Migrations\Factory\MigrationFactoryDecorator.inner', '@service_container']

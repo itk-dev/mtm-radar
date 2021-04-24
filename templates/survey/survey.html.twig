@@ -1,0 +1,164 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ site_name }} – {{ survey.title }}
+{% endblock %}
+
+{# @FIXME: There must be a better way to do this! #}
+{# @see: https://getbootstrap.com/docs/4.0/components/buttons/#checkbox-and-radio-buttons #}
+{% block choice_widget_expanded -%}
+    <div class="replies">
+        <div class="btn-group btn-group-toggle choices" data-toggle="buttons">
+            {% for choice in choices %}
+                {% set is_checked = choice is selectedchoice(value) %}
+                <label class="btn btn-secondary reply-index-{{ loop.index0 }} reply-value-{{ choice.value }} {{ is_checked ? 'active' }}">
+                    <input type="radio" name="{{ loop.parent.full_name }}" value="{{ choice.value }}" autocomplete="off" {% if is_checked %}checked{% endif %} required/> {{ choice.label }}
+                </label>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    {% set labels = survey.configuration.labels|default(null) %}
+
+    <div class="row full-height">
+        <div class="col-md-8">
+            <div id="validation-errors" class="alert alert-danger alert-dismissible" style="display: none" role="alert">{{ 'Please fill in all required fields'|trans }}
+                <button type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="survey" data-configuration="{{ survey.configuration|json_encode }}" data-survey-min="{{ survey.configuration.min|default(0) }}" data-survey-max="{{ survey.configuration.rating|length }}">
+                {% form_theme form 'bootstrap_3_layout.html.twig' %}
+                {{ form_start(form) }}
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <section class="metadata mt-3 mb-3" style="display: none">
+
+                                <header>
+                                    <h1 class="title" >{{ survey.title }}</h1>
+                                </header>
+
+                                {{ form_row(form.name, {label: labels.answer.name|default(null)}) }}
+                                {{ form_row(form.company, {label: labels.answer.company|default(null)}) }}
+                                {{ form_row(form.documentationId, {label: labels.answer.documentationId|default(null)}) }}
+
+                                {{ form_row(form.address, {label: labels.answer.address|default(null)}) }}
+                                {{ form_row(form.description, {label: labels.answer.description|default(null)}) }}
+
+                                <button type="button" class="btn btn-primary btn-lg btn-block survey-next">{{ labels.start|default('Start survey'|trans) }}</button>
+                                <p class="mt-2"><b>{{ 'Warning'|trans }}</b> – {{ 'It is not possible to save until you finish the survey'|trans }}</p>
+                            </section>
+                        </div>
+                    </div>
+
+                    {% for question in survey.questions %}
+                        <section data-index="{{ loop.index0 }}" id="{{ loop.index0 }}" style="display: none">
+                            <div class="question" >
+                                <div class="row mt-3">
+                                    <div class="col-md-6 col-sm-12">
+                                        <p class="lead">{{ 'Question %number% of %max_number%'|trans({'%number%': loop.index, '%max_number%': loop.length}) }}</p>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <p class="lead text-md-right">{{ question.category }}</p>
+                                    </div>
+                                </div>
+
+                                <h1>{{ loop.index }}. <span class="title">{{ question.title }}</span></h1>
+
+                                <div class="text">{{ question.text|raw }}</div>
+
+                                {% if question.image|default(null) %}
+                                    <div class="image img-fluid">
+                                        <img src="{{ question.image }}"/>
+                                    </div>
+                                {% endif %}
+
+                                {% set form_field = form.replies[loop.index0] %}
+                                {# use custom "block choice_widget_expanded" (see above) to render radio buttons #}
+                                {% form_theme form_field.value _self %}
+                                {{ form_row(form_field.value, {label: labels.answer.reply.value|default('Reply')}) }}
+                                {{ form_row(form_field.comment, {label: labels.answer.reply.comment|default('Comment')}) }}
+                            </div>
+                            <div class="row prev-next-btns">
+                                {% set show_frontpage_button = true %}
+                                {% set col_class = show_frontpage_button ? 'col-md-4' : 'col-md-6' %}
+                                <div class="col {{ col_class }}">
+                                    {% if loop.first %}
+                                        <button type="button" class="btn btn-default btn-lg btn-block survey-prev text-left">{{ labels.back|default('Back'|trans) }}</button>
+                                    {% else %}
+                                        <button type="button" class="btn btn-default btn-lg btn-block survey-prev text-left">{{ labels.prev|default('Previous question'|trans) }}</button>
+                                    {% endif %}
+                                </div>
+
+                                {% if show_frontpage_button %}
+                                    <div class="col {{ col_class }}">
+                                        <button type="button" class="btn btn-default btn-lg btn-block survey-frontpage text-center">{{ labels.first|default('Go to frontpage'|trans) }}</button>
+                                    </div>
+                                {% endif %}
+
+                                <div class="col {{ col_class }}">
+                                    {% if loop.last %}
+                                        <button type="submit" class="btn btn-primary btn-lg btn-block survey-next text-right">{{ labels.save|default('Save answer'|trans) }}</button>
+                                    {% else %}
+                                        <button type="button" class="btn btn-primary btn-lg btn-block survey-next text-right">{{ labels.next|default('Next question'|trans) }}</button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </section>
+                    {% endfor %}
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+        <div class="col-md-4 grey-bg aside">
+
+            <section id="survey-info" class="survey-info mt-3 mb-3">
+                {% include '_partials/survey_metadata.html.twig' with {expandfirst: true} %}
+            </section>
+
+            <div id="chartinfo-wrapper">
+                <p class="lead mt-3">{{ labels.chart.title|default('Model of answers'|trans) }}</p>
+                <h4>{{ survey.title }}</h4>
+                <div id="chart-wrapper">
+                    <canvas id="chart"></canvas>
+                </div>
+                {% include '_partials/category_ranges.html.twig' %}
+
+                {% include '_partials/chart_legend.html.twig' %}
+            </div>
+
+            {% include '_partials/logo.html.twig' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/dist/css/survey.css') }}"/>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/dist/js/jquery.validate.min.js') }}"></script>
+    {% include '_partials/survey_scripts.twig.html' %}
+    <script>(function ($) {
+        var dirty = false;
+        $('form :input').change(function() {
+            dirty = true;
+        });
+        $(window).on('beforeunload', function() {
+            if (dirty) {
+                return {{ 'Are you sure you want to leave this page?'|trans|json_encode|raw }};
+            }
+        });
+        $('[type="submit"]').on('click', function(){
+            $(window).off('beforeunload');
+        });
+        $(".close").on("click", function(e) {
+            $("#validation-errors").hide();
+        });
+    }(jQuery))</script>
+{% endblock %}
