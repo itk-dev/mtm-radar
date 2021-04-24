@@ -7,7 +7,12 @@ framework:
     # Enables session support. Note that the session will ONLY be started if you read or write from it.
     # Remove or comment this section to explicitly disable session support.
     session:
-        handler_id: null
+        # @see https://ourcodeworld.com/articles/read/970/how-to-change-the-lifetime-of-the-session-cookie-in-symfony-4-session-expires-too-soon
+        # @see https://symfony.com/doc/current/session.html
+        handler_id: session.handler.native_file
+        save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
+        # @see https://symfony.com/doc/current/reference/configuration/framework.html#cookie-lifetime
+        cookie_lifetime: 0
         cookie_secure: auto
         cookie_samesite: lax
 
