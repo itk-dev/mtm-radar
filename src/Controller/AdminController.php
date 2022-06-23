@@ -26,4 +26,11 @@ class AdminController extends EasyAdminController
     {
         return $this->userManager->createUser();
     }
+
+    public function setUserPasswordAction()
+    {
+        $id = $this->request->query->get('id');
+
+        return $this->redirectToRoute('admin_user_set_password', ['id' => $id]);
+    }
 }

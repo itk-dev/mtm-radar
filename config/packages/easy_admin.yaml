@@ -104,6 +104,13 @@ easy_admin:
                     - property: lastLoggedInAt
                       type: datetime
 
+                actions:
+                  -
+                    label: 'Set password'
+                    name: setUserPassword
+                    # name: admin_user_set_password
+                    # type: route
+
             form:
                 fields:
                     - property: email

@@ -102,3 +102,8 @@ Password: Adgangskode
 Sign in: Log på
 Sign out: Log af
 'Forgot your password?': 'Glemt adgangskode?'
+
+'User password too short. Must be contain least %min_length% characters.': 'Adgangskoden er for kort. Den skal indeholde mindst %min_length% tegn.'
+'Set password for user %user%': 'Sæt adgangskode for %user%'
+'Password for user %username% set to %password%': 'Adgangskode for %username% sat til %password%'
+'Set password': 'Sæt adgangskode'
