@@ -107,3 +107,4 @@ Sign out: Log af
 'Set password for user %user%': 'Sæt adgangskode for %user%'
 'Password for user %username% set to %password%': 'Adgangskode for %username% sat til %password%'
 'Set password': 'Sæt adgangskode'
+'Error setting password for user %username%: %message%': 'Fejl under opdatering af Adgangskode for %username%: %message%'

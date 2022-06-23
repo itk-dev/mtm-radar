@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\SetUserPasswordFormType;
-use Cassandra\Set;
 use Doctrine\ORM\EntityManagerInterface;
 use ItkDev\UserBundle\User\UserManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -57,28 +56,22 @@ class SecurityController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = trim($form->getData()['password'] ?? '');
-            if (strlen($password) < $minLength) {
-                $this->addFlash('danger', $translator->trans('User password too short. Must be contain least %min_length% characters.', [
-                    '%min_length%' => $minLength,
+            $password = $form->getData()['password'];
+            try {
+                $userManager->setPassword($user, $password);
+                $userManager->updateUser($user);
+
+                $this->addFlash('success', $translator->trans('Password for user %username% set to %password%', [
+                    '%username%' => $user->getUsername(),
+                    '%password%' => $password,
                 ]));
-            } else {
-                try {
-                    $userManager->setPassword($user, $password);
-                    $userManager->updateUser($user);
 
-                    $this->addFlash('success', $translator->trans('Password for user %username% set to %password%', [
-                        '%username%' => $user->getUsername(),
-                        '%password%' => $password,
-                    ]));
-
-                    return $this->redirectToRoute('easyadmin', ['entity' => 'User']);
-                } catch (\Throwable $t) {
-                    $this->addFlash('danger', $translator->trans('Error settings password for user %username%: %message%', [
-                        '%username%' => $user->getUsername(),
-                        '%message%' => $t->getMessage(),
-                    ]));
-                }
+                return $this->redirectToRoute('easyadmin', ['entity' => 'User']);
+            } catch (\Throwable $t) {
+                $this->addFlash('danger', $translator->trans('Error setting password for user %username%: %message%', [
+                    '%username%' => $user->getUsername(),
+                    '%message%' => $t->getMessage(),
+                ]));
             }
         }
 
