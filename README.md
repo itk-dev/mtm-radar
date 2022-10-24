@@ -2,10 +2,19 @@
 
 ## Installation
 
-```
-docker-compose up -d
+``` 
+    docker-compose up -d
 docker-compose exec phpfpm composer install
 docker-compose exec phpfpm bin/console doctrine:migrations:migrate --no-interaction
+```
+
+## Rewrite in app/vendor/itk-dev/user-bundle/src/User/UserManager.php:90
+
+``` 
+OLD: 
+$user->setField($user, $this->getUsernameField(), $username);
+NEW: 
+$this->setField($user, $this->getUsernameField(), $username);
 ```
 
 ## Create administrator users
