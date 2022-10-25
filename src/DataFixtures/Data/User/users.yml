@@ -1,9 +1,0 @@
--
-    email: admin@example.com
-    plain_password: password
-    roles: [ROLE_ADMIN]
-
--
-    email: user@example.com
-    plain_password: password
-    roles: [ROLE_USER]

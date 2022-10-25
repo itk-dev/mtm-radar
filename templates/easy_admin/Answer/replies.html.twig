@@ -1,8 +1,0 @@
-{% for reply in value %}
-	<div class="reply">
-		{{ reply.reply }}
-		{% if reply.comment|default(false) %}
-			{{ reply.comment }}
-		{% endif %}
-	</div>
-{% endfor %}

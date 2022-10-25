@@ -1,2 +1,0 @@
-{% set max_length = field_options.richtext.max_length|default(80) %}
-<div class="richtext">{{ value|striptags|easyadmin_truncate(max_length, true, '…')|raw }}</div>
