@@ -85,20 +85,9 @@ class __TwigTemplate_1abfd895837295af11f907132b55d79c extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
-        echo "<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    .æhh{border: solid 1px red;}
-</style>
-
-<div class=\"example-wrapper\">
-    <form>
-    <label>bruger</label/>
-    <input type=\"email\" placeholder=\"email\" class=\"æhh\" />
-    <label>password</label/>
-    <input type=\"password\" placeholder=\"password\" class=\"æhh\" />
-    </form>
-</div>
+        echo "    <h1>
+    YUPPIII DET VIRKER
+      </h1>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -130,20 +119,9 @@ class __TwigTemplate_1abfd895837295af11f907132b55d79c extends Template
 {% block title %}Hello DefaultController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    .æhh{border: solid 1px red;}
-</style>
-
-<div class=\"example-wrapper\">
-    <form>
-    <label>bruger</label/>
-    <input type=\"email\" placeholder=\"email\" class=\"æhh\" />
-    <label>password</label/>
-    <input type=\"password\" placeholder=\"password\" class=\"æhh\" />
-    </form>
-</div>
+    <h1>
+    YUPPIII DET VIRKER
+      </h1>
 {% endblock %}
 ", "default/index.html.twig", "/Users/martinkristiansen/Desktop/NyVersion/mtm-radar/templates/default/index.html.twig");
     }

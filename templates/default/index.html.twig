@@ -4,20 +4,6 @@
 
 {% block body %}
     <h1>
-        {% if craue_setting('frontpage_title') %}
-            {{ craue_setting('frontpage_title') }}
-        {% else %}
-            {% set url = path('easyadmin', {entity: 'Setting', action: 'edit', 'id': 'frontpage_title'}) %}
-            Go to <a href="{{ url }}">{{ url }}</a> and edit the frontpage title.
-        {% endif %}
-    </h1>
-
-    <div class="content">
-        {% if craue_setting('frontpage_content') %}
-            {{ craue_setting('frontpage_content')|raw }}
-        {% else %}
-            {% set url = path('easyadmin', {entity: 'Setting', action: 'edit', 'id': 'frontpage_content'}) %}
-            Go to <a href="{{ url }}">{{ url }}</a> and edit the frontpage content.
-        {% endif %}
-    </div>
+    YUPPIII DET VIRKER
+      </h1>
 {% endblock %}
