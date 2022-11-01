@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\SurveyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,6 +30,14 @@ class Survey
 
     #[ORM\Column]
     private array $configuration = [];
+
+    #[ORM\OneToMany(mappedBy: 'survey', targetEntity: Answer::class, orphanRemoval: true)]
+    private Collection $answers;
+
+    public function __construct()
+    {
+        $this->answers = new ArrayCollection();
+    }
 
 
 
@@ -95,6 +104,36 @@ class Survey
     public function setConfiguration(array $configuration): self
     {
         $this->configuration = $configuration;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Answer>
+     */
+    public function getAnswers(): Collection
+    {
+        return $this->answers;
+    }
+
+    public function addAnswer(Answer $answer): self
+    {
+        if (!$this->answers->contains($answer)) {
+            $this->answers->add($answer);
+            $answer->setSurvey($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnswer(Answer $answer): self
+    {
+        if ($this->answers->removeElement($answer)) {
+            // set the owning side to null (unless already changed)
+            if ($answer->getSurvey() === $this) {
+                $answer->setSurvey(null);
+            }
+        }
 
         return $this;
     }
