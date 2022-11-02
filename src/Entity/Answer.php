@@ -5,14 +5,21 @@ namespace App\Entity;
 use App\Repository\AnswerRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Uid\UuidV4;
 
 #[ORM\Entity(repositoryClass: AnswerRepository::class)]
 class Answer
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    // #[ORM\GeneratedValue("UUID")]
+    #[ORM\Column(type: 'guid')]
+    private ?Uuid $id = null;
+
+
 
     #[ORM\ManyToOne(inversedBy: 'answers')]
     #[ORM\JoinColumn(nullable: false)]
@@ -41,6 +48,11 @@ class Answer
 
     #[ORM\Column(nullable: true)]
     private array $data = [];
+
+    public function __construct()
+    {
+        $this->id = new UuidV4;
+    }
 
     public function getId(): ?int
     {
@@ -154,4 +166,6 @@ class Answer
 
         return $this;
     }
+
+
 }
