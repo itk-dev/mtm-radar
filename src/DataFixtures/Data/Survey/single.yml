@@ -1,0 +1,15 @@
+title: A single question
+
+description: A survey with just a single question.
+
+configuration:
+    min: 1
+    rating:
+        - 1
+        - 2
+        - 3
+
+questions:
+    -
+        title: The first question
+        text: Pellentesque condimentum, magna ut suscipit hendrerit, ipsum augue ornare nulla, non luctus diam neque sit amet urna.
