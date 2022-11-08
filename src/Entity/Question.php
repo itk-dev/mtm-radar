@@ -5,14 +5,17 @@ namespace App\Entity;
 use App\Repository\QuestionRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Uid\UuidV4;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
 class Question
 {
+
+    use TimestampableEntity;
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    // #[ORM\GeneratedValue]
     #[ORM\Column(type: 'guid')]
     private ?Uuid $id = null;
 

@@ -15,7 +15,7 @@ class Answer
     use TimestampableEntity;
 
     #[ORM\Id]
-    // #[ORM\GeneratedValue("UUID")]
+    #[ORM\GeneratedValue]
     #[ORM\Column(type: 'guid')]
     private ?Uuid $id = null;
 

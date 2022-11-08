@@ -7,14 +7,19 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Uid\UuidV4;
+use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: SurveyRepository::class)]
 class Survey
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'guid')]
+    private ?Uuid $id = null;
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
@@ -34,20 +39,42 @@ class Survey
     #[ORM\OneToMany(mappedBy: 'survey', targetEntity: Answer::class, orphanRemoval: true)]
     private Collection $answers;
 
-    #[ORM\OneToMany(mappedBy: 'survey', targetEntity: Question::class)]
+    #[ORM\OneToMany(mappedBy: 'survey', targetEntity: Question::class, cascade:['persist', 'remove'], orphanRemoval:true)]
+    // cascade={"persist", "remove"},
+    // orphanRemoval=true
     private Collection $questions;
 
     public function __construct()
     {
+        $this->id = new UuidV4;
         $this->answers = new ArrayCollection();
         $this->questions = new ArrayCollection();
+        $this->configuration = [
+            'rating' => [
+                '1' => 'i ringe grad',
+                '2' => 'i nogen grad',
+                '3' => 'i høj grad',
+                '4' => 'i meget høj grad',
+                '0' => 'ikke relevant',
+            ],
+            'chart' => [
+                'type' => 'radar',
+            ],
+        ];
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle() ?? 'Survey#'.$this->getId();
+
     }
 
 
 
 
 
-    public function getId(): ?int
+    // public function getId(): ?Uuid
+    public function getId(): ?UuidV4
     {
         return $this->id;
     }
@@ -170,6 +197,13 @@ class Survey
         }
 
         return $this;
+    }
+
+    public function getRating()
+    {
+        $configuration = $this->getConfiguration();
+
+        return isset($configuration['rating']) ? $configuration['rating'] : [];
     }
 
 
