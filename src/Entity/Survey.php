@@ -12,6 +12,7 @@ use Symfony\Component\Uid\UuidV4;
 use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: SurveyRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Survey
 {
     use TimestampableEntity;
@@ -203,6 +204,53 @@ class Survey
         return isset($configuration['rating']) ? $configuration['rating'] : [];
     }
 
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function updateQuestions()
+    {
+        $this->setQuestionCategories();
+        $this->setQuestionRanks();
+    }
+
+    public function setQuestionCategories()
+    {
+        $category = null;
+        foreach ($this->getQuestions() as $question) {
+            if (null !== $question->getCategory()) {
+                $category = $question->getCategory();
+            } else {
+                $question->setCategory($category);
+            }
+        }
+    }
+
+    public function setQuestionRanks()
+    {
+        $rank = 0;
+        foreach ($this->getQuestions() as $question) {
+            $question->setRank($rank);
+            ++$rank;
+        }
+    }
+
+    public function getCategoryRanges()
+    {
+        $ranges = [];
+        $questions = $this->getQuestions();
+        $start = 0;
+        while ($start < count($questions)) {
+            $category = $questions[$start]->getCategory();
+            $end = $start;
+            while ($end < count($questions) && $questions[$end]->getCategory() === $category) {
+                ++$end;
+            }
+            $key = $start.($start === $end - 1 ? '' : '-'.($end - 1));
+            $ranges[$key] = $category;
+            $start = $end;
+        }
+
+        return $ranges;
+    }
 
 
 
