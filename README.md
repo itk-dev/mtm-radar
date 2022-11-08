@@ -43,7 +43,7 @@ After loading fixtures, you can sign in with username `admin@example.com` and pa
 ## Open site
 
 ```
-open http://$(docker-compose port nginx 8080)
+open "http://$(docker-compose port nginx 8080)"
 ```
 
 ## Patches
