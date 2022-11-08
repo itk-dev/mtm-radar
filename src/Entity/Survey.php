@@ -17,7 +17,6 @@ class Survey
     use TimestampableEntity;
 
     #[ORM\Id]
-    #[ORM\GeneratedValue]
     #[ORM\Column(type: 'guid')]
     private ?Uuid $id = null;
 
@@ -40,8 +39,6 @@ class Survey
     private Collection $answers;
 
     #[ORM\OneToMany(mappedBy: 'survey', targetEntity: Question::class, cascade:['persist', 'remove'], orphanRemoval:true)]
-    // cascade={"persist", "remove"},
-    // orphanRemoval=true
     private Collection $questions;
 
     public function __construct()
