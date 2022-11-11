@@ -1,9 +1,31 @@
-{% extends 'base.html.twig' %}
+{% extends 'page.html.twig' %}
 
-{% block title %}Hello DefaultController!{% endblock %}
+{# {% block title %}Hello DefaultController!{% endblock %}
 
 {% block body %}
     <h1>
     YUPPIII DET VIRKER
       </h1>
+{% endblock %} #}
+
+{% block content %}
+    <h1>
+    Overskrift fra default.index.twig
+        {# {% if craue_setting('frontpage_title') %}
+            {{ craue_setting('frontpage_title') }}
+        {% else %} #}
+            {# {% set url = path('easyadmin', {entity: 'Setting', action: 'edit', 'id': 'frontpage_title'}) %}
+            Go to <a href="{{ url }}">{{ url }}</a> and edit the frontpage title.
+        {% endif %} #}
+    </h1>
+
+    <div class="content">
+      hej fra default.index.twig
+        {# {% if craue_setting('frontpage_content') %}
+            {{ craue_setting('frontpage_content')|raw }}
+        {% else %}
+            {% set url = path('easyadmin', {entity: 'Setting', action: 'edit', 'id': 'frontpage_content'}) %}
+            Go to <a href="{{ url }}">{{ url }}</a> and edit the frontpage content.
+        {% endif %} #}
+    </div>
 {% endblock %}

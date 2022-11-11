@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\AnswerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -50,10 +51,15 @@ class Answer
 
     public function __construct()
     {
-        $this->id = new UuidV4;
+        $this->replies = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function __toString()
+    {
+        return 'Answer#'.$this->getId();
+    }
+
+    public function getId(): ?UuidV4
     {
         return $this->id;
     }

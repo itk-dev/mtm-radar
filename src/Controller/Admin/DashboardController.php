@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Controller\Admin;
+
+use App\Entity\Answer;
 use App\Entity\Survey;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -12,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashboardController extends AbstractDashboardController
 {
     #[Route('/admin', name: 'admin')]
-    public function index(): Response
+    public function index():Response
     {
         // return parent::index();
         $routeBuilder = $this->container->get(AdminUrlGenerator::class);
@@ -48,7 +50,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         //  yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'homepage');
          yield MenuItem::linkToCrud('Surveys', 'fas fa-surveys', Survey::class);
-
+         yield MenuItem::linkToCrud('Answers', 'fas fa-anwser', Answer::class );
      }
 
 }

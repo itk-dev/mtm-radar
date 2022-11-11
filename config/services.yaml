@@ -4,7 +4,13 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    'env(SITE_NAME)': 'MTM Radar'
+    'env(SITE_LOGO_URL)': '/assets/images/AAK_02_venstrejusteret_sh.svg'
     survey.reply.comment_required: true
+
+    site_name: '%env(SITE_NAME)%'
+    site_logo_url: '%env(SITE_LOGO_URL)%'
+
 services:
     # default configuration for services in *this* file
     _defaults:

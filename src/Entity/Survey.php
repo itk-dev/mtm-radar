@@ -45,6 +45,7 @@ class Survey
     public function __construct()
     {
         $this->id = new UuidV4;
+
         $this->answers = new ArrayCollection();
         $this->questions = new ArrayCollection();
         $this->configuration = [

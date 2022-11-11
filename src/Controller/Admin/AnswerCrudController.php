@@ -1,16 +1,16 @@
 <?php
 
+// namespace Answer;
 namespace App\Controller\Admin;
 
 use App\Entity\Answer;
-use App\Entity\Survey;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
-class SurveyCrudController extends AbstractCrudController
+class AnswerCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Survey::class;
+        return Answer::class;
     }
 
     /*
