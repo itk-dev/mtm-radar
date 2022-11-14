@@ -3,12 +3,12 @@ index 3a157c4..8eabbd5 100644
 --- a/lib/Doctrine/ORM/UnitOfWork.php
 +++ b/lib/Doctrine/ORM/UnitOfWork.php
 @@ -2742,6 +2742,9 @@ class UnitOfWork implements PropertyChangedListener
- 
+
          foreach ($data as $field => $value) {
              if (isset($class->fieldMappings[$field])) {
-+                if ('id' === $field) {
-+                    $value = \Symfony\Component\Uid\Uuid::fromString($value);
-+                }
+                if ('id' === $field) {
+                    $value = \Symfony\Component\Uid\Uuid::fromString($value);
+                }
                  $class->reflFields[$field]->setValue($entity, $value);
              }
          }

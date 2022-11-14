@@ -59,7 +59,8 @@ class Answer
         return 'Answer#'.$this->getId();
     }
 
-    public function getId(): ?UuidV4
+    // public function getId(): ?UuidV4
+    public function getId(): ?string
     {
         return $this->id;
     }
