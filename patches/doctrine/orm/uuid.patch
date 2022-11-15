@@ -6,9 +6,9 @@ index 3a157c4..8eabbd5 100644
 
          foreach ($data as $field => $value) {
              if (isset($class->fieldMappings[$field])) {
-                if ('id' === $field) {
-                    $value = \Symfony\Component\Uid\Uuid::fromString($value);
-                }
++               if ('id' === $field) {
++                 $value = \Symfony\Component\Uid\Uuid::fromString($value);
++                }
                  $class->reflFields[$field]->setValue($entity, $value);
              }
          }

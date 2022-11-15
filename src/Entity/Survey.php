@@ -68,10 +68,6 @@ class Survey
 
     }
 
-
-
-
-
     // public function getId(): ?Uuid
     public function getId(): ?UuidV4
     {

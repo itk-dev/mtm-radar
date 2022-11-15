@@ -51,7 +51,8 @@ class Answer
 
     public function __construct()
     {
-        $this->replies = new ArrayCollection();
+        $this->id = new UuidV4;
+        $this->replies = [];
     }
 
     public function __toString()
@@ -154,7 +155,8 @@ class Answer
         return $this->replies;
     }
 
-    public function setReplies(array $replies): self
+
+    public function setReplies( $replies): self
     {
         $this->replies = $replies;
 
