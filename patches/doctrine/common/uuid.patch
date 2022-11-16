@@ -1,0 +1,17 @@
+diff --git a/src/Proxy/AbstractProxyFactory.php b/src/Proxy/AbstractProxyFactory.php
+index d487e1a..2c096f6 100644
+--- a/src/Proxy/AbstractProxyFactory.php
++++ b/src/Proxy/AbstractProxyFactory.php
+@@ -115,7 +115,11 @@ abstract class AbstractProxyFactory
+                 throw OutOfBoundsException::missingPrimaryKeyValue($className, $idField);
+             }
+ 
+-            $definition->reflectionFields[$idField]->setValue($proxy, $identifier[$idField]);
++            $value = $identifier[$idField];
++            if ('id' === $idField && is_string($value)) {
++                $value = \Symfony\Component\Uid\Uuid::fromString($value);
++            }
++            $definition->reflectionFields[$idField]->setValue($proxy, $value);
+         }
+ 
+         return $proxy;
