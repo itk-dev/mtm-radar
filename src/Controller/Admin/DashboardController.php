@@ -4,6 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\Answer;
 use App\Entity\Survey;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
@@ -43,6 +46,13 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTitle('Mtm Radar');
+    }
+
+    public function configureActions(): Actions
+    {
+
+        return parent::configureActions()
+        ->add(Crud::PAGE_INDEX, Action::DETAIL);
     }
 
     public function configureMenuItems(): iterable

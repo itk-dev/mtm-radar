@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Answer;
+
 use App\Entity\Survey;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
