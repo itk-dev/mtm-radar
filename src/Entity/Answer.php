@@ -21,8 +21,8 @@ class Answer
 
 
 
-    #[ORM\ManyToOne(inversedBy: 'answers')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(inversedBy: 'answers', targetEntity:Survey::class)]
+    #[ORM\JoinColumn(nullable: false, name:'survey_id', referencedColumnName:'id')]
     private ?Survey $survey = null;
 
     #[ORM\Column(length: 255)]
@@ -53,6 +53,7 @@ class Answer
     {
         $this->id = new UuidV4;
         $this->replies = [];
+        // $this->replies = new ArrayCollection();
     }
 
     public function __toString()
@@ -71,7 +72,7 @@ class Answer
         return $this->survey;
     }
 
-    public function setSurvey(?Survey $survey): self
+    public function setSurvey(?Survey $survey = null): self
     {
         $this->survey = $survey;
 
@@ -90,36 +91,36 @@ class Answer
         return $this;
     }
 
-    public function getCompany(): ?string
+    public function getCompany(): mixed
     {
         return $this->company;
     }
 
-    public function setCompany(?string $company): self
+    public function setCompany(mixed $company)
     {
         $this->company = $company;
 
         return $this;
     }
 
-    public function getAddress(): ?string
+    public function getAddress():mixed
     {
         return $this->address;
     }
 
-    public function setAddress(?string $address): self
+    public function setAddress(mixed $address)
     {
         $this->address = $address;
 
         return $this;
     }
 
-    public function getDocumentationId(): ?string
+    public function getDocumentationId():mixed
     {
         return $this->documentationId;
     }
 
-    public function setDocumentationId(?string $documentationId): self
+    public function setDocumentationId(mixed $documentationId)
     {
         $this->documentationId = $documentationId;
 
@@ -156,7 +157,7 @@ class Answer
     }
 
 
-    public function setReplies( $replies): self
+    public function setReplies( array $replies): self
     {
         $this->replies = $replies;
 

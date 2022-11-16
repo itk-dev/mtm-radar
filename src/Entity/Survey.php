@@ -36,7 +36,7 @@ class Survey
     #[ORM\Column]
     private array $configuration = [];
 
-    #[ORM\OneToMany(mappedBy: 'survey', targetEntity: Answer::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'survey', targetEntity: Answer::class, orphanRemoval: true, cascade:['remove'])]
     private Collection $answers;
 
     #[ORM\OneToMany(mappedBy: 'survey', targetEntity: Question::class, cascade:['persist', 'remove'], orphanRemoval:true)]
@@ -134,9 +134,7 @@ class Survey
         return $this;
     }
 
-    /**
-     * @return Collection<int, Answer>
-     */
+
     public function getAnswers(): Collection
     {
         return $this->answers;
@@ -144,29 +142,33 @@ class Survey
 
     public function addAnswer(Answer $answer): self
     {
-        if (!$this->answers->contains($answer)) {
-            $this->answers->add($answer);
-            $answer->setSurvey($this);
-        }
+        // if (!$this->answers->contains($answer)) {
+        //     $this->answers->add($answer);
+        //     $answer->setSurvey($this);
+        // }
+        // return $this;
+
+        $this->answers[] = $answer;
+        $answer->setSurvey($this);
 
         return $this;
     }
 
-    public function removeAnswer(Answer $answer): self
+    public function removeAnswer(Answer $answer)
     {
-        if ($this->answers->removeElement($answer)) {
-            // set the owning side to null (unless already changed)
-            if ($answer->getSurvey() === $this) {
-                $answer->setSurvey(null);
-            }
-        }
+        // if ($this->answers->removeElement($answer)) {
+        //     // set the owning side to null (unless already changed)
+        //     if ($answer->getSurvey() === $this) {
+        //         $answer->setSurvey(null);
+        //     }
+        // }
+        // return $this;
 
-        return $this;
+        $this->answers->removeElement($answer);
+        $answer->setSurvey(null);
     }
 
-    /**
-     * @return Collection<int, Question>
-     */
+
     public function getQuestions(): Collection
     {
         return $this->questions;
@@ -174,24 +176,30 @@ class Survey
 
     public function addQuestion(Question $question): self
     {
-        if (!$this->questions->contains($question)) {
-            $this->questions->add($question);
-            $question->setSurvey($this);
-        }
+        // if (!$this->questions->contains($question)) {
+        //     $this->questions->add($question);
+        //     $question->setSurvey($this);
+        // }
+
+        // return $this;
+
+        $this->questions[] = $question;
+        $question->setSurvey($this);
 
         return $this;
     }
 
-    public function removeQuestion(Question $question): self
+    public function removeQuestion(Question $question)
     {
-        if ($this->questions->removeElement($question)) {
-            // set the owning side to null (unless already changed)
-            if ($question->getSurvey() === $this) {
-                $question->setSurvey(null);
-            }
-        }
+        // if ($this->questions->removeElement($question)) {
+        //     // set the owning side to null (unless already changed)
+        //     if ($question->getSurvey() === $this) {
+        //         $question->setSurvey(null);
+        //     }
+        // } return $this;
 
-        return $this;
+        $this->questions->removeElement($question);
+        $question->setSurvey(null);
     }
 
     public function getRating()
