@@ -103,6 +103,9 @@
         "patches": {
             "doctrine/orm": {
                 "patches/doctrine/orm/uuid.patch": "patches/doctrine/orm/uuid.patch"
+            },
+            "doctrine/common": {
+                "patches/doctrine/common/uuid.patch": "patches/doctrine/common/uuid.patch"
             }
         }
     },
