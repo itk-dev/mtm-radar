@@ -9,6 +9,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "composer/package-versions-deprecated": "1.11.99.1",
+        "cweagans/composer-patches": "^1.7",
         "doctrine/doctrine-bundle": "^2.2",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.8",
@@ -43,7 +44,10 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "symfony/flex": true
+        }
     },
     "autoload": {
         "psr-4": {
@@ -101,6 +105,11 @@
         "symfony": {
             "allow-contrib": true,
             "require": "5.2.*"
+        },
+        "patches": {
+            "itk-dev/config-bundle": {
+                "https://github.com/itk-dev/config-bundle/compare/4.x...set-service-container": "https://github.com/itk-dev/config-bundle/commit/8ae207569a179f9dbc173a0cdc475a44787638ea.diff"
+            }
         }
     }
 }

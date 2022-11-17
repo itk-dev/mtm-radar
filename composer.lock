@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5085d9a46b4bbc19a1bf9ef2bb91d319",
+    "content-hash": "bc913a2ae41b124dba30e031f747b62a",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -203,6 +203,50 @@
                 "source": "https://github.com/craue/CraueConfigBundle/tree/2.5.0"
             },
             "time": "2020-12-17T09:04:32+00:00"
+        },
+        {
+            "name": "cweagans/composer-patches",
+            "version": "1.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cweagans/composer-patches.git",
+                "reference": "e9969cfc0796e6dea9b4e52f77f18e1065212871"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cweagans/composer-patches/zipball/e9969cfc0796e6dea9b4e52f77f18e1065212871",
+                "reference": "e9969cfc0796e6dea9b4e52f77f18e1065212871",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0 || ^2.0",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "composer/composer": "~1.0 || ~2.0",
+                "phpunit/phpunit": "~4.6"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "cweagans\\Composer\\Patches"
+            },
+            "autoload": {
+                "psr-4": {
+                    "cweagans\\Composer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Cameron Eagans",
+                    "email": "me@cweagans.net"
+                }
+            ],
+            "description": "Provides a way to patch Composer packages.",
+            "time": "2022-01-25T19:21:20+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -2050,6 +2094,11 @@
                 "squizlabs/php_codesniffer": "^3.2"
             },
             "type": "library",
+            "extra": {
+                "patches_applied": {
+                    "https://github.com/itk-dev/config-bundle/compare/4.x...set-service-container": "https://github.com/itk-dev/config-bundle/commit/8ae207569a179f9dbc173a0cdc475a44787638ea.diff"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "ItkDev\\ConfigBundle\\": ""
@@ -8073,6 +8122,7 @@
                 "issues": "https://github.com/PHP-CS-Fixer/diff/issues",
                 "source": "https://github.com/PHP-CS-Fixer/diff/tree/v1.3.1"
             },
+            "abandoned": true,
             "time": "2020-10-14T08:39:05+00:00"
         },
         {
@@ -8386,5 +8436,5 @@
         "ext-iconv": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "1.1.0"
 }

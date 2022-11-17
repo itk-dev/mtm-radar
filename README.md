@@ -8,8 +8,15 @@ docker-compose exec phpfpm composer install
 docker-compose exec phpfpm bin/console doctrine:migrations:migrate --no-interaction
 ```
 
+Open the site:
+
+```sh
+open "http://$(docker-compose port nginx 80)"
+```
+
 ## Create administrator users
 
+<strong>The stuff in this section does not work!</strong>
 
 ### Super administrator
 
