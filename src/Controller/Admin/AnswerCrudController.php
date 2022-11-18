@@ -4,7 +4,13 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Answer;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 class AnswerCrudController extends AbstractCrudController
 {
@@ -13,14 +19,25 @@ class AnswerCrudController extends AbstractCrudController
         return Answer::class;
     }
 
-    /*
+
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
+
             TextField::new('title'),
-            TextEditorField::new('description'),
+            // TextEditorField::new('description'),
+            TextField::new('name'),
+            TextField::new('company'),
+            TextField::new('documentation_id'),
+            TextField::new('address'),
+            TextField::new('description'),
+            DateTimeField::new('created_at')->setFormat('long', 'none'),
+            // ChoiceField::new('survey')->allowMultipleChoices(),
+            AssociationField::new('survey')->hideOnIndex(),
+
+
+
         ];
     }
-    */
+
 }
