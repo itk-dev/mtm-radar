@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ site_name }} – {{ survey.title }}
+{% endblock %}
+
+{% block body %}
+    <div class="row full-height">
+        <div class="col-md-12">
+            <div class="survey">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <section class="metadata mt-3 mb-3">
+                            <header>
+                                <h1 class="title" >{{ survey.title }}</h1>
+
+                            </header>
+
+                            <div class="description">{{ survey.description|raw }}</div>
+                            <div class="instructions">{{ survey.instructions|raw }}</div>
+                        </section>
+
+                        <section class="questions mt-3 mb-3">
+                            <header>
+                                <h1 class="title" >{{ 'All questions'|trans }}</h1>
+                            </header>
+                            {% for question in survey.questions %}
+                                <section data-index="{{ loop.index0 }}" id="{{ loop.index0 }}">
+                                    <div class="question" >
+                                        <div class="row mt-3">
+                                            <div class="col-md-6 col-sm-12">
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <p class="lead text-md-right">{{ question.category }}</p>
+                                            </div>
+                                        </div>
+
+                                        <h1>{{ loop.index }}. <span class="title">{{ question.title }}</span></h1>
+
+                                        <div class="text">{{ question.text|raw }}</div>
+
+                                        {% if question.image|default(null) %}
+                                            <div class="img-fluid image">
+                                                <img src="{{ question.image }}"/>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </section>
+                            {% endfor %}
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
