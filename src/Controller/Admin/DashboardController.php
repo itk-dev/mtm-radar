@@ -53,15 +53,15 @@ class DashboardController extends AbstractDashboardController
 
         return parent::configureActions()
         ->add(Crud::PAGE_INDEX, Action::DETAIL);
+
     }
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        // yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         //  yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'homepage');
-         yield MenuItem::linkToCrud('Surveys', 'fas fa-surveys', Survey::class);
+         yield MenuItem::linkToCrud('Survey', 'fas fa-surveys', Survey::class);
          yield MenuItem::linkToCrud('Answers', 'fas fa-anwser', Answer::class );
      }
 
 }
-
