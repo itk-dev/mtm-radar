@@ -8,6 +8,12 @@ docker-compose exec phpfpm composer install
 docker-compose exec phpfpm bin/console doctrine:migrations:migrate --no-interaction
 ```
 
+## Coding stamdards
+
+```
+docker-compose exec phpfpm composer check-coding-standards
+```
+
 ## Rewrite in app/vendor/itk-dev/user-bundle/src/User/UserManager.php:90
 
 ```
