@@ -3,21 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Survey;
-use Doctrine\DBAL\Types\StringType;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use Symfony\Component\Validator\Constraints\Length;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
-use EasyCorp\Bundle\EasyAdminBundle\Filter\TextFilter;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
-use Symfony\Component\Console\Input\StringInput;
-use Symfony\Component\DomCrawler\Field\TextareaFormField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class SurveyCrudController extends AbstractCrudController
 {
@@ -26,14 +17,12 @@ class SurveyCrudController extends AbstractCrudController
         return Survey::class;
     }
 
-
     public function configureFields(string $pageName): iterable
     {
-
         return [
             TextField::new('title'),
 
-            /*SHOW ON INDEX */
+            /* SHOW ON INDEX */
             TextField::new('description')
                 ->hideOnForm()
                 ->hideOnDetail(),
@@ -55,8 +44,6 @@ class SurveyCrudController extends AbstractCrudController
             DateTimeField::new('created_at')->setFormat('long', 'none')->hideOnForm(),
             // ChoiceField::new('survey')->allowMultipleChoices(),
             CollectionField::new('questions'),
-
         ];
     }
-
 }

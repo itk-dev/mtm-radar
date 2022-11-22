@@ -12,7 +12,6 @@ use Symfony\Component\Uid\UuidV4;
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
 class Question
 {
-
     use TimestampableEntity;
     #[ORM\Id]
     #[ORM\Column(type: 'guid')]
@@ -39,7 +38,7 @@ class Question
 
     public function __construct()
     {
-        $this->id = new UuidV4;
+        $this->id = new UuidV4();
     }
 
     public function getId(): ?int

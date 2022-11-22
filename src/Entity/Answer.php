@@ -19,10 +19,8 @@ class Answer
     #[ORM\Column(type: 'guid')]
     private ?Uuid $id = null;
 
-
-
-    #[ORM\ManyToOne(inversedBy: 'answers', targetEntity:Survey::class)]
-    #[ORM\JoinColumn(nullable: false, name:'survey_id', referencedColumnName:'id')]
+    #[ORM\ManyToOne(inversedBy: 'answers', targetEntity: Survey::class)]
+    #[ORM\JoinColumn(nullable: false, name: 'survey_id', referencedColumnName: 'id')]
     private ?Survey $survey = null;
 
     #[ORM\Column(length: 255)]
@@ -51,7 +49,7 @@ class Answer
 
     public function __construct()
     {
-        $this->id = new UuidV4;
+        $this->id = new UuidV4();
         $this->replies = [];
         // $this->replies = new ArrayCollection();
     }
@@ -103,7 +101,7 @@ class Answer
         return $this;
     }
 
-    public function getAddress():mixed
+    public function getAddress(): mixed
     {
         return $this->address;
     }
@@ -115,7 +113,7 @@ class Answer
         return $this;
     }
 
-    public function getDocumentationId():mixed
+    public function getDocumentationId(): mixed
     {
         return $this->documentationId;
     }
@@ -156,8 +154,7 @@ class Answer
         return $this->replies;
     }
 
-
-    public function setReplies( array $replies): self
+    public function setReplies(array $replies): self
     {
         $this->replies = $replies;
 
@@ -175,6 +172,4 @@ class Answer
 
         return $this;
     }
-
-
 }

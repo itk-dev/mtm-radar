@@ -4,18 +4,15 @@ namespace App\Controller;
 
 use App\Entity\Answer;
 use App\Entity\Survey;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class AnswerController extends AbstractController
 {
@@ -28,10 +25,10 @@ class AnswerController extends AbstractController
     }
 
 // post a single answer
-    #[Route('/{id}', name:'answer_submit', methods: ['POST'] )]
-    public function answerSubmitAction(Request $request, Survey $survey):RedirectResponse
+    #[Route('/{id}', name: 'answer_submit', methods: ['POST'])]
+    public function answerSubmitAction(Request $request, Survey $survey): RedirectResponse
     {
-        $data = json_decode($request->request-> get('data'));
+        $data = json_decode($request->request->get('data'));
         $answer = new Answer();
         $answer
             ->setSurvey($survey)
@@ -42,33 +39,36 @@ class AnswerController extends AbstractController
         $this->entityManager->flush();
 
         $this->addFlash('info', 'Anwer saved succesfully');
+
         return $this->redirectToRoute('answer_show', ['id' => $answer->getId()]);
     }
+
     // get a single answer
     #[Route('/{Id}', name: 'answer_show', methods: ['GET'])]
-    public function getAction(Request $request, Answer $answer):Response
+    public function getAction(Request $request, Answer $answer): Response
     {
         return $this->render('answer/show.htm.twig',
-        [
-            'answer' => $answer,
-        ]);
+            [
+                'answer' => $answer,
+            ]);
     }
 
     // get a single answer_edit
-    #[Route('/{id}/edit', name:'answer_edit', methods:['GET'])]
-        public function editAction(Answer $answer):Response
+    #[Route('/{id}/edit', name: 'answer_edit', methods: ['GET'])]
+        public function editAction(Answer $answer): Response
         {
-            if(!$this->isGranted('ROLE_ADMIN')){
+            if (!$this->isGranted('ROLE_ADMIN')) {
                 throw new AccessDeniedHttpException();
             }
 
-            return $this-> redirectToRoute(
+            return $this->redirectToRoute(
                 'survey_answer_edit',
-                ['id' => $answer -> getSurvey()->getId(), 'answer' => $answer->getId()]
+                ['id' => $answer->getSurvey()->getId(), 'answer' => $answer->getId()]
             );
         }
-    #[Route('/{id}/data', name:'answer_show_data', methods: ['GET'])]
-    public function getDataAction(Request $request, Answer $answer, SerializerInterface $serializer):JsonResponse
+
+    #[Route('/{id}/data', name: 'answer_show_data', methods: ['GET'])]
+    public function getDataAction(Request $request, Answer $answer, SerializerInterface $serializer): JsonResponse
     {
         $callback = $request->get('callback');
         $data = $serializer->serialize(
@@ -83,7 +83,6 @@ class AnswerController extends AbstractController
 
         return $response;
     }
-
 
     #[Route('/answer', name: 'app_answer')]
     public function index(): Response

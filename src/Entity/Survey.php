@@ -8,8 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Symfony\Component\Uid\UuidV4;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Uid\UuidV4;
 
 #[ORM\Entity(repositoryClass: SurveyRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -36,15 +36,15 @@ class Survey
     #[ORM\Column]
     private array $configuration = [];
 
-    #[ORM\OneToMany(mappedBy: 'survey', targetEntity: Answer::class, orphanRemoval: true, cascade:['remove'])]
+    #[ORM\OneToMany(mappedBy: 'survey', targetEntity: Answer::class, orphanRemoval: true, cascade: ['remove'])]
     private Collection $answers;
 
-    #[ORM\OneToMany(mappedBy: 'survey', targetEntity: Question::class, cascade:['persist', 'remove'], orphanRemoval:true)]
+    #[ORM\OneToMany(mappedBy: 'survey', targetEntity: Question::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $questions;
 
     public function __construct()
     {
-        $this->id = new UuidV4;
+        $this->id = new UuidV4();
 
         $this->answers = new ArrayCollection();
         $this->questions = new ArrayCollection();
@@ -65,7 +65,6 @@ class Survey
     public function __toString()
     {
         return $this->getTitle() ?? 'Survey#'.$this->getId();
-
     }
 
     // public function getId(): ?Uuid
@@ -134,7 +133,6 @@ class Survey
         return $this;
     }
 
-
     public function getAnswers(): Collection
     {
         return $this->answers;
@@ -167,7 +165,6 @@ class Survey
         $this->answers->removeElement($answer);
         $answer->setSurvey(null);
     }
-
 
     public function getQuestions(): Collection
     {
@@ -256,7 +253,4 @@ class Survey
 
         return $ranges;
     }
-
-
-
 }

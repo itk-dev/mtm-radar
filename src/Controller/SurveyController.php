@@ -9,22 +9,20 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 // use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
-
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class SurveyController extends AbstractController
 {
-     /** @var \Doctrine\ORM\EntityManagerInterface */
-     private $entityManager;
+    /** @var \Doctrine\ORM\EntityManagerInterface */
+    private $entityManager;
 
-      /** @var array */
+    /** @var array */
     private $options;
 
     public function __construct(EntityManagerInterface $entityManager, array $surveyOption)
@@ -36,29 +34,27 @@ class SurveyController extends AbstractController
         $this->options = $resolver->resolve($surveyOption);
     }
 
-
-    #[Route('/{id}/answer', name:'survey_answer', methods: ['GET'])]
-    public function getAction(Survey $survey):Response
+    #[Route('/{id}/answer', name: 'survey_answer', methods: ['GET'])]
+    public function getAction(Survey $survey): Response
     {
-
         $answer = new Answer();
-        $form =  $this->buildAnswerForm($answer, $survey);
+        $form = $this->buildAnswerForm($answer, $survey);
 
-        return $this->render('survey/survey.html.twig',[
+        return $this->render('survey/survey.html.twig', [
             'survey' => $survey,
             'form' => $form->createView(),
         ]);
     }
 
-    #[Route("/{id}/questions", name:'survey_questions', methods:['GET'])]
-    public function questionAction(Survey $survey):Response
+    #[Route('/{id}/questions', name: 'survey_questions', methods: ['GET'])]
+    public function questionAction(Survey $survey): Response
     {
         return $this->render('survey/answers.html.twig', [
-            'survey' => $survey
+            'survey' => $survey,
         ]);
     }
 
-    #[Route('/{id}/answer', methods:['POST'])]
+    #[Route('/{id}/answer', methods: ['POST'])]
     public function postAnswer(Request $request, Survey $survey)
     {
         $answer = new Answer();
@@ -85,8 +81,8 @@ class SurveyController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/compare', name:'survey_compare_answers', methods:['Get'])]
-    public function compareAnswers(Request $request, Survey $survey):Response
+    #[Route('/{id}/compare', name: 'survey_compare_answers', methods: ['Get'])]
+    public function compareAnswers(Request $request, Survey $survey): Response
     {
         $answerIds = $request->get('answers');
         $answers = $this->entityManager->getRepository(Answer::class)->findBy(['id' => $answerIds]);
@@ -113,12 +109,13 @@ class SurveyController extends AbstractController
             'answers' => $answers,
         ]);
     }
-    #[Route('/{id}/answer/{answer}/edit', name:'survey_answer_edit', methods:['Get'])]
 
-    public function editAnswer(Request $request, Survey $survey, Answer $answer){
+    #[Route('/{id}/answer/{answer}/edit', name: 'survey_answer_edit', methods: ['Get'])]
+    public function editAnswer(Request $request, Survey $survey, Answer $answer)
+    {
         if (!$this->isGranted('ROLE_ADMIN')) {
             // throw new AccessDeniedHttpException();
-                throw new AccessDeniedHttpException();
+            throw new AccessDeniedHttpException();
         }
 
         if ($answer->getSurvey()->getId() !== $survey->getId()) {
@@ -133,20 +130,22 @@ class SurveyController extends AbstractController
         ]);
     }
 
-    public function getDataAction(Request $request, Survey $survey, SerializerInterface $serializer):JsonResponse
+    public function getDataAction(Request $request, Survey $survey, SerializerInterface $serializer): JsonResponse
     {
         $callback = $request->get('callback');
         $data = $serializer->serialize(
-            ['survey' => $survey],'json', ['groups' => ['survey'], 'enable_max_depth' => true]
+            ['survey' => $survey], 'json', ['groups' => ['survey'], 'enable_max_depth' => true]
         );
         $response = new JsonResponse($data, 200, [], true);
-        if($callback){
+        if ($callback) {
             $response->setCallback($callback);
         }
+
         return $response;
     }
 
-    private function buildAnswerForm(Answer $answer, Survey $survey, $method = 'POST'){
+    private function buildAnswerForm(Answer $answer, Survey $survey, $method = 'POST')
+    {
         // Ensure that each question has a reply.
         $replies = $answer->getReplies();
         foreach ($survey->getQuestions() as $index => $question) {
@@ -193,5 +192,4 @@ class SurveyController extends AbstractController
             'survey.reply.comment_required' => true,
         ]);
     }
-
 }
