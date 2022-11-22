@@ -92,7 +92,7 @@
             "@auto-scripts"
         ],
         "check-coding-standards/php-cs-fixer": [
-            "php -n vendor/bin/php-cs-fixer --config=.php_cs.dist fix --dry-run"
+            "php -n vendor/bin/php-cs-fixer --config=.php-cs-fixer.dist.php fix --dry-run"
         ],
         "check-coding-standards/twigcs": [
             "vendor/bin/twigcs templates/"
@@ -102,7 +102,7 @@
             "@check-coding-standards/twigcs"
         ],
         "apply-coding-standards/php-cs-fixer": [
-            "php -n vendor/bin/php-cs-fixer --config=.php_cs.dist fix"
+            "php -n vendor/bin/php-cs-fixer --config=.php-cs-fixer.dist.php fix"
         ],
         "apply-coding-standards": [
             "@apply-coding-standards/php-cs-fixer"
