@@ -3,12 +3,16 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Survey;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class SurveyCrudController extends AbstractCrudController
 {
@@ -17,33 +21,37 @@ class SurveyCrudController extends AbstractCrudController
         return Survey::class;
     }
 
+    public function configureActions(Actions $actions): Actions
+    {
+        $actions
+            ->add(Crud::PAGE_INDEX, Action::DETAIL)
+            ->remove(Crud::PAGE_INDEX, Action::DELETE)
+            ->remove(Crud::PAGE_DETAIL, Action::DELETE)
+            ;
+
+        return $actions;
+    }
+
     public function configureFields(string $pageName): iterable
     {
-        return [
-            TextField::new('title'),
 
-            /* SHOW ON INDEX */
-            TextField::new('description')
-                ->hideOnForm()
-                ->hideOnDetail(),
+        $title = TextField::new('title');
+        $description = TextField::new('description');
+        $edit_description = TextEditorField::new('description');
+        $edit_instruction = TextEditorField::new('instructions');
+        $edit_preparations = TextEditorField::new('preparations');
+        $area_configuration = TextareaField::new('configuration');
+        $coll_question = CollectionField::new('question');
+        // $coll_answers = CollectionField::new('answers')->setTemplatePath('Survey/answers.html.twig');
+        $date_createdAt = DateTimeField::new('created_at')->setFormat('long', 'none');
+        $choice_question = ChoiceField::new('survey')->allowMultipleChoices();
 
-            CollectionField::new('questions')
-                ->hideOnForm()
-                ->hideOnDetail(),
-
-            // TextEditorField::new('description')->hideOnIndex(),
-
-            TextEditorField::new('instructions')->hideOnIndex(),
-
-            // TextareaField::new('configuration')->hideOnIndex(),
-
-            TextEditorField::new('preparations')->hideOnIndex()->setHelp('Use <code>survey://all_questions</code> to insert the url to all survey questions'),
-
-            CollectionField::new('answers')->hideOnForm(),
-            // CollectionField::new('questions'),
-            DateTimeField::new('created_at')->setFormat('long', 'none')->hideOnForm(),
-            // ChoiceField::new('survey')->allowMultipleChoices(),
-            CollectionField::new('questions'),
-        ];
+        if (Crud::PAGE_INDEX === $pageName) {
+            return [$title, $description, $coll_question, $coll_answers, $date_createdAt];
+        } elseif(Crud::PAGE_DETAIL === $pageName) {
+            return [$title];
+        } else {
+            return [$title];
+        }
     }
 }

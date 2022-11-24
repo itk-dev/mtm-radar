@@ -48,11 +48,13 @@ class DashboardController extends AbstractDashboardController
             ->setTitle('Mtm Radar');
     }
 
-    public function configureActions(): Actions
-    {
-        return parent::configureActions()
-        ->add(Crud::PAGE_INDEX, Action::DETAIL);
-    }
+    // public function configureActions(): Actions
+    // {
+    //     return parent::configureActions()
+    //     ->add(Crud::PAGE_INDEX, Action::DETAIL);
+    // }
+
+
 
     public function configureMenuItems(): iterable
     {
