@@ -49,7 +49,7 @@ class SurveyCrudController extends AbstractCrudController
         if (Crud::PAGE_INDEX === $pageName) {
             return [$title, $description, $coll_question, $coll_answers, $date_createdAt];
         } elseif(Crud::PAGE_DETAIL === $pageName) {
-            return [$title];
+            return [$title, $coll_answers];
         } else {
             return [$title];
         }

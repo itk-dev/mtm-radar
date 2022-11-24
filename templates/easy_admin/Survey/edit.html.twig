@@ -1,0 +1,13 @@
+{% extends '@EasyAdmin/default/edit.html.twig' %}
+
+{% block entity_form %}
+    {% if not form.vars.valid %}
+        <div class="alert alert-danger">{{ 'Errors on form'|trans }}</div>
+    {% endif %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body_javascript %}
+    {{ parent() }}
+    {{ include('easy_admin/includes/_elfinder_widget.html.twig') }}
+{% endblock %}
