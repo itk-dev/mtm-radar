@@ -42,14 +42,15 @@ class SurveyCrudController extends AbstractCrudController
         $edit_preparations = TextEditorField::new('preparations');
         $area_configuration = TextareaField::new('configuration');
         $coll_question = CollectionField::new('question');
-        // $coll_answers = CollectionField::new('answers')->setTemplatePath('Survey/answers.html.twig');
+        $coll_answers = CollectionField::new('answers');
+        $coll_answers_detail = CollectionField::new('answers')->setTemplatePath('easy_admin/Survey/answers.html.twig');
         $date_createdAt = DateTimeField::new('created_at')->setFormat('long', 'none');
         $choice_question = ChoiceField::new('survey')->allowMultipleChoices();
 
         if (Crud::PAGE_INDEX === $pageName) {
             return [$title, $description, $coll_question, $coll_answers, $date_createdAt];
         } elseif(Crud::PAGE_DETAIL === $pageName) {
-            return [$title, $coll_answers];
+            return [$title, $coll_answers_detail];
         } else {
             return [$title];
         }
