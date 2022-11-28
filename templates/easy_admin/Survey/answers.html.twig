@@ -1,16 +1,11 @@
-{% if 'list' == view %}
-    <a href="{{ path('easyadmin', {action: 'show', entity: 'Survey', id: item.id}) }}">
-        {% include '@EasyAdmin/default/field_association.html.twig' %}
-    </a>
-{% elseif 'show' == view %}
-    {# @TODO: Get this from app parameters #}
-    {% set required_answers = {
+
+       {% set required_answers = {
         min: 2,
         max: 5
     } %}
     <div class="survey-answer">
-        {% if value %}
-            <form id="survey-answers" action="{{ path('survey_compare_answers', {id: item.id}) }}">
+        {% if entity %}
+            <form id="survey-answers" action="{{ path('survey_compare_answers', {id: entity.primaryKeyValue}) }}">
                 <table class="table">
                     <thead>
                         <tr>
@@ -23,7 +18,7 @@
                             <th/>
                         </tr>
                     </thead>
-                    {% for answer in value %}
+                    {% for answer in field.value.snapshot %}
                         <tr>
                             <td>
                                 <input type="checkbox" name="answers[]" value="{{ answer.id }}" />
@@ -69,4 +64,3 @@
             {{ 'No answers'|trans }}
         {% endif %}
     </div>
-{% endif %}
