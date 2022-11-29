@@ -1,0 +1,15 @@
+{# {{ dump(_context|keys) }}
+{{dump(site_logo_url)}}
+{{dump(survey)}} #}
+<div class="logo">
+    {# Gammel #}
+    {# {% set logo_url = survey.configuration.logo.url|default(survey_logo_url)|default(null) %}
+    set logo_alt = survey.configuration.logo.alt|default(survey_logo_alt)|default(null)  #}
+
+
+    {% set logo_url = site_logo_url|default(null) %}
+    {% set logo_alt = labels|default(null)  %}
+    {% if logo_url %}
+        <img src="{{ asset(logo_url) }}" alt="{{ logo_alt }}"/>
+    {% endif %}
+</div>
