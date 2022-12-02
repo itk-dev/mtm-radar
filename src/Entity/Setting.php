@@ -23,9 +23,9 @@ use PHPUnit\Framework\MockObject\Builder\Identity;
 class Setting extends BaseSetting
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    // #[ORM\GeneratedValue]
     #[ORM\Column]
-    protected ?int $id = null;
+    protected $name = null;
 
 
     const TYPE_ARRAY = 'array';
