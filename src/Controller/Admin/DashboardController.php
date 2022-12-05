@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Answer;
+use App\Entity\Setting;
 use App\Entity\Survey;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -62,5 +63,6 @@ class DashboardController extends AbstractDashboardController
         //  yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'homepage');
         yield MenuItem::linkToCrud('Survey', 'fas fa-surveys', Survey::class);
         yield MenuItem::linkToCrud('Answers', 'fas fa-anwser', Answer::class);
+        yield MenuItem::linkToCrud('Settings', 'fas fa-setting', Setting::class);
     }
 }
