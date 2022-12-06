@@ -10,22 +10,20 @@
 
 namespace App\Entity;
 
-use App\Repository\SettingRepository;
 use Craue\ConfigBundle\Entity\BaseSetting;
 use Craue\ConfigBundle\Repository\SettingRepository as RepositorySettingRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use PHPUnit\Framework\MockObject\Builder\Identity;
 
 #[ORM\Entity(repositoryClass:RepositorySettingRepository::class)]
 #[ORM\Table(name:'itkdev_setting')]
 // #[ORM\Entity(repositoryClass: SettingRepository::class)]
 class Setting extends BaseSetting
 {
-    #[ORM\Id]
-    // #[ORM\GeneratedValue]
-    #[ORM\Column]
-    protected $name = null;
+    // #[ORM\Id]
+    // // #[ORM\GeneratedValue]
+    // #[ORM\Column]
+    // protected $name = null;
 
 
     const TYPE_ARRAY = 'array';
@@ -41,31 +39,31 @@ class Setting extends BaseSetting
     // protected $name;
 
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[ORM\Column(type: Types::TEXT, nullable: true, name: 'description')]
     protected ?string $description = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true, name:"type")]
     protected ?string $type = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true, name:"form_type")]
     protected ?string $formType = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true, name:"value_string")]
     protected $value = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[ORM\Column(type: Types::TEXT, nullable: true, name:"value_text")]
     protected ?string $valueText = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true, name:"value_datetime")]
     protected ?\DateTimeInterface $valueDateTime = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true, name:"value_integer")]
     protected ?int $valueInteger = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true, name:"value_boolean")]
     protected ?int $valueBoolean = null;
 
-    #[ORM\Column(type: Types::JSON, nullable: true)]
+    #[ORM\Column(type: Types::JSON, nullable: true, name:"value_array")]
     protected ?int $valueArray;
 
 
