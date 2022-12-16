@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Survey;
-use Craue\ConfigBundle\DependencyInjection\Configuration;
+use Symfony\Component\BrowserKit\Response;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -11,12 +11,14 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use Craue\ConfigBundle\DependencyInjection\Configuration;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+
 
 class SurveyCrudController extends AbstractCrudController
 {
@@ -25,11 +27,32 @@ class SurveyCrudController extends AbstractCrudController
         return Survey::class;
     }
 
+
+    public function shareSurveyAction(AdminContext $adminContext)
+    {
+
+        // $id = $this->request->query->get('id');
+        $survey = $adminContext->getEntity()->getInstance();
+        return $this->redirectToRoute('survey_answer', ['id' => $survey->getId()]);
+    }
+
+
     public function configureActions(Actions $actions): Actions
     {
+        $shareSurveyAchtion = Action::new('ShareSurveyActions', 'ShareSurveyAction', 'fa fa-file-ShareSurveyAction')
+        ->linkToCrudAction('shareSurveyAction');
+
+        // $shareSurveyAchtion = Action::new('ShareSurveyActions', 'shareSurvey')->linkToRoute('survey_answer', function (Survey $survey): array {
+        //         return [
+        //             'id' => $survey->getId(),
+
+        //         ];
+        //     });
+
         $actions
             ->add(Crud::PAGE_INDEX, Action::DETAIL)
             ->remove(Crud::PAGE_INDEX, Action::DELETE)
+            ->add(Crud::PAGE_INDEX, $shareSurveyAchtion)
             ->remove(Crud::PAGE_DETAIL, Action::DELETE)
             ;
 
@@ -37,7 +60,22 @@ class SurveyCrudController extends AbstractCrudController
     }
 
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return Crud::new()
+        // ...
 
+        // the first argument is the "template name", which is the same as the
+        // Twig path but without the `@EasyAdmin/` prefix
+        ->overrideTemplate('label/null', 'admin/labels/my_null_label.html.twig')
+
+        ->overrideTemplates([
+            // 'crud/detail' => 'answer/show.html.twig',
+            'crud/new' => 'easy_admin/Survey/new.html.twig',
+            'crud/edit' => 'easy_admin/Survey/edit.html.twig'
+        ])
+    ;
+    }
 
 
     public function configureFields(string $pageName): iterable
@@ -52,7 +90,7 @@ class SurveyCrudController extends AbstractCrudController
         // HVAD ER DU !!!!!!
         // $configuration_Textarea = AssociationField::new('configuration');
 
-        // $coll_questions = CollectionField::new('questions')->setEntryType()
+        $coll_questions = CollectionField::new('questions')->setEntryType('App\Form\Type\QuestionType')->setRequired(true);
 
         $assoc_answ = AssociationField::new('answers');
         $assoc_quest = AssociationField::new('questions');
@@ -65,8 +103,11 @@ class SurveyCrudController extends AbstractCrudController
             return [$title, $description, $assoc_answ,$assoc_quest , $date_createdAt];
         } elseif(Crud::PAGE_DETAIL === $pageName) {
             return [$title, $coll_answers_detail];
-        } elseif(Crud::PAGE_NEW === $pageName) {
-            return [$title,$description_editor,$instructions_editor,$preparations_editor];
+        }
+        elseif(Crud::PAGE_NEW === $pageName) {
+            return [$title, $description_editor, $instructions_editor, $preparations_editor, $coll_questions ];
+        } elseif(Crud::PAGE_EDIT === $pageName) {
+            return [$title, $description_editor, $instructions_editor, $preparations_editor, $coll_questions ];
         }
     }
 }

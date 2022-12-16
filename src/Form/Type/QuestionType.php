@@ -3,8 +3,8 @@
 namespace App\Form\Type;
 
 use App\Entity\Question;
-use FM\ElfinderBundle\Form\Type\ElFinderType;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use EasyCorp\Bundle\EasyAdminBundle\Form\Type\FileUploadType;
+use EasyCorp\Bundle\EasyAdminBundle\Form\Type\TextEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,15 +19,15 @@ class QuestionType extends AbstractType
             ->add('category', TextType::class, [
                 'required' => false,
             ])
-            ->add('text', CKEditorType::class, [
+            ->add('text', TextEditorType::class, [
                 'attr' => [
                     'rows' => 4,
                 ],
             ])
-            ->add('image', ElFinderType::class, [
-                'instance' => 'form',
-                'enable' => true,
-                'required' => false,
+            ->add('image', FileUploadType::class, [
+                // 'instance' => 'form',
+                // 'enable' => true,
+                'required' => true,
             ]);
     }
 

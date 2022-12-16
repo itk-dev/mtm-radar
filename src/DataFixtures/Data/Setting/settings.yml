@@ -3,7 +3,7 @@
     name: frontpage_title
     type: string
     form_type: text
-    value: ''
+    value: 'test'
 
 -
     section: cms
@@ -17,4 +17,11 @@
     name: page_footer
     type: string
     form_type: text
+    value: ''
+
+-
+    section: cms
+    name: gdpr_message
+    type: string
+    form_type: ckeditor
     value: ''

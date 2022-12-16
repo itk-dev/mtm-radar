@@ -1,5 +1,5 @@
-{% extends '@EasyAdmin/default/new.html.twig' %}
-
+{# {% extends '@EasyAdmin/default/new.html.twig' %} #}
+{% extends '@EasyAdmin/crud/new.html.twig' %}
 {% block entity_form %}
     {% if not form.vars.valid %}
         <div class="alert alert-danger">{{ 'Errors on form'|trans }}</div>

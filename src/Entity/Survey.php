@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Uid\UuidV4;
 
@@ -19,6 +20,7 @@ class Survey
 
     #[ORM\Id]
     #[ORM\Column(type: 'guid')]
+    // #[Groups("survey","answer")]
     private ?Uuid $id = null;
 
     #[ORM\Column(length: 255)]
