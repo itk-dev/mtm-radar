@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Uid\UuidV4;
 
@@ -21,30 +22,39 @@ class Answer
 
     #[ORM\ManyToOne(inversedBy: 'answers', targetEntity: Survey::class)]
     #[ORM\JoinColumn(nullable: false, name: 'survey_id', referencedColumnName: 'id')]
+    #[Groups(['answer'])]
     private ?Survey $survey = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['survey', 'answer'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['survey', 'answer'])]
     private ?string $company = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['survey', 'answer'])]
     private ?string $address = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['survey', 'answer'])]
     private ?string $documentationId = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['survey', 'answer'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['survey', 'answer'])]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Groups(['answer'])]
     private array $replies = [];
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['answer'])]
     private array $data = [];
 
     public function __construct()
@@ -166,7 +176,7 @@ class Answer
         return $this->data;
     }
 
-    public function setData(?array $data): self
+    public function setData(array $data): self
     {
         $this->data = $data;
 

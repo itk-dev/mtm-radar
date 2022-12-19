@@ -43,11 +43,11 @@ class AnswerCrudController extends AbstractCrudController
 
         // the first argument is the "template name", which is the same as the
         // Twig path but without the `@EasyAdmin/` prefix
-        ->overrideTemplate('label/null', 'admin/labels/my_null_label.html.twig')
+        // ->overrideTemplate('label/null', 'admin/labels/my_null_label.html.twig')
 
         ->overrideTemplates([
-            // 'crud/detail' => 'answer/show.html.twig'
-            'crud/detail' => 'easy_admin/test.html.twig'
+            'crud/detail' => 'answer/show.html.twig'
+            // 'crud/detail' => 'easy_admin/test.html.twig'
         ])
     ;
     }

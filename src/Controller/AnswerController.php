@@ -36,7 +36,8 @@ class AnswerController extends AbstractController
         $this->entityManager->persist($answer);
         $this->entityManager->flush();
 
-        $this->entityManager->flush();
+
+
 
         $this->addFlash('info', 'Anwer saved succesfully');
 
@@ -44,10 +45,10 @@ class AnswerController extends AbstractController
     }
 
     // get a single answer
-    #[Route('/{Id}', name: 'answer_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'answer_show', methods: ['GET'])]
     public function getAction(Request $request, Answer $answer): Response
     {
-        return $this->render('answer/show.htm.twig',
+        return $this->render('answer/show.html.twig',
             [
                 'answer' => $answer,
             ]);

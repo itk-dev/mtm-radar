@@ -20,28 +20,34 @@ class Survey
 
     #[ORM\Id]
     #[ORM\Column(type: 'guid')]
-    // #[Groups("survey","answer")]
+    #[Groups(['survey', 'answer'])]
     private ?Uuid $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['survey', 'answer'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['survey', 'answer'])]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['survey', 'answer'])]
     private ?string $instructions = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['survey', 'answer'])]
     private ?string $preparations = null;
 
     #[ORM\Column]
+    #[Groups(['survey', 'answer'])]
     private array $configuration = [];
 
     #[ORM\OneToMany(mappedBy: 'survey', targetEntity: Answer::class, orphanRemoval: true, cascade: ['remove'])]
     private Collection $answers;
 
     #[ORM\OneToMany(mappedBy: 'survey', targetEntity: Question::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[Groups(['survey', 'answer'])]
     private Collection $questions;
 
     public function __construct()

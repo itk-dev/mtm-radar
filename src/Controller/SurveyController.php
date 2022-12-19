@@ -69,7 +69,7 @@ class SurveyController extends AbstractController
             $serializer = $this->container->get('serializer');
             $answer->setReplies(json_decode($serializer->serialize($answer->getReplies(), 'json')));
             $data = $serializer->serialize($survey, 'json', ['groups' => ['survey'], 'enable_max_depth' => true]);
-            $data = json_decode($data);
+            $data = json_decode($data, true);
             $answer->setSurvey($survey)
                 ->setData($data);
             $this->entityManager->persist($answer);

@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Entity;
-
 use App\Repository\QuestionRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Uid\UuidV4;
 
@@ -25,15 +25,19 @@ class Question
     private ?int $rank = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['survey', 'answer'])]
     private ?string $category = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['survey', 'answer'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['survey', 'answer'])]
     private ?string $text = null;
 
     #[ORM\Column(length: 255, nullable:true)]
+    #[Groups(['survey', 'answer'])]
     private ?string $image = null;
 
     public function __construct()
