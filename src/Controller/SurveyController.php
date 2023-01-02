@@ -114,18 +114,50 @@ class SurveyController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/answer/{answer}/edit', name: 'survey_answer_edit', methods: ['Get'])]
+    #[Route('/{id}/answer/{answer}/edit', name: 'survey_answer_edit', methods: ['GET'])]
     public function editAnswer(Request $request, Survey $survey, Answer $answer)
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
-            // throw new AccessDeniedHttpException();
-            throw new AccessDeniedHttpException();
-        }
+        // if (!$this->isGranted('ROLE_ADMIN')) {
+        //     // throw new AccessDeniedHttpException();
+        //     throw new AccessDeniedHttpException();
+        // }
 
         if ($answer->getSurvey()->getId() !== $survey->getId()) {
             throw new BadRequestHttpException();
         }
-        $form = $this->buildAnswerForm($answer, $survey, 'PUT');
+        $form = $this->buildAnswerForm($answer, $survey, 'POST');
+        return $this->render('survey/survey.html.twig', [
+            'survey' => $survey,
+            'answer' => $answer,
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+
+     #[Route("/{id}/answer/{answer}/edit", name:"survey_answer_update", methods:["POST"] )]
+    public function updateAnswer(Request $request, Survey $survey, Answer $answer):Response
+    {
+        // if (!$this->isGranted('ROLE_ADMIN')) {
+        //     throw new AccessDeniedHttpException();
+        // }
+
+        $form = $this->buildAnswerForm($answer, $survey, 'POST');
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $serializer = $this->container->get('serializer');
+            $answer->setReplies(json_decode($serializer->serialize($answer->getReplies(), 'json')));
+            $data = $serializer->serialize($survey, 'json', ['groups' => ['survey'], 'enable_max_depth' => true]);
+            $data = json_decode($data, true);
+            $answer->setSurvey($survey)
+                ->setData($data);
+            $this->entityManager->persist($answer);
+            $this->entityManager->flush();
+            $this->addFlash('info', 'Answer updated successfully');
+
+            return $this->redirectToRoute('answer_show', ['id' => $answer->getId()]);
+        }
 
         return $this->render('survey/survey.html.twig', [
             'survey' => $survey,

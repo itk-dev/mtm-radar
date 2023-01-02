@@ -60,22 +60,17 @@ class SurveyCrudController extends AbstractCrudController
     }
 
 
-    public function configureCrud(Crud $crud): Crud
-    {
-        return Crud::new()
-        // ...
+    // public function configureCrud(Crud $crud): Crud
+    // {
+    //     return Crud::new()
 
-        // the first argument is the "template name", which is the same as the
-        // Twig path but without the `@EasyAdmin/` prefix
-        ->overrideTemplate('label/null', 'admin/labels/my_null_label.html.twig')
-
-        ->overrideTemplates([
-            // 'crud/detail' => 'answer/show.html.twig',
-            'crud/new' => 'easy_admin/Survey/new.html.twig',
-            'crud/edit' => 'easy_admin/Survey/edit.html.twig'
-        ])
-    ;
-    }
+    //     ->overrideTemplates([
+    //         // 'crud/detail' => 'answer/show.html.twig',
+    //         // 'crud/new' => 'easy_admin/Survey/new.html.twig',
+    //         // 'crud/edit' => 'easy_admin/Survey/edit.html.twig'
+    //     ])
+    // ;
+    // }
 
 
     public function configureFields(string $pageName): iterable
@@ -87,10 +82,8 @@ class SurveyCrudController extends AbstractCrudController
         $instructions_editor = TextEditorField::new('instructions');
         $preparations_editor = TextEditorField::new('preparations')->setHelp('Use <code>survey://all_questions</code> to insert the url to all survey questions');
 
-        // HVAD ER DU !!!!!!
-        // $configuration_Textarea = AssociationField::new('configuration');
-
-        $coll_questions = CollectionField::new('questions')->setEntryType('App\Form\Type\QuestionType')->setRequired(true);
+        $coll_configuration = CollectionField::new('configuration')->setEntryType('App\Form\Type\ConfigurationType')->allowAdd()->allowDelete(false);
+        $coll_questions = CollectionField::new('questions')->setEntryType('App\Form\Type\QuestionType');
 
         $assoc_answ = AssociationField::new('answers');
         $assoc_quest = AssociationField::new('questions');
@@ -99,15 +92,19 @@ class SurveyCrudController extends AbstractCrudController
 
 
 
+
+
         if (Crud::PAGE_INDEX === $pageName) {
             return [$title, $description, $assoc_answ,$assoc_quest , $date_createdAt];
-        } elseif(Crud::PAGE_DETAIL === $pageName) {
+        }
+        elseif(Crud::PAGE_DETAIL === $pageName) {
             return [$title, $coll_answers_detail];
         }
         elseif(Crud::PAGE_NEW === $pageName) {
-            return [$title, $description_editor, $instructions_editor, $preparations_editor, $coll_questions ];
-        } elseif(Crud::PAGE_EDIT === $pageName) {
-            return [$title, $description_editor, $instructions_editor, $preparations_editor, $coll_questions ];
+            return [$title, $description_editor, $instructions_editor, $preparations_editor, $coll_questions, $coll_configuration ];
+        }
+        elseif(Crud::PAGE_EDIT === $pageName) {
+            return [$title, $description_editor, $instructions_editor, $preparations_editor, $coll_questions, $coll_configuration ];
         }
     }
 }

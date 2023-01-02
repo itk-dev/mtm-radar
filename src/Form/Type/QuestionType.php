@@ -3,12 +3,13 @@
 namespace App\Form\Type;
 
 use App\Entity\Question;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use EasyCorp\Bundle\EasyAdminBundle\Form\Type\FileUploadType;
 use EasyCorp\Bundle\EasyAdminBundle\Form\Type\TextEditorType;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class QuestionType extends AbstractType
 {
@@ -27,14 +28,28 @@ class QuestionType extends AbstractType
             ->add('image', FileUploadType::class, [
                 // 'instance' => 'form',
                 // 'enable' => true,
-                'required' => true,
-            ]);
+                // 'required' => true,
+
+                'required' => false,
+                'data_class' => null,
+                // Register new key "empty_data" with an empty string
+                'empty_data' => '',
+                // 'allow'
+
+
+            ])
+            ;
+
+
+
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
            'data_class' => Question::class,
+
         ]);
     }
 

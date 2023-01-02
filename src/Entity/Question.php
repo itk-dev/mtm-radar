@@ -40,6 +40,11 @@ class Question
     #[Groups(['survey', 'answer'])]
     private ?string $image = null;
 
+    public function __toString()
+    {
+        return $this->getSurvey().' - '.$this->getTitle();
+    }
+
     public function __construct()
     {
         $this->id = new UuidV4();

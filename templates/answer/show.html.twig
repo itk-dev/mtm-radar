@@ -1,10 +1,13 @@
+{# {{dump(_context|keys) }}
+{{dump(anwer)}} #}
+
 {% extends 'base.html.twig' %}
 {% block title %}
     {{ site_name }} – {{ survey.title }}
 {% endblock %}
 
 {% set survey = answer.survey %}
-
+{# {% set survey = entity.instance.survey %} #}
 {% block body %}
     {% set labels = survey.configuration.labels|default(null) %}
     <div class="row full-height">

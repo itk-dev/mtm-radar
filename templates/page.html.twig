@@ -33,10 +33,10 @@
                         <h1> container page fra page.html.twig </h1>
                         {# {% if craue_setting('page_footer') %}
                             {{ craue_setting('page_footer') }}
-                        {% else %} #}
-                            {# {% set url = path('easyadmin', {entity: 'Setting', action: 'edit', 'id': 'page_footer'}) %}
-                            Go to <a href="{{ url }}">{{ url }}</a> and edit the page footer. #}
-                        {# {% endif %} #}
+                        {% else %}
+                            {% set url = path('easyadmin', {entity: 'Setting', action: 'edit', 'id': 'page_footer'}) %}
+                            Go to <a href="{{ url }}">{{ url }}</a> and edit the page footer.
+                        {% endif %} #}
                     </div>
                 </footer>
             {% endblock %}
