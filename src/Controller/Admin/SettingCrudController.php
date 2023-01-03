@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class SettingCrudController extends AbstractCrudController
@@ -30,15 +31,15 @@ class SettingCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
 
-       $name = TextField::new('name');
-       $name_readonly = TextField::new('name')->setFormTypeOption('disabled','disabled');
-       $description = TextField::new('description');
-       $value = TextField::new('value');
+       $name = TextareaField::new('name');
+       $name_readonly = TextareaField::new('name')->setFormTypeOption('disabled','disabled');
+       $description = TextareaField::new('description');
+       $value = TextareaField::new('value');
 
        if (Crud::PAGE_INDEX === $pageName) {
         return [$name, $description, $value];
     } elseif(Crud::PAGE_EDIT === $pageName) {
-        return [$name_readonly];
+        return [$name_readonly, $value];
 
     }
     }
