@@ -117,10 +117,10 @@ class SurveyController extends AbstractController
     #[Route('/{id}/answer/{answer}/edit', name: 'survey_answer_edit', methods: ['GET'])]
     public function editAnswer(Request $request, Survey $survey, Answer $answer)
     {
-        // if (!$this->isGranted('ROLE_ADMIN')) {
-        //     // throw new AccessDeniedHttpException();
-        //     throw new AccessDeniedHttpException();
-        // }
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            // throw new AccessDeniedHttpException();
+            throw new AccessDeniedHttpException();
+        }
 
         if ($answer->getSurvey()->getId() !== $survey->getId()) {
             throw new BadRequestHttpException();
@@ -138,9 +138,9 @@ class SurveyController extends AbstractController
      #[Route("/{id}/answer/{answer}/edit", name:"survey_answer_update", methods:["POST"] )]
     public function updateAnswer(Request $request, Survey $survey, Answer $answer):Response
     {
-        // if (!$this->isGranted('ROLE_ADMIN')) {
-        //     throw new AccessDeniedHttpException();
-        // }
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedHttpException();
+        }
 
         $form = $this->buildAnswerForm($answer, $survey, 'POST');
 

@@ -14,6 +14,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
+#[Route('/answer')]
 class AnswerController extends AbstractController
 {
     /** @var \Doctrine\ORM\EntityManagerInterface */
@@ -28,6 +29,7 @@ class AnswerController extends AbstractController
     #[Route('/{id}', name: 'answer_submit', methods: ['POST'])]
     public function answerSubmitAction(Request $request, Survey $survey): RedirectResponse
     {
+
         $data = json_decode($request->request->get('data'));
         $answer = new Answer();
         $answer

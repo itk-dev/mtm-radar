@@ -21,7 +21,7 @@
                   </button>
                   <div class="dropdown-menu">
                       <a class="dropdown-item" href="{{ path('app_logout') }}">{{ 'Sign out'|trans }}</a>
-                      <a class="dropdown-item" href="{{ path('easyadmin') }}">{{ 'Go to admin'|trans }}</a>
+                      <a class="dropdown-item" href="{{ path('admin') }}">{{ 'Go to admin'|trans }}</a>
                       {% if app.request.attributes.get('_route') in ['survey_answer', 'survey_questions'] %}
                           {% set params = app.request.attributes.get('_route_params') %}
                           {% if 'id' in params|keys %}
