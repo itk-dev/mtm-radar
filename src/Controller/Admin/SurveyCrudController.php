@@ -29,7 +29,7 @@ class SurveyCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        $shareSurveyAchtion = Action::new('ShareSurveyActions', 'ShareSurveyAction', 'fa fa-file-ShareSurveyAction')
+        $shareSurveyAchtion = Action::new('ShareSurveyActions', 'Del Spørgeskema')
         ->linkToCrudAction('shareSurveyAction');
 
         $actions

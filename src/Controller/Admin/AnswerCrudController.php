@@ -57,10 +57,10 @@ class AnswerCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        $editAnswersAction = Action::new('EditAnswersAction', 'EditAnswer', 'fa fa-file-EditAnswer')
+        $editAnswersAction = Action::new('EditAnswersAction', 'Ret')
         ->linkToCrudAction('editAnswersAction');
 
-        $detailAnswerAction = Action::new('detailAnswerAction', 'DetailAnswer', 'fa fa-file-DetailAnswer')
+        $detailAnswerAction = Action::new('detailAnswerAction', 'Vis')
         ->linkToCrudAction('detailAnswerAction');
 
 
