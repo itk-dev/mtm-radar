@@ -60,9 +60,9 @@ class AnswerController extends AbstractController
     #[Route('/{id}/edit', name: 'answer_edit', methods: ['GET'])]
         public function editAction(Answer $answer): Response
         {
-            // if (!$this->isGranted('ROLE_ADMIN')) {
-            //     throw new AccessDeniedHttpException();
-            // }
+            if (!$this->isGranted('ROLE_ADMIN')) {
+                throw new AccessDeniedHttpException();
+            }
 
             return $this->redirectToRoute(
                 'survey_answer_edit',

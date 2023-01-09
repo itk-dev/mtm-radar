@@ -32,6 +32,8 @@ class UserCrudController extends AbstractCrudController
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
+
+        // Random string generator. $length is equal to the length of the CHARACTER Output. $keyspace is equal to the type of CHARACTERS included
         function random_str(
             int $length = 8,
             string $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'

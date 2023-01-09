@@ -1,11 +1,7 @@
 <?php
-
-// namespace Answer;
-
 namespace App\Controller\Admin;
 
 use App\Entity\Answer;
-use App\Entity\Survey;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;

@@ -1,6 +1,7 @@
 craue_config:
   entity_name: App\Entity\Setting
 
+
 # fm_elfinder:
 #     #assets_path: / # default is /assets, this is where css/js elfinder files are
 #     instances:
