@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Answer;
 use App\Entity\Survey;
 use App\Entity\Setting;
+use App\Entity\Testuser;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -69,6 +70,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Answers', 'fas fa-anwser', Answer::class);
         yield MenuItem::linkToCrud('Settings', 'fas fa-setting', Setting::class);
         yield MenuItem::linkToCrud('User', 'fas fa-user', User::class);
+        //DELEME
+        yield MenuItem::linkToCrud('TestUser / DELETEME', 'fas fa-user', Testuser::class);
 
     }
 }

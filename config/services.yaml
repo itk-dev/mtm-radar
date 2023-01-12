@@ -12,6 +12,8 @@ parameters:
     site_logo_url: '%env(SITE_LOGO_URL)%'
 
 services:
+    App\EventSubscriber\UserSubscriber:
+        tags: [kernel.event_listener]
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
