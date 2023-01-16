@@ -1,5 +1,5 @@
 <?php
-namespace App\EventSubcriber;
+namespace App\EventSubscriber;
 
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\Events;
@@ -7,6 +7,8 @@ use Doctrine\Persistence\Event\LifecycleEventArgs;
 
 class UserSubscriber implements EventSubscriberInterface
 {
+    // /** @var UserManager */
+    // private $userManager
     // this method can only return the event names; you cannot define a
     // custom method name to execute when each event triggers
     public function getSubscribedEvents(): array
@@ -38,7 +40,7 @@ class UserSubscriber implements EventSubscriberInterface
     }
 
     private function logActivity(string $action, LifecycleEventArgs $args): void
-    {   die(__FILE__);
+    {
         $entity = $args->getObject();
 
         // if this subscriber only applies to certain entity types,
