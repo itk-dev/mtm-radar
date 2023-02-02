@@ -71,7 +71,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Settings', 'fas fa-setting', Setting::class);
         yield MenuItem::linkToCrud('User', 'fas fa-user', User::class);
         //DELEME
-        yield MenuItem::linkToCrud('TestUser / DELETEME', 'fas fa-user', Testuser::class);
+
 
     }
 }
