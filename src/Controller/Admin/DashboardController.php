@@ -50,7 +50,9 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Mtm Radar');
+            ->setTitle('Mtm Radar')
+            ->setFaviconPath('favicon.ico');
+
     }
 
 
@@ -66,9 +68,9 @@ class DashboardController extends AbstractDashboardController
     {
         // yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         //  yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'homepage');
-        yield MenuItem::linkToCrud('Survey', 'fas fa-surveys', Survey::class);
-        yield MenuItem::linkToCrud('Answers', 'fas fa-anwser', Answer::class);
-        yield MenuItem::linkToCrud('Settings', 'fas fa-setting', Setting::class);
+        yield MenuItem::linkToCrud('Survey', 'fas fa-broom', Survey::class);
+        yield MenuItem::linkToCrud('Answers', 'fas fa-boxes', Answer::class);
+        yield MenuItem::linkToCrud('Settings', 'fab fa-app-store-ios', Setting::class);
         yield MenuItem::linkToCrud('User', 'fas fa-user', User::class);
         //DELEME
 
