@@ -64,7 +64,9 @@ class SurveyController extends AbstractController
         $answer = new Answer();
         $form = $this->buildAnswerForm($answer, $survey);
 
+
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $serializer = $this->container->get('serializer');
             $answer->setReplies(json_decode($serializer->serialize($answer->getReplies(), 'json')));
@@ -73,6 +75,9 @@ class SurveyController extends AbstractController
             $answer->setSurvey($survey)
                 ->setData($data);
             $this->entityManager->persist($answer);
+
+
+
             $this->entityManager->flush();
             $this->addFlash('info', 'Answer saved successfully');
 

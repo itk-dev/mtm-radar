@@ -1,4 +1,4 @@
-{% extends '@FMElfinder/Form/elfinder_widget.html.twig' %}
+{# {% extends '@FMElfinder/Form/elfinder_widget.html.twig' %}
 
 {% block elfinder_widget %}
     <input type="hidden" class="form-control" data-type="elfinder-image-url" data-elfinder-id="{{ id }}" readonly {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %} data-type="elfinder-input-field" />
@@ -22,4 +22,21 @@
     </div>
 
     <div class="image-display"><img class="img-responsive" data-type="elfinder-image-display" data-elfinder-id="{{ id }}" src="{{ value|default('data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=') }}"/></div>
+{% endblock %} #}
+{# templates/product/new.html.twig #}
+<h1>Adding a new product</h1>
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+  {{ form_start(form) }}
+        {# ... #}
+
+        {{ form_row(form.image) }}
+
+    {{ form_end(form) }}
+{# <a href="{{ asset('uploads/' ~ product.brochureFilename) }}">View brochure (PDF)</a> #}
+</div>
 {% endblock %}

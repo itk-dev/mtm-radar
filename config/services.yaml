@@ -7,7 +7,7 @@ parameters:
     'env(SITE_NAME)': 'MTM Radar'
     'env(SITE_LOGO_URL)': '/assets/images/AAK_02_venstrejusteret_sh.svg'
     survey.reply.comment_required: true
-
+    image_dir: '%kernel.project_dir%/public/uploads/files'
     site_name: '%env(SITE_NAME)%'
     site_logo_url: '%env(SITE_LOGO_URL)%'
 
@@ -32,4 +32,7 @@ services:
             - '../src/Kernel.php'
 
     # add more service definitions when explicit configuration is needed
+    App\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%image_dir%'
     # please note that last definitions always *replace* previous ones
