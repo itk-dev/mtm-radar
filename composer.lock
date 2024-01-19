@@ -2093,12 +2093,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/itk-dev/config-bundle.git",
-                "reference": "788d005e760344fc0c631547dde8367f07b9a3e9"
+                "reference": "60cf54125a74a2ef4ef1231099f2fdf87e308d0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itk-dev/config-bundle/zipball/788d005e760344fc0c631547dde8367f07b9a3e9",
-                "reference": "788d005e760344fc0c631547dde8367f07b9a3e9",
+                "url": "https://api.github.com/repos/itk-dev/config-bundle/zipball/60cf54125a74a2ef4ef1231099f2fdf87e308d0d",
+                "reference": "60cf54125a74a2ef4ef1231099f2fdf87e308d0d",
                 "shasum": ""
             },
             "require": {
@@ -2133,7 +2133,7 @@
                 "issues": "https://github.com/itk-dev/config-bundle/issues",
                 "source": "https://github.com/itk-dev/config-bundle/tree/4.x"
             },
-            "time": "2021-01-12T16:49:05+00:00"
+            "time": "2024-01-19T10:42:03+00:00"
         },
         {
             "name": "itk-dev/database-bundle",
